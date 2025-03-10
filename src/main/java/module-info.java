@@ -5,5 +5,6 @@ module htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota {
     requires org.controlsfx.controls;
 
     opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota to javafx.fxml;
-    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota;
+    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application;
 }
