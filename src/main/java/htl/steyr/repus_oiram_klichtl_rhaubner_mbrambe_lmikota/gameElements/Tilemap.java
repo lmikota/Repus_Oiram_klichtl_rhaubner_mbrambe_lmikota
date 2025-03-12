@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 public class Tilemap {
     public final int TILE_SIZE = 40;
     public final int ROWS = 10;
-    public final int COLS = 30;
+    public final int COLS = 59;
     private int[][] tileMapPattern;
     private Pane tyleMapPane;
 
