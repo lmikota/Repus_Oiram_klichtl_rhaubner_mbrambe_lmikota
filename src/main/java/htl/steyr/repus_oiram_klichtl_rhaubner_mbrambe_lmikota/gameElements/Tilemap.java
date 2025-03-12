@@ -1,19 +1,21 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Tilemap {
-    /**
-     * @TODO
-     * ROWS und COLS sollen Variieren können
-     */
+    /// @ToDo
+    /// ROWS und COLS sollen Variieren können
     private int tileSize;
-    private final int rows = 17;
+    private final int ROWS = 17;
     private int cols;
     private int[][] tileMapPattern;
     private Pane tyleMapPane;
+    final String dirtImageFilePath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/dirtblock.png";
+    final String grassImageFilePath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/grassblock.png";
 
     public Tilemap(int[][] tileMapPattern, int tileSize) {
         setTileMapPattern(tileMapPattern);
@@ -25,9 +27,20 @@ public class Tilemap {
     public void drawTileMap() {
         tyleMapPane = new Pane();
 
-        for (int row = 0; row < rows; row++) {
+        for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < cols; col++) {
+                /// @ToDo
+                /// Style CSS für imageview
                 int tileType = tileMapPattern[row][col];
+                ImageView imageView = new ImageView();
+                imageView.setFitWidth(tileSize);
+                imageView.setFitHeight(tileSize);
+                imageView.setX(col * tileSize);
+                imageView.setY(row * tileSize);
+                imageView.maxHeight(tileSize);
+                imageView.minHeight(tileSize);
+                imageView.maxWidth(tileSize);
+                imageView.minWidth(tileSize);
 
                 Rectangle tile = new Rectangle(col * tileSize, row * tileSize, tileSize, tileSize);
 
@@ -36,17 +49,20 @@ public class Tilemap {
                         tile.setFill(Color.TRANSPARENT);
                         break;
                     case 1:
-                        tile.setFill(Color.BROWN);
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getDirtImageFilePath())));
+                        //tile.setFill(Color.BROWN);
                         break;
                     case 2:
-                        tile.setFill(Color.GREEN);
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getGrassImageFilePath())));
+                        //tile.setFill(Color.GREEN);
                         break;
                 }
 
                 if (tileType != 0) {
                     tile.setStroke(Color.BLACK);
                 }
-                tyleMapPane.getChildren().add(tile);
+                //tyleMapPane.getChildren().add(tile);
+                tyleMapPane.getChildren().add(imageView);
             }
         }
     }
@@ -76,8 +92,8 @@ public class Tilemap {
         this.cols = cols;
     }
 
-    public int getRows() {
-        return rows;
+    public int getROWS() {
+        return ROWS;
     }
 
     public int getTileSize() {
@@ -88,4 +104,11 @@ public class Tilemap {
         this.tileSize = tileSize;
     }
 
+    public String getDirtImageFilePath() {
+        return dirtImageFilePath;
+    }
+
+    public String getGrassImageFilePath() {
+        return grassImageFilePath;
+    }
 }
