@@ -5,25 +5,32 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Tilemap {
-    public final int TILE_SIZE = 40;
-    public final int ROWS = 10;
-    public final int COLS = 59;
+    /**
+     * @TODO
+     * ROWS und COLS sollen Variieren können
+     */
+    private int tileSize;
+    private int rows;
+    private int cols;
     private int[][] tileMapPattern;
     private Pane tyleMapPane;
 
-    public Tilemap(int[][] tileMapPattern) {
+    public Tilemap(int[][] tileMapPattern, int tileSize) {
         setTileMapPattern(tileMapPattern);
+        setTileSize(tileSize);
+        setRows(tileMapPattern.length);
+        setCols(tileMapPattern[0].length);
         drawTileMap();
     }
 
     public void drawTileMap() {
         tyleMapPane = new Pane();
 
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
                 int tileType = tileMapPattern[row][col];
 
-                Rectangle tile = new Rectangle(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                Rectangle tile = new Rectangle(col * tileSize, row * tileSize, tileSize, tileSize);
 
                 switch (tileType) {
                     case 0:
@@ -61,4 +68,29 @@ public class Tilemap {
     public void setTyleMapPane(Pane tyleMapPane) {
         this.tyleMapPane = tyleMapPane;
     }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public void setCols(int cols) {
+        this.cols = cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public void setTileSize(int tileSize) {
+        this.tileSize = tileSize;
+    }
+
 }

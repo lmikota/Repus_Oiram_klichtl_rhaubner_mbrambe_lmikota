@@ -3,6 +3,7 @@ module htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires com.google.gson;
 
     opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota to javafx.fxml;
     exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
