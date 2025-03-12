@@ -10,7 +10,7 @@ public class Tilemap {
      * ROWS und COLS sollen Variieren können
      */
     private int tileSize;
-    private int rows;
+    private final int rows = 17;
     private int cols;
     private int[][] tileMapPattern;
     private Pane tyleMapPane;
@@ -18,7 +18,6 @@ public class Tilemap {
     public Tilemap(int[][] tileMapPattern, int tileSize) {
         setTileMapPattern(tileMapPattern);
         setTileSize(tileSize);
-        setRows(tileMapPattern.length);
         setCols(tileMapPattern[0].length);
         drawTileMap();
     }
@@ -79,10 +78,6 @@ public class Tilemap {
 
     public int getRows() {
         return rows;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
     }
 
     public int getTileSize() {
