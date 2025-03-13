@@ -50,18 +50,15 @@ public class Tilemap {
                         break;
                     case 1:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getDirtImageFilePath())));
-                        //tile.setFill(Color.BROWN);
                         break;
                     case 2:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getGrassImageFilePath())));
-                        //tile.setFill(Color.GREEN);
                         break;
                 }
 
                 if (tileType != 0) {
                     tile.setStroke(Color.BLACK);
                 }
-                //tyleMapPane.getChildren().add(tile);
                 tyleMapPane.getChildren().add(imageView);
             }
         }
