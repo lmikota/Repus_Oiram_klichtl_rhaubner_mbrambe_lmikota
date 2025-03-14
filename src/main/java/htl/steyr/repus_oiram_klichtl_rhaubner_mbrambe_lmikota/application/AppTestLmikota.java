@@ -27,21 +27,12 @@ public class AppTestLmikota extends Application {
         try {
             MapDataReader mapDataReader;
             mapDataReader = new MapDataReader();
-            int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-            int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-            //screenHeight = 2160;
-            //screenWidth =  3840;
-            System.out.println(screenWidth);
-            System.out.println(screenHeight);
-            int dynamicTileSize = (screenHeight * screenWidth) / 40000;
-            System.out.println(dynamicTileSize);
-            Tilemap tilemap = new Tilemap(mapDataReader.getMapData(), dynamicTileSize);
 
+            Tilemap tilemap = new Tilemap(mapDataReader.getMapData());
 
             Pane root = new Pane();
             root.getChildren().add(tilemap.getTyleMapPane());
-
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,tilemap.SCREEN_WIDTH,tilemap.SCREEN_HEIGHT);
             Stage stage = new Stage();
 
             stage.setTitle("Repus Oiram");

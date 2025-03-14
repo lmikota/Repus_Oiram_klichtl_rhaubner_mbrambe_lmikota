@@ -6,20 +6,26 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
+
 public class Tilemap {
-    /// @ToDo
-    /// ROWS und COLS sollen Variieren können
-    private int tileSize;
-    private final int ROWS = 17;
+    public final int SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+    public final int SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+    private final int ROWS = 18;
+    private final int TILE_SIZE = SCREEN_HEIGHT / ROWS;
     private int cols;
     private int[][] tileMapPattern;
     private Pane tyleMapPane;
-    final String dirtImageFilePath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/dirtblock.png";
-    final String grassImageFilePath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/grassblock.png";
+    final String DIRT_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/3_dirtblock.png";
+    final String GRASS_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/4_grassblock.png";
+    final String STONE_DIRT_BLOCK = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/1_stonedirtblock.png";
+    final String STONE_DIRT_TRANSITION = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/2_stoneDirtTransition.png";
+    final String FLOATING_GRASS_LEFT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/5_floatingGrassblockLeft.png";
+    final String FLOATING_GRASS_RIGHT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/7_floatingGrassblockRight.png";
+    final String FLOATING_GRASS_MIDDLE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/6_floatingGrassBlockMiddle.png";
 
-    public Tilemap(int[][] tileMapPattern, int tileSize) {
+    public Tilemap(int[][] tileMapPattern) {
         setTileMapPattern(tileMapPattern);
-        setTileSize(tileSize);
         setCols(tileMapPattern[0].length);
         drawTileMap();
     }
@@ -29,30 +35,43 @@ public class Tilemap {
 
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < cols; col++) {
-                /// @ToDo
-                /// Style CSS für imageview
                 int tileType = tileMapPattern[row][col];
                 ImageView imageView = new ImageView();
-                imageView.setFitWidth(tileSize);
-                imageView.setFitHeight(tileSize);
-                imageView.setX(col * tileSize);
-                imageView.setY(row * tileSize);
-                imageView.maxHeight(tileSize);
-                imageView.minHeight(tileSize);
-                imageView.maxWidth(tileSize);
-                imageView.minWidth(tileSize);
+                imageView.setFitWidth(TILE_SIZE);
+                imageView.setFitHeight(TILE_SIZE);
+                imageView.setX(col * TILE_SIZE);
+                imageView.setY(row * TILE_SIZE);
+                imageView.maxHeight(TILE_SIZE);
+                imageView.minHeight(TILE_SIZE);
+                imageView.maxWidth(TILE_SIZE);
+                imageView.minWidth(TILE_SIZE);
 
-                Rectangle tile = new Rectangle(col * tileSize, row * tileSize, tileSize, tileSize);
+                Rectangle tile = new Rectangle(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
                 switch (tileType) {
                     case 0:
                         tile.setFill(Color.TRANSPARENT);
                         break;
                     case 1:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getDirtImageFilePath())));
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getSTONE_DIRT_BLOCK())));
                         break;
                     case 2:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getGrassImageFilePath())));
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getSTONE_DIRT_TRANSITION())));
+                        break;
+                    case 3:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getDIRT_IMAGE())));
+                        break;
+                    case 4:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getGRASS_IMAGE())));
+                        break;
+                    case 5:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_LEFT())));
+                        break;
+                    case 6:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_MIDDLE())));
+                        break;
+                    case 7:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_RIGHT())));
                         break;
                 }
 
@@ -62,6 +81,10 @@ public class Tilemap {
                 tyleMapPane.getChildren().add(imageView);
             }
         }
+    }
+
+    public int getTileMapLengthInPixel() {
+        return getTileMapPattern()[0].length * getTILE_SIZE() + getTileMapPattern().length * getTILE_SIZE();
     }
 
 
@@ -93,19 +116,37 @@ public class Tilemap {
         return ROWS;
     }
 
-    public int getTileSize() {
-        return tileSize;
+    public int getTILE_SIZE() {
+        return TILE_SIZE;
     }
 
-    public void setTileSize(int tileSize) {
-        this.tileSize = tileSize;
+    public String getDIRT_IMAGE() {
+        return DIRT_IMAGE;
     }
 
-    public String getDirtImageFilePath() {
-        return dirtImageFilePath;
+    public String getGRASS_IMAGE() {
+        return GRASS_IMAGE;
     }
 
-    public String getGrassImageFilePath() {
-        return grassImageFilePath;
+    public String getSTONE_DIRT_BLOCK() {
+        return STONE_DIRT_BLOCK;
     }
+
+    public String getFLOATING_GRASS_MIDDLE() {
+        return FLOATING_GRASS_MIDDLE;
+    }
+
+    public String getFLOATING_GRASS_RIGHT() {
+        return FLOATING_GRASS_RIGHT;
+    }
+
+    public String getFLOATING_GRASS_LEFT() {
+        return FLOATING_GRASS_LEFT;
+    }
+
+    public String getSTONE_DIRT_TRANSITION() {
+        return STONE_DIRT_TRANSITION;
+    }
+
+
 }
