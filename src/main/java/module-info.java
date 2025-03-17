@@ -1,12 +1,16 @@
 module htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota {
     requires javafx.controls;
     requires javafx.fxml;
-
     requires org.controlsfx.controls;
     requires com.google.gson;
     requires java.desktop;
 
-    opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota to javafx.fxml;
-    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+    // Nur existierende Packages exportieren!
     exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application;
+    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
+    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data;
+
+    opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application to javafx.fxml;
+    opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller to javafx.fxml;
 }
