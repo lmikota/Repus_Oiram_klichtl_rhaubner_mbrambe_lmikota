@@ -23,6 +23,8 @@ public class Tilemap {
     final String FLOATING_GRASS_LEFT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/5_floatingGrassblockLeft.png";
     final String FLOATING_GRASS_RIGHT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/7_floatingGrassblockRight.png";
     final String FLOATING_GRASS_MIDDLE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/6_floatingGrassBlockMiddle.png";
+    final String TREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/11_Tree.png";
+    private SuperTrank superTrank;
 
     public Tilemap(int[][] tileMapPattern) {
         setTileMapPattern(tileMapPattern);
@@ -49,6 +51,10 @@ public class Tilemap {
                 Rectangle tile = new Rectangle(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
                 switch (tileType) {
+                    case -1:
+                        superTrank = new SuperTrank();
+                        imageView.setImage(new Image(getClass().getResourceAsStream(superTrank.getImageFilePath())));
+                        break;
                     case 0:
                         tile.setFill(Color.TRANSPARENT);
                         break;
@@ -72,6 +78,9 @@ public class Tilemap {
                         break;
                     case 7:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_RIGHT())));
+                        break;
+                    case 11:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE())));
                         break;
                 }
 
@@ -148,5 +157,15 @@ public class Tilemap {
         return STONE_DIRT_TRANSITION;
     }
 
+    public String getTREE() {
+        return TREE;
+    }
 
+    public SuperTrank getSuperTrank() {
+        return superTrank;
+    }
+
+    public void setSuperTrank(SuperTrank superTrank) {
+        this.superTrank = superTrank;
+    }
 }
