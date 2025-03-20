@@ -56,7 +56,7 @@ public class AppTestLmikota extends Application {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
 
-            player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/img.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
+            player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
             addToRoot(root, player.getPlayerImage());
 
             scene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
