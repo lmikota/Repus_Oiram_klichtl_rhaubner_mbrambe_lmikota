@@ -14,13 +14,20 @@ public class MapDataReader {
         setMapData(getFileName());
     }
 
-
     private void setMapData(String fileName) throws IOException {
         JsonReader reader;
         Gson gson = new Gson();
         reader = new JsonReader(new FileReader(fileName));
         this.mapData = gson.fromJson(reader, int[][].class);
         reader.close();
+    }
+
+    public int getMapWidth(int tileSize) {
+        int mapsize = 0;
+        for ( int i = 0; i < getMapData().length; i++) {
+            mapsize = i * tileSize;
+        }
+        return mapsize;
     }
 
     public String getFileName() {

@@ -24,6 +24,14 @@ public class Tilemap {
     final String FLOATING_GRASS_RIGHT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/7_floatingGrassblockRight.png";
     final String FLOATING_GRASS_MIDDLE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/6_floatingGrassBlockMiddle.png";
     final String TREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/11_Tree.png";
+    final String TOWER_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks1.png";
+    final String TOWER_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks2.png";
+    final String TOWER_LEFT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks3.png";
+    final String TOWER_LEFT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks4.png";
+    final String TOWER_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts1.png";
+    final String TOWER_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts2.png";
+    final String TOWER_RIGHT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts3.png";
+    final String TOWER_RIGHT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts4.png";
     private SuperTrank superTrank;
 
     public Tilemap(int[][] tileMapPattern) {
@@ -81,6 +89,30 @@ public class Tilemap {
                         break;
                     case 11:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getTREE())));
+                        break;
+                    case 12:
+                            imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_ONE())));
+                            break;
+                    case 13:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_ONE())));
+                        break;
+                    case 14:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_TWO())));
+                        break;
+                    case 15:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_TWO())));
+                        break;
+                    case 16:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_THREE())));
+                        break;
+                    case 17:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_THREE())));
+                        break;
+                    case 18:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_FOUR())));
+                        break;
+                    case 19:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_FOUR())));
                         break;
                 }
 
@@ -167,5 +199,37 @@ public class Tilemap {
 
     public void setSuperTrank(SuperTrank superTrank) {
         this.superTrank = superTrank;
+    }
+
+    public String getTOWER_LEFT_ONE() {
+        return TOWER_LEFT_ONE;
+    }
+
+    public String getTOWER_LEFT_TWO() {
+        return TOWER_LEFT_TWO;
+    }
+
+    public String getTOWER_LEFT_FOUR() {
+        return TOWER_LEFT_FOUR;
+    }
+
+    public String getTOWER_LEFT_THREE() {
+        return TOWER_LEFT_THREE;
+    }
+
+    public String getTOWER_RIGHT_ONE() {
+        return TOWER_RIGHT_ONE;
+    }
+
+    public String getTOWER_RIGHT_TWO() {
+        return TOWER_RIGHT_TWO;
+    }
+
+    public String getTOWER_RIGHT_THREE() {
+        return TOWER_RIGHT_THREE;
+    }
+
+    public String getTOWER_RIGHT_FOUR() {
+        return TOWER_RIGHT_FOUR;
     }
 }
