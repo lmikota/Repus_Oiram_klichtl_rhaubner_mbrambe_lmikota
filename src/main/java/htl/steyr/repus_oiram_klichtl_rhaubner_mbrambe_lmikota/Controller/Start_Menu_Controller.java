@@ -23,6 +23,7 @@ public class Start_Menu_Controller {
             Parent newRoot = loader.load();
 
             Scene scene = startButton.getScene();
+            scene.getStylesheets().add(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/style/ui-style.css").toExternalForm());
             scene.setRoot(newRoot);
 
         } catch (IOException e) {

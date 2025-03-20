@@ -23,3 +23,20 @@
 .Text {
 
 }
+
+
+.LevelImages {
+    -fx-border-width: 25px;
+    -fx-border-color: Transparent;
+}
+
+.LevelImages:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 223, 0, 1), 25, 0.5, 0, 0);
+    -fx-cursor: hand;
+}
+
+.selected-image-view {
+    -fx-border-color: rgba(255, 223, 0, 1);
+    -fx-border-width: 5;
+    -fx-effect: dropshadow(gaussian, rgba(255, 223, 0, 1), 25, 0.5, 0, 0);
+}
