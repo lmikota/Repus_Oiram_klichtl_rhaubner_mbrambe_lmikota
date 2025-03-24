@@ -12,7 +12,7 @@ public class Tilemap {
     public final int SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
     public final int SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
     private final int ROWS = 18;
-    private final int TILE_SIZE = SCREEN_HEIGHT / ROWS;
+    private final double TILE_SIZE = SCREEN_HEIGHT / ROWS;
     private int cols;
     private int[][] tileMapPattern;
     private Pane tyleMapPane;
@@ -32,6 +32,12 @@ public class Tilemap {
     final String TOWER_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts2.png";
     final String TOWER_RIGHT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts3.png";
     final String TOWER_RIGHT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts4.png";
+    final String TREE_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/baumRechts1.png";
+    final String TREE_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/baumRechts2.png";
+    final String TREE_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bauLlinks1.png";
+    final String TREE_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/baumLinks2.png";
+
+
     private SuperTrank superTrank;
 
     public Tilemap(int[][] tileMapPattern) {
@@ -56,15 +62,19 @@ public class Tilemap {
                 imageView.maxWidth(TILE_SIZE);
                 imageView.minWidth(TILE_SIZE);
 
-                Rectangle tile = new Rectangle(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-
                 switch (tileType) {
+                    /**
+                     * @ToDo
+                     * Item allignment is centered
+                     */
                     case -1:
                         superTrank = new SuperTrank();
+                        imageView.setFitHeight(getTILE_SIZE()/1.5);
+                        imageView.setFitWidth(getTILE_SIZE()/1.5);
                         imageView.setImage(new Image(getClass().getResourceAsStream(superTrank.getImageFilePath())));
+                        imageView.setX(imageView.getX() - getTILE_SIZE()/1.5);
                         break;
                     case 0:
-                        tile.setFill(Color.TRANSPARENT);
                         break;
                     case 1:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getSTONE_DIRT_BLOCK())));
@@ -87,12 +97,15 @@ public class Tilemap {
                     case 7:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_RIGHT())));
                         break;
+                    case 187:
+                        // invisible Border
+                        break;
                     case 11:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getTREE())));
                         break;
                     case 12:
-                            imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_ONE())));
-                            break;
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_ONE())));
+                        break;
                     case 13:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_ONE())));
                         break;
@@ -114,17 +127,27 @@ public class Tilemap {
                     case 19:
                         imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_FOUR())));
                         break;
+                    case 20:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_LEFT_ONE())));
+                        break;
+                    case 21:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_RIGHT_ONE())));
+                        break;
+                    case 22:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_LEFT_TWO())));
+                        break;
+                    case 23:
+                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_RIGHT_TWO())));
+                        break;
                 }
 
-                if (tileType != 0) {
-                    tile.setStroke(Color.BLACK);
-                }
+
                 tyleMapPane.getChildren().add(imageView);
             }
         }
     }
 
-    public int getTileMapLengthInPixel() {
+    public double getTileMapLengthInPixel() {
         return getTileMapPattern()[0].length * getTILE_SIZE() + getTileMapPattern().length * getTILE_SIZE();
     }
 
@@ -157,7 +180,7 @@ public class Tilemap {
         return ROWS;
     }
 
-    public int getTILE_SIZE() {
+    public double getTILE_SIZE() {
         return TILE_SIZE;
     }
 
@@ -231,5 +254,21 @@ public class Tilemap {
 
     public String getTOWER_RIGHT_FOUR() {
         return TOWER_RIGHT_FOUR;
+    }
+
+    public String getTREE_LEFT_TWO() {
+        return TREE_LEFT_TWO;
+    }
+
+    public String getTREE_LEFT_ONE() {
+        return TREE_LEFT_ONE;
+    }
+
+    public String getTREE_RIGHT_ONE() {
+        return TREE_RIGHT_ONE;
+    }
+
+    public String getTREE_RIGHT_TWO() {
+        return TREE_RIGHT_TWO;
     }
 }

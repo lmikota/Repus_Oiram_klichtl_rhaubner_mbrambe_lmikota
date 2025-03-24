@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -34,24 +34,24 @@ public class AppTestLmikota extends Application {
     @Override
     public void start(Stage primaryStage) {
         /// @ToDo
-        /// Exception handling
-        /// Fullscreen fixen
+        /// Background wiederholen
+        /// ImageViews bg1 und bg2 wiederholt aufrufen
         try {
             MapDataReader mapDataReader;
             mapDataReader = new MapDataReader();
             int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
             int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-            //screenHeight = 2160;
-            //screenWidth =  3840;
-            System.out.println(screenWidth);
-            System.out.println(screenHeight);
-            int dynamicTileSize = (screenHeight * screenWidth) / 23500;
-            System.out.println(dynamicTileSize);
+            System.out.println("tilesize: " + screenHeight / 18);
+            System.out.println("widht: " + screenWidth);
+            System.out.println("height: " + screenHeight);
             Tilemap tilemap = new Tilemap(mapDataReader.getMapData());
-
-
+            ImageView bg1 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_1.png");
+            ImageView bg2 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_2.png");
             Pane root = new Pane();
-            root.getChildren().add(tilemap.getTyleMapPane());
+            addToRoot(root, bg1);
+            addToRoot(root, bg2);
+            bg2.setX(bg1.getImage().getWidth());
+            addToRoot(root, tilemap.getTyleMapPane());
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -64,7 +64,7 @@ public class AppTestLmikota extends Application {
 
             AnimationTimer gameLoop = new AnimationTimer() {
                 public void handle(long now) {
-                    updateGame(mapDataReader.getMapData(), root, 1200);
+                    updateGame(mapDataReader.getMapData(), root, tilemap.SCREEN_WIDTH, tilemap, bg1, bg2);
                 }
             };
             gameLoop.start();
@@ -78,13 +78,14 @@ public class AppTestLmikota extends Application {
         }
     }
 
-    private void updateGame(int map[][], Pane root, int screenWidth) {
+    private void updateGame(int map[][], Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
-        moveRoot(root, player.getPlayerImage(), screenWidth);
+        moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
+        repeatBackground(bg1, bg2, offsetX);
     }
 
-    public void moveRoot(Pane root, ImageView player, int screenWidth) {
+    public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {
         double playerScreenX = player.getX() - offsetX;
 
         if (playerScreenX > screenWidth * 0.75) {
@@ -92,11 +93,27 @@ public class AppTestLmikota extends Application {
         } else if (playerScreenX < screenWidth * 0.25) {
             offsetX -= SCROLL_SPEED;
         }
-        offsetX = Math.max(0, Math.min(offsetX, 1400 * 40 - screenWidth));
+        offsetX = Math.max(0, Math.min(offsetX, totalTileLength * tileSize - screenWidth));
         root.setTranslateX(-offsetX);
     }
 
     public void addToRoot(Pane root, Node node) {
         root.getChildren().add(node);
+    }
+
+    public ImageView createBackGround(String filepath) {
+        return new ImageView(new Image(getClass().getResourceAsStream(filepath)));
+    }
+
+    public void repeatBackground(ImageView bg1, ImageView bg2, double offsetX) {
+        double bgWidth = bg1.getImage().getWidth();
+
+        if (bg1.getX() + bgWidth <= offsetX) {
+            bg1.setX(bg2.getX() + bgWidth);
+        }
+
+        if (bg2.getX() + bgWidth <= offsetX) {
+            bg2.setX(bg1.getX() + bgWidth);
+        }
     }
 }

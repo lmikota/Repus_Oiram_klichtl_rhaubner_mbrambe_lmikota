@@ -8,20 +8,20 @@ import java.util.Set;
 
 public class Player {
     private ImageView playerImage;
-    private int playerSize;
+    private double playerSize;
 
     private double playerX;
     private double playerY;
     private double playerVelY = 0;
     private boolean isJumping = false;
-    private int tileSize;
+    private double tileSize;
     boolean isBlockUnderIt = false;
     boolean isBlockOverIt = false;
 
     private final double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
 
-    public Player(Image playerImage, int playerSize, int tileSize) {
+    public Player(Image playerImage, double playerSize, double tileSize) {
         setPlayerImage(playerImage);
         setPlayerSize(playerSize);
         changePlayerSize(getPlayerSize());
@@ -36,7 +36,7 @@ public class Player {
         getPlayerImage().setY(playerY);
     }
 
-    public void changePlayerSize(int playerSize) {
+    public void changePlayerSize(double playerSize) {
         playerImage.setFitHeight(playerSize);
         playerImage.setFitWidth(playerSize);
     }
@@ -125,7 +125,7 @@ public class Player {
     }
 
     public boolean isBlockSolid(int block) {
-        return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 ;
+        return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187;
     }
 
     public ImageView getPlayerImage() {
@@ -142,19 +142,19 @@ public class Player {
         getPlayerImage().maxWidth(getPlayerSize());
     }
 
-    public int getPlayerSize() {
+    public double getPlayerSize() {
         return playerSize;
     }
 
-    public void setPlayerSize(int playerSize) {
+    public void setPlayerSize(double playerSize) {
         this.playerSize = playerSize;
     }
 
-    public int getTileSize() {
+    public double getTileSize() {
         return tileSize;
     }
 
-    public void setTileSize(int tileSize) {
+    public void setTileSize(double tileSize) {
         this.tileSize = tileSize;
     }
 }
