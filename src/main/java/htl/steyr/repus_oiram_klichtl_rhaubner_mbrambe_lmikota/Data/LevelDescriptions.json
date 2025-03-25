@@ -2,37 +2,37 @@
   {
     "id": 1,
     "name": "Heavenly Garden",
-    "description": "Hallo, dies ist eines unserer vielen Levels ich bin Kevin und zuständig für die Arbeit an diesem Projekt! Was liegt ihnen am herzen ich schreibe gerade nur wirres zeug blabla bla",
+    "description": "Beispieltext.",
     "difficulty": "Easy"
   },
   {
     "id": 2,
     "name": "Twilight Serenity",
-    "description": "Hallo",
+    "description": "Beispieltext.",
     "difficulty": "Easy-Medium"
   },
   {
     "id": 3,
     "name": "Restless Dusk",
-    "description": "Hallo",
+    "description": "Beispieltext.",
     "difficulty": "Medium"
   },
   {
     "id": 4,
     "name": "Fury of the Storm",
-    "description": "Hallo",
+    "description": "Beispieltext.",
     "difficulty": "Medium-Hard"
   },
   {
     "id": 5,
     "name": "Eye of the Chaos",
-    "description": "Hallo",
+    "description": "Beispieltext.",
     "difficulty": "Hard"
   },
   {
     "id": 6,
     "name": "Abyss of Silence",
-    "description": "Hallo",
+    "description": "Beispieltext.",
     "difficulty": "Hard"
   }
 ]
