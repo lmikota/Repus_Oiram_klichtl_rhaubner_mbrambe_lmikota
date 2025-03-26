@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Sunny Meadows",
+    "description": "Repus starts his journey worried, but the beautiful weather and \nsinging birds give him hope and motivation to push forward.",
+    "difficulty": "Easy"
+  },
+  {
+    "id": 2,
+    "name": "Twilight Path",
+    "description": "After collecting the first key out of six, Repus thinks the \njourney will be easy—if only he knew what was ahead…",
+    "difficulty": "Easy-Medium"
+  },
+  {
+    "id": 3,
+    "name": "Stormy Road",
+    "description": "The weather is making Repus' journey much harder than \nhe expected, but he won’t let a little lightning stop him.",
+    "difficulty": "Medium"
+  },
+  {
+    "id": 4,
+    "name": "Ghostly Night",
+    "description": "The sun has completely disappeared. Repus begins to think he’s \nseeing ghosts. Is it just his imagination playing tricks on him?",
+    "difficulty": "Medium-Hard"
+  },
+  {
+    "id": 5,
+    "name": "Eye of the Chaos",
+    "description": "The storm has reached its peak, rain and lightning fill the air. \nEven dragons have appeared. Is this the end of Repus journey?",
+    "difficulty": "Hard"
+  },
+  {
+    "id": 6,
+    "name": "Dark Cave",
+    "description": "Now in a dark cave, Repus is away from the rain, but the \ndangers here are just as deadly. Can he still free Hcaep?",
+    "difficulty": "Hard"
+  }
+]
