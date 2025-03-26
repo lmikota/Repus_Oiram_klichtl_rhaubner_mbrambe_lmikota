@@ -22,7 +22,7 @@
                 <Image url="@../img/Level-Menu.png" />
             </image>
         </ImageView>
-        <Button fx:id="returnButton" focusTraversable="false" layoutX="350.0" layoutY="689.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Return">
+        <Button fx:id="returnButton" focusTraversable="false" layoutX="350.0" layoutY="689.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Return" AnchorPane.leftAnchor="350.0">
             <font>
                 <Font size="28.0" />
             </font>
@@ -32,32 +32,32 @@
                 <Font size="45.0" />
             </font>
         </Text>
-      <Button fx:id="levelStartButton" focusTraversable="false" layoutX="350.0" layoutY="610.0" mnemonicParsing="false" onAction="#onLevelStartButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Start">
+      <Button fx:id="levelStartButton" focusTraversable="false" layoutX="350.0" layoutY="610.0" mnemonicParsing="false" onAction="#onLevelStartButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Start" AnchorPane.leftAnchor="350.0">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <ImageView fx:id="Level1_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="354.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="350.0">
+      <ImageView fx:id="Level1_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="354.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="1100.0">
          <image>
             <Image url="@../img/Level_Backgrounds/Level_1_Background/Level_1-Icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Level2_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="518.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="535.0">
+      <ImageView fx:id="Level2_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="518.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="535.0" AnchorPane.rightAnchor="915.0">
          <image>
             <Image url="@../img/Level_Backgrounds/Level_2_Background/Level_2-Icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Level3_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="707.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.rightAnchor="725.0">
+      <ImageView fx:id="Level3_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="707.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="725.0" AnchorPane.rightAnchor="725.0">
          <image>
             <Image url="@../img/Level_Backgrounds/Level_3_Background/Level_3-Icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Level4_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="901.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.rightAnchor="535.0">
+      <ImageView fx:id="Level4_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="901.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="915.0" AnchorPane.rightAnchor="535.0">
          <image>
             <Image url="@../img/Level_Backgrounds/Level_4_Background/Level_4-Icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Level5_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="1095.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.rightAnchor="350.0">
+      <ImageView fx:id="Level5_Icon" fitHeight="150.0" fitWidth="150.0" layoutX="1095.0" layoutY="250.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="1100.0" AnchorPane.rightAnchor="350.0">
          <image>
             <Image url="@../img/Level_Backgrounds/Level_5_Background/Level_5-Icon.png" />
          </image>
@@ -67,7 +67,7 @@
             <Image url="@../img/Level_Backgrounds/Level_6_Background/Level_6-Background.png" />
          </image>
       </ImageView>
-      <GridPane fx:id="LevelDescriptionGrid" layoutX="562.0" layoutY="597.0" prefHeight="158.0" prefWidth="675.0" styleClass="LevelDescription" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="350.0">
+      <GridPane fx:id="LevelDescriptionGrid" layoutX="562.0" layoutY="597.0" prefHeight="158.0" prefWidth="675.0" styleClass="LevelDescription" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="350.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.33331298828125" minWidth="10.0" prefWidth="152.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="541.3333129882812" minWidth="10.0" prefWidth="536.0" />
