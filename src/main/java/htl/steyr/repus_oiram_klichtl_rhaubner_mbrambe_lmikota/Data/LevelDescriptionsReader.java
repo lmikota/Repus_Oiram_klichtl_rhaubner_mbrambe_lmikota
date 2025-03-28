@@ -10,7 +10,7 @@ public class LevelDescriptionsReader {
     public int selectedLevelID;
 
     public LevelDescriptionsReader(int selectedLevelID) {
-        this.selectedLevelID = selectedLevelID;
+        setSelectedLevelID(selectedLevelID);
     }
 
     public LevelDescription readLevelDescription() throws IOException {
@@ -25,5 +25,9 @@ public class LevelDescriptionsReader {
             }
         }
         return null;
+    }
+
+    public void setSelectedLevelID(int selectedLevelID) {
+        this.selectedLevelID = selectedLevelID;
     }
 }

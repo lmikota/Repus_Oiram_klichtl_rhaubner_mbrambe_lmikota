@@ -4,11 +4,11 @@ import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescript
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescriptionsReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUser;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUserReader;
-import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application.AppTestLmikota;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,14 +17,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
-
-import javafx.scene.Node;
 
 public class Level_Menu_Controller implements Initializable {
 
@@ -48,7 +46,7 @@ public class Level_Menu_Controller implements Initializable {
     @FXML
     public ImageView Level6_Icon;
 
-    private int selectedLevel = 0;
+    public int selectedLevel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,8 +54,8 @@ public class Level_Menu_Controller implements Initializable {
         try {
             LocalUser localUser = localUserReader.readLocalUsersUnlockedLevels();
 
+            /* look if the user has unlocked the levels */
             if (localUser != null) {
-
                 if ("locked".equals(localUser.getLevel_2())) {
                     disableLevelIcon(Level2_Icon);
                 }
@@ -81,43 +79,21 @@ public class Level_Menu_Controller implements Initializable {
 
     @FXML
     public void onLevelStartButtonClicked(ActionEvent actionEvent) {
-        AppTestLmikota appTestLmikota = new AppTestLmikota();
-        if (getSelectedLevel() > 0) {
-            switch (getSelectedLevel()) {
-                case 1:
-                    appTestLmikota.setSelectedLevel(1);
-                    appTestLmikota.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 2:
-                    appTestLmikota.setSelectedLevel(2);
-                    appTestLmikota.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 3:
-                    appTestLmikota.setSelectedLevel(3);
-                    appTestLmikota.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 4:
-                    appTestLmikota.setSelectedLevel(4);
-                    appTestLmikota.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 5:
-                    appTestLmikota.setSelectedLevel(5);
-                    appTestLmikota.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 6:
-                    appTestLmikota.setSelectedLevel(6);
-                    appTestLmikota.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                default:
-                    System.out.println("Unexpected Error while choosing Level");
-                    break;
+        if (selectedLevel > 0) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/story_scene-view.fxml"));
+                Parent newRoot = loader.load();
+
+                Story_Scene_Controller storySceneController = loader.getController();
+                storySceneController.setSelectedLevelID(getSelectedLevel());
+
+                Scene scene = returnButton.getScene();
+                scene.setRoot(newRoot);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+        } else {
+            System.out.println("No Level selected!");
         }
     }
 
@@ -125,7 +101,6 @@ public class Level_Menu_Controller implements Initializable {
         clearFromSelectionClass();
         ImageView selectedLevel = (ImageView) mouseEvent.getSource();
         selectedLevel.getStyleClass().add("selected-image-view");
-        setSelectedLevel(getLevelIdByImageView(selectedLevel));
 
         LevelDescriptionsReader reader = new LevelDescriptionsReader(getLevelIdByImageView(selectedLevel));
         LevelDescription levelDescription = reader.readLevelDescription();
@@ -143,28 +118,35 @@ public class Level_Menu_Controller implements Initializable {
     }
 
     private void clearFromSelectionClass() {
-        Level1_Icon.getStyleClass().remove("selected-image-view");
-        Level2_Icon.getStyleClass().remove("selected-image-view");
-        Level3_Icon.getStyleClass().remove("selected-image-view");
-        Level4_Icon.getStyleClass().remove("selected-image-view");
-        Level5_Icon.getStyleClass().remove("selected-image-view");
-        Level6_Icon.getStyleClass().remove("selected-image-view");
+        /* Node is a base class for the graphical elements */
+        List<Node> icons = Arrays.asList(Level1_Icon, Level2_Icon, Level3_Icon, Level4_Icon, Level5_Icon, Level6_Icon);
+
+        for (Node icon : icons) {
+            /* If Node is not used, the style could not be changed */
+            icon.getStyleClass().remove("selected-image-view");
+        }
         LevelDescriptionGrid.getChildren().clear();
     }
 
     private int getLevelIdByImageView(ImageView levelImageView) {
         if (levelImageView == Level1_Icon) {
-            return 1;
+            setSelectedLevel(1);
+            return getSelectedLevel();
         } else if (levelImageView == Level2_Icon) {
-            return 2;
+            setSelectedLevel(2);
+            return getSelectedLevel();
         } else if (levelImageView == Level3_Icon) {
-            return 3;
+            setSelectedLevel(3);
+            return getSelectedLevel();
         } else if (levelImageView == Level4_Icon) {
-            return 4;
+            setSelectedLevel(4);
+            return getSelectedLevel();
         } else if (levelImageView == Level5_Icon) {
-            return 5;
+            setSelectedLevel(5);
+            return getSelectedLevel();
         } else if (levelImageView == Level6_Icon) {
-            return 6;
+            setSelectedLevel(6);
+            return getSelectedLevel();
         } else {
             return -1;
         }
@@ -186,7 +168,6 @@ public class Level_Menu_Controller implements Initializable {
 
             Scene scene = returnButton.getScene();
             scene.setRoot(newRoot);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -198,10 +179,5 @@ public class Level_Menu_Controller implements Initializable {
 
     public void setSelectedLevel(int selectedLevel) {
         this.selectedLevel = selectedLevel;
-    }
-
-    private void closeCurrentWindow(ActionEvent actionEvent) {
-        Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        currentWindow.close();
     }
 }

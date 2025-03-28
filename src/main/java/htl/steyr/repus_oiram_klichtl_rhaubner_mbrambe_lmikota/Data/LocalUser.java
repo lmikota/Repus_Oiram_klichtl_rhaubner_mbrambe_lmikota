@@ -1,8 +1,5 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LocalUser {
 
     private String level_1;

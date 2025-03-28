@@ -1,0 +1,39 @@
+[
+  {
+    "levelID": 1,
+    "dialogs": [
+      { "dialogID": 1, "dialog": "Hallo" },
+      { "dialogID": 2, "dialog": "Welt" }
+    ]
+  },
+  {
+    "levelID": 2,
+    "dialogs": [
+      { "dialogID": 1, "dialog": "" }
+    ]
+  },
+  {
+    "levelID": 3,
+    "dialogs": [
+      {"dialogID": 1, "dialog":  ""}
+    ]
+  },
+  {
+    "levelID": 4,
+    "dialogs": [
+      {"dialogID": 1, "dialog":  ""}
+    ]
+  },
+  {
+    "levelID": 5,
+    "dialogs": [
+      {"dialogID": 1, "dialog":  ""}
+    ]
+  },
+  {
+    "levelID": 6,
+    "dialogs": [
+      {"dialogID": 1, "dialog":  ""}
+    ]
+  }
+]
