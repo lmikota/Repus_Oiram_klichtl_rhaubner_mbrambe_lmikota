@@ -1,40 +1,47 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class MapDataReader {
+    /// @ToDo Über LevelID soll man bestimmte Level Laden können
+    /// Man sollte sich mit ID aussuchen können, welches Level, jetzt passt das noch NICHT mit dem Ansatz
+    /// Man wird verm. a for Schleife benötigen
     final String fileName = "src/main/java/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/Data/MapData.json";
-    private int mapData[][];
+    private HashMap<Integer,MapData> mapHm;
+
     public MapDataReader() throws IOException {
-        setMapData(getFileName());
+        initializeMapData(getFileName());
     }
 
-    private void setMapData(String fileName) throws IOException {
+    private void initializeMapData(String fileName) throws IOException {
         JsonReader reader;
         Gson gson = new Gson();
         reader = new JsonReader(new FileReader(fileName));
-        this.mapData = gson.fromJson(reader, int[][].class);
+        Type type = new TypeToken<HashMap<Integer,MapData>>() {}.getType();
+        setMapHm(gson.fromJson(reader,type));
         reader.close();
-    }
-
-    public int getMapWidth(int tileSize) {
-        int mapsize = 0;
-        for ( int i = 0; i < getMapData().length; i++) {
-            mapsize = i * tileSize;
-        }
-        return mapsize;
     }
 
     public String getFileName() {
         return fileName;
     }
 
-    public int[][] getMapData() {
-        return mapData;
+
+    public HashMap<Integer, MapData> getMapHm() {
+        return mapHm;
+    }
+
+    public void setMapHm(HashMap<Integer, MapData> mapHm) {
+        this.mapHm = mapHm;
     }
 }

@@ -4,6 +4,7 @@ import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescript
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescriptionsReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUser;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUserReader;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application.AppTestLmikota;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +17,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.scene.Node;
 
 public class Level_Menu_Controller implements Initializable {
 
@@ -42,6 +47,8 @@ public class Level_Menu_Controller implements Initializable {
     public ImageView Level5_Icon;
     @FXML
     public ImageView Level6_Icon;
+
+    private int selectedLevel = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,13 +81,51 @@ public class Level_Menu_Controller implements Initializable {
 
     @FXML
     public void onLevelStartButtonClicked(ActionEvent actionEvent) {
-
+        AppTestLmikota appTestLmikota = new AppTestLmikota();
+        if (getSelectedLevel() > 0) {
+            switch (getSelectedLevel()) {
+                case 1:
+                    appTestLmikota.setSelectedLevel(1);
+                    appTestLmikota.start(new Stage());
+                    closeCurrentWindow(actionEvent);
+                    break;
+                case 2:
+                    appTestLmikota.setSelectedLevel(2);
+                    appTestLmikota.start(new Stage());
+                    closeCurrentWindow(actionEvent);
+                    break;
+                case 3:
+                    appTestLmikota.setSelectedLevel(3);
+                    appTestLmikota.start(new Stage());
+                    closeCurrentWindow(actionEvent);
+                    break;
+                case 4:
+                    appTestLmikota.setSelectedLevel(4);
+                    appTestLmikota.start(new Stage());
+                    closeCurrentWindow(actionEvent);
+                    break;
+                case 5:
+                    appTestLmikota.setSelectedLevel(5);
+                    appTestLmikota.start(new Stage());
+                    closeCurrentWindow(actionEvent);
+                    break;
+                case 6:
+                    appTestLmikota.setSelectedLevel(6);
+                    appTestLmikota.start(new Stage());
+                    closeCurrentWindow(actionEvent);
+                    break;
+                default:
+                    System.out.println("Unexpected Error while choosing Level");
+                    break;
+            }
+        }
     }
 
     public void onLevelSelected(MouseEvent mouseEvent) throws IOException {
         clearFromSelectionClass();
         ImageView selectedLevel = (ImageView) mouseEvent.getSource();
         selectedLevel.getStyleClass().add("selected-image-view");
+        setSelectedLevel(getLevelIdByImageView(selectedLevel));
 
         LevelDescriptionsReader reader = new LevelDescriptionsReader(getLevelIdByImageView(selectedLevel));
         LevelDescription levelDescription = reader.readLevelDescription();
@@ -145,5 +190,18 @@ public class Level_Menu_Controller implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int getSelectedLevel() {
+        return selectedLevel;
+    }
+
+    public void setSelectedLevel(int selectedLevel) {
+        this.selectedLevel = selectedLevel;
+    }
+
+    private void closeCurrentWindow(ActionEvent actionEvent) {
+        Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentWindow.close();
     }
 }

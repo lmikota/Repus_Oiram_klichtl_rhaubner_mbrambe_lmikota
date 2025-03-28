@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -21,8 +22,8 @@ import java.util.Set;
 public class AppTestLmikota extends Application {
     private static final int SCROLL_SPEED = 10;
     private final double GRAVITY = 0.5;
-    private int playerSize = 90;
     private double offsetX = 0;
+    private int selectedLevel;
 
     private Player player;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
@@ -33,18 +34,14 @@ public class AppTestLmikota extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        /// @ToDo
-        /// Background wiederholen
-        /// ImageViews bg1 und bg2 wiederholt aufrufen
         try {
             MapDataReader mapDataReader;
             mapDataReader = new MapDataReader();
             int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
             int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-            System.out.println("tilesize: " + screenHeight / 18);
             System.out.println("widht: " + screenWidth);
             System.out.println("height: " + screenHeight);
-            Tilemap tilemap = new Tilemap(mapDataReader.getMapData());
+            Tilemap tilemap = new Tilemap(mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             ImageView bg1 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_1.png");
             ImageView bg2 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_2.png");
             Pane root = new Pane();
@@ -64,7 +61,7 @@ public class AppTestLmikota extends Application {
 
             AnimationTimer gameLoop = new AnimationTimer() {
                 public void handle(long now) {
-                    updateGame(mapDataReader.getMapData(), root, tilemap.SCREEN_WIDTH, tilemap, bg1, bg2);
+                    updateGame(tilemap.getTileMapPattern(), root, tilemap.SCREEN_WIDTH, tilemap, bg1, bg2);
                 }
             };
             gameLoop.start();
@@ -72,6 +69,15 @@ public class AppTestLmikota extends Application {
             stage.setTitle("Repus Oiram");
             stage.setScene(scene);
             stage.setFullScreen(true);
+            stage.setFullScreenExitHint("");
+//            stage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
+//            scene.setOnKeyPressed( keyEvent ->  {
+//                if(keyEvent.getCode().equals(KeyCode.F11) && stage.fullScreenProperty().get()) {
+//                    stage.setFullScreen(false);
+//                } else if (keyEvent.getCode().equals(KeyCode.F11) && !stage.fullScreenProperty().get()) {
+//                    stage.setFullScreen(true);
+//                }
+//            }); geht ned weil des mitn Robin kollanbiert
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,5 +121,13 @@ public class AppTestLmikota extends Application {
         if (bg2.getX() + bgWidth <= offsetX) {
             bg2.setX(bg1.getX() + bgWidth);
         }
+    }
+
+    public int getSelectedLevel() {
+        return selectedLevel;
+    }
+
+    public void setSelectedLevel(int selectedLevel) {
+        this.selectedLevel = selectedLevel;
     }
 }
