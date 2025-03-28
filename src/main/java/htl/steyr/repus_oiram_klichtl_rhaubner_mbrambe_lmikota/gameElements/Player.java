@@ -4,9 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Set;
+import java.util.Timer;
 
-public class Player {
+public class Player implements Runnable {
     private ImageView playerImage;
     private double playerSize;
 
@@ -17,9 +20,46 @@ public class Player {
     private double tileSize;
     boolean isBlockUnderIt = false;
     boolean isBlockOverIt = false;
+    private int hp = 3;
+    private boolean safeTime = false;
+    private boolean plinkHigh = false;
 
     private final double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
+
+    @Override
+    public void run() {
+        setSafeTime(true);
+
+        LocalTime start = LocalTime.now();
+        LocalTime end;
+        Duration duration;
+        double deltaTime;
+
+        do {
+            end = LocalTime.now();
+            duration = Duration.between(start, end);
+            deltaTime = duration.toSeconds();
+
+            if(isPlinkHigh()){
+                getPlayerImage().setOpacity(0.75);
+                setPlinkHigh(false);
+            }else{
+                getPlayerImage().setOpacity(0.25);
+                setPlinkHigh(true);
+            }
+
+            try {
+                Thread.sleep(150);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        } while (deltaTime < 0.5);
+
+        setSafeTime(false);
+        getPlayerImage().setOpacity(1.0);
+    }
 
     public Player(Image playerImage, double playerSize, double tileSize) {
         setPlayerImage(playerImage);
@@ -42,10 +82,7 @@ public class Player {
     }
 
     public void playerMovementY(int map[][], Set<KeyCode> pressedKeys, double GRAVITY) {
-        isBlockUnderIt = false;
-        isBlockOverIt = false;
-
-        if (pressedKeys.contains(KeyCode.SPACE) && !isJumping) {
+        if (pressedKeys.contains(KeyCode.SPACE) && !isJumping && isBlockUnderIt) {
             playerVelY = JUMP_SPEED;
             isJumping = true;
         }
@@ -66,6 +103,9 @@ public class Player {
                 } else if (blockY >= 0 && blockY < map.length && isBlockSolid(map[blockY][blockX])) {
                     isBlockUnderIt = true;
                     break;
+                }else{
+                    isBlockUnderIt = false;
+                    isBlockOverIt = false;
                 }
             }
         }
@@ -156,5 +196,37 @@ public class Player {
 
     public void setTileSize(double tileSize) {
         this.tileSize = tileSize;
+    }
+
+    public double getPlayerVelY() {
+        return playerVelY;
+    }
+
+    public void setPlayerVelY(double playerVelY) {
+        this.playerVelY = playerVelY;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public boolean isSafeTime() {
+        return safeTime;
+    }
+
+    public void setSafeTime(boolean safeTime) {
+        this.safeTime = safeTime;
+    }
+
+    public boolean isPlinkHigh() {
+        return plinkHigh;
+    }
+
+    public void setPlinkHigh(boolean plinkHigh) {
+        this.plinkHigh = plinkHigh;
     }
 }

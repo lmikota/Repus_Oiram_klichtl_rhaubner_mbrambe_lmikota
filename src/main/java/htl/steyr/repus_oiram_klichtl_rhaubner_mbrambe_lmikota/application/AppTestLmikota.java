@@ -1,8 +1,7 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader;
-import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements.Player;
-import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements.Tilemap;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Node;
@@ -55,6 +54,19 @@ public class AppTestLmikota extends Application {
 
             player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
             addToRoot(root, player.getPlayerImage());
+
+            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+            addToRoot(root, gegner.getEnemyImage());
+            Thread gegnerThread = new Thread(gegner);
+            gegnerThread.start();
+
+            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
+            addToRoot(root, skyEnemy.getEnemyImage());
+            Thread skyEnemyThread = new Thread(skyEnemy);
+            skyEnemyThread.start();
+
+
+            player.getPlayerImage().toFront();
 
             scene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
             scene.setOnKeyReleased(event -> pressedKeys.remove(event.getCode()));
