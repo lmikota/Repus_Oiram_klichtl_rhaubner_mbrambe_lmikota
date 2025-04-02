@@ -3,6 +3,7 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.awt.*;
 
@@ -18,6 +19,8 @@ public class Enemy{
 
     private boolean playerTouching;
     private Player player;
+
+    private boolean dead = false;
 
     public Enemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player) {
         setEnemySize(enemySize);
@@ -37,7 +40,12 @@ public class Enemy{
             for(int j = -getTileSize()/2; j < getTileSize()/2; j += 1){
                 if(playerX == enemyX+j && playerY == enemyY+i){
                     player.setPlayerVelY(0);
-                    if(!getPlayer().isSafeTime()){
+
+                    if(playerY < enemyY + 6){
+                        playerKillsEnemy();
+                    }
+
+                    if(!getPlayer().isSafeTime() && !isDead()){
                         onEnemyHitsPlayer();
                     }
                     setPlayerTouching(true);
@@ -46,6 +54,12 @@ public class Enemy{
                 }
             }
         }
+    }
+
+    public void playerKillsEnemy() {
+        System.out.println("Gegner wurde getroffen!");
+        setDead(true);
+        System.out.println("isDead: " + isDead());
     }
 
     public void onEnemyHitsPlayer(){
@@ -144,5 +158,13 @@ public class Enemy{
 
     public void setPlayerTouching(boolean playerTouching) {
         this.playerTouching = playerTouching;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 }

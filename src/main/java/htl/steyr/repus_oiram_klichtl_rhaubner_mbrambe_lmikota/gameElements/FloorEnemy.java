@@ -1,6 +1,7 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 public class FloorEnemy extends Enemy implements Runnable {
     private int map[][];
@@ -15,20 +16,46 @@ public class FloorEnemy extends Enemy implements Runnable {
 
     @Override
     public void run() {
-        while(true) {
+        while(!isDead()) {
             try{
                 for(double i = 0; i < getOneMovementSite(); i += 0.2){
+                    if(isDead()){
+                        getEnemyImage().setDisable(true);
+                        getEnemyImage().setVisible(false);
+                        return;
+                    }
+
                     Thread.sleep(20);
                     setEnemyX(getEnemyX()+2);
                     getEnemyImage().setX(getEnemyX());
                     checkPlayerHitBox();
+
+                    if(isDead()){
+                        getEnemyImage().setDisable(true);
+                        getEnemyImage().setVisible(false);
+                        return;
+                    }
+
                     gravityOnEnemy();
                 }
                 for(double i = 0; i < getOneMovementSite(); i += 0.2){
+                    if(isDead()){
+                        getEnemyImage().setDisable(true);
+                        getEnemyImage().setVisible(false);
+                        return;
+                    }
+
                     Thread.sleep(20);
                     setEnemyX(getEnemyX()-2);
                     getEnemyImage().setX(getEnemyX());
                     checkPlayerHitBox();
+
+                    if(isDead()){
+                        getEnemyImage().setDisable(true);
+                        getEnemyImage().setVisible(false);
+                        return;
+                    }
+
                     gravityOnEnemy();
                 }
             }catch (Exception e) {
