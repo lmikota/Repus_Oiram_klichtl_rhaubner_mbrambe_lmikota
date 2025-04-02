@@ -15,11 +15,15 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -45,6 +49,19 @@ public class Level_Menu_Controller implements Initializable {
     public ImageView Level5_Icon;
     @FXML
     public ImageView Level6_Icon;
+
+    @FXML
+    public AnchorPane level_menu_AnchorPane;
+    @FXML
+    public HBox levelIcons1HBox;
+    @FXML
+    public HBox levelIcons2HBox;
+    @FXML
+    public Text levelOverviewText;
+    @FXML
+    public HBox buttonGridHBox;
+    @FXML
+    public VBox buttonHBox;
 
     public int selectedLevel;
 
@@ -75,6 +92,7 @@ public class Level_Menu_Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setStyles();
     }
 
     @FXML
@@ -124,6 +142,7 @@ public class Level_Menu_Controller implements Initializable {
         for (Node icon : icons) {
             /* If Node is not used, the style could not be changed */
             icon.getStyleClass().remove("selected-image-view");
+            icon.getStyleClass().add("-fx-opacity: 0.75");
         }
         LevelDescriptionGrid.getChildren().clear();
     }
@@ -179,5 +198,43 @@ public class Level_Menu_Controller implements Initializable {
 
     public void setSelectedLevel(int selectedLevel) {
         this.selectedLevel = selectedLevel;
+    }
+
+    public void setStyles() {
+        levelIcons1HBox.translateYProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.25));
+        levelIcons1HBox.spacingProperty().bind(level_menu_AnchorPane.widthProperty().multiply(0.025));
+
+        levelIcons2HBox.translateYProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.45));
+
+        List<ImageView> levelIcons = new ArrayList<>(List.of(Level1_Icon, Level2_Icon, Level3_Icon, Level4_Icon, Level5_Icon));
+
+        for (int i = 0; i < 5; ++i) {
+            levelIcons.get(i).fitHeightProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.15));
+            levelIcons.get(i).fitWidthProperty().bind(level_menu_AnchorPane.widthProperty().multiply(0.10));
+        }
+
+        Level6_Icon.fitHeightProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.15));
+        Level6_Icon.fitWidthProperty().bind(level_menu_AnchorPane.widthProperty().multiply(0.60));
+
+        // Center text horizontally using translation
+        levelOverviewText.translateXProperty().bind(
+                level_menu_AnchorPane.widthProperty()
+                        .subtract(levelOverviewText.prefWidth(-1))
+                        .divide(2)
+        );
+
+        // Set fixed distance from top
+        levelOverviewText.translateYProperty().bind(
+                level_menu_AnchorPane.heightProperty().multiply(0.2)
+                        .subtract(levelOverviewText.getLayoutBounds().getHeight() / 2)
+        );
+
+        buttonGridHBox.translateYProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.65));
+        buttonGridHBox.spacingProperty().bind(level_menu_AnchorPane.widthProperty().multiply(0.05));
+
+        buttonGridHBox.prefWidthProperty().bind(level_menu_AnchorPane.widthProperty().multiply(0.8));
+        buttonGridHBox.prefHeightProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.15));
+
+        buttonHBox.spacingProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.02));
     }
 }

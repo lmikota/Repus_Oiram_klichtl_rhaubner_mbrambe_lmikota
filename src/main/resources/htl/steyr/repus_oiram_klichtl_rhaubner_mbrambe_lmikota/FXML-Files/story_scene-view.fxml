@@ -9,7 +9,12 @@
 
 <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.Story_Scene_Controller">
     <children>
-        <ImageView fitHeight="288.0" fitWidth="260.0" layoutX="38.0" layoutY="573.0" pickOnBounds="true" preserveRatio="true" styleClass="Button" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0">
+      <ImageView fitHeight="902.0" fitWidth="1600.0" layoutX="1286.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../img/Level_Backgrounds/Level_1_Background/Level_1-Background_1.png" />
+         </image>
+      </ImageView>
+        <ImageView fitHeight="288.0" fitWidth="260.0" layoutX="56.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true" styleClass="Button" AnchorPane.leftAnchor="56.0">
             <image>
                 <Image url="@../img/Character_Repus.png" />
             </image>
@@ -19,12 +24,17 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <Button fx:id="returnButton" focusTraversable="false" layoutX="1350.0" layoutY="720.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Return" AnchorPane.bottomAnchor="110.0" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="returnButton" focusTraversable="false" layoutX="22.0" layoutY="800.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Return" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button fx:id="beginJourney" focusTraversable="false" layoutX="1338.0" layoutY="817.0" mnemonicParsing="false" onAction="#onBeginJourneyButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Beginn Journey" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="beginJourney" focusTraversable="false" layoutX="1338.0" layoutY="817.0" mnemonicParsing="false" onAction="#onBeginJourneyButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Beginn Journey" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Button>
+      <Button fx:id="nextDialog" focusTraversable="false" layoutX="744.0" layoutY="818.0" mnemonicParsing="false" onAction="#onNextDialogButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Next Dialog" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0">
          <font>
             <Font size="28.0" />
          </font>

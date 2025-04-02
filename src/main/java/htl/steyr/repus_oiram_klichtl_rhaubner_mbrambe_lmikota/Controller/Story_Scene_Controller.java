@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -27,6 +28,7 @@ public class Story_Scene_Controller implements Initializable {
     public Button returnButton;
     @FXML
     public Button beginJourney;
+    public Button nextDialog;
     @FXML
     private Text dialogText;
 
@@ -61,12 +63,18 @@ public class Story_Scene_Controller implements Initializable {
 
     @FXML
     public void handleKeyPress(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.SPACE) {
-            if (count < storyDialogs.getDialogs().size() - 1) {
-                count++;
-                showDialog();
-            }
-        }
+        /**
+         * @TO-Do:
+         * irgendwann fertig machen
+         */
+//        KeyCode key = keyEvent.getCode();
+//        System.out.println("Key pressed: " + key);
+//        if (key == KeyCode.SPACE) {
+//            if (count < storyDialogs.getDialogs().size() - 1) {
+//                count++;
+//                showDialog();
+//            }
+//        }
     }
 
     @FXML
@@ -137,4 +145,10 @@ public class Story_Scene_Controller implements Initializable {
         this.selectedLevelID = selectedLevelID;
     }
 
+    public void onNextDialogButtonClicked(ActionEvent actionEvent) {
+        if (count < storyDialogs.getDialogs().size() - 1) {
+            count++;
+            showDialog();
+        }
+    }
 }
