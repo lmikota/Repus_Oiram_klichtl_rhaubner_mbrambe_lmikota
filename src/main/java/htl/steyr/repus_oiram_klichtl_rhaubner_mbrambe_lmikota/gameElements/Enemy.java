@@ -45,7 +45,7 @@ public class Enemy{
                         playerKillsEnemy();
                     }
 
-                    if(!getPlayer().isSafeTime()){
+                    if(!getPlayer().isSafeTime() && !isDead()){
                         onEnemyHitsPlayer();
                     }
                     setPlayerTouching(true);
@@ -61,8 +61,6 @@ public class Enemy{
         setDead(true);
         System.out.println("isDead: " + isDead());
     }
-
-
 
     public void onEnemyHitsPlayer(){
         if(!playerTouching){
