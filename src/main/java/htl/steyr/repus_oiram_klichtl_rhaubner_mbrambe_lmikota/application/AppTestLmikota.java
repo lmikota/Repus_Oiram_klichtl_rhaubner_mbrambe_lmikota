@@ -4,7 +4,9 @@ import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,6 +35,11 @@ public class AppTestLmikota extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        /**
+         * @ToDo
+         * Background je nach Level matchen und ALLE 3 Hintergründe implementieren
+         * Zuerst aber noch mit ESC Level verlassen
+         */
         try {
             MapDataReader mapDataReader;
             mapDataReader = new MapDataReader();
@@ -69,6 +76,16 @@ public class AppTestLmikota extends Application {
             player.getPlayerImage().toFront();
 
             scene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
+            scene.setOnKeyPressed(event -> {
+                pressedKeys.add(event.getCode());
+                if(event.getCode().equals(KeyCode.F11) && stage.fullScreenProperty().get()) {
+                    stage.setFullScreen(false);
+                } else if (event.getCode().equals(KeyCode.F11) && !stage.fullScreenProperty().get()) {
+                    stage.setFullScreen(true);
+                } else if (event.getCode().equals(KeyCode.ESCAPE)) {
+                    loadExitMenu(root);
+                }
+            });
             scene.setOnKeyReleased(event -> pressedKeys.remove(event.getCode()));
 
             AnimationTimer gameLoop = new AnimationTimer() {
@@ -82,17 +99,19 @@ public class AppTestLmikota extends Application {
             stage.setScene(scene);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
-//            stage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
-//            scene.setOnKeyPressed( keyEvent ->  {
-//                if(keyEvent.getCode().equals(KeyCode.F11) && stage.fullScreenProperty().get()) {
-//                    stage.setFullScreen(false);
-//                } else if (keyEvent.getCode().equals(KeyCode.F11) && !stage.fullScreenProperty().get()) {
-//                    stage.setFullScreen(true);
-//                }
-//            }); geht ned weil des mitn Robin kollanbiert
+            stage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void loadExitMenu(Pane root) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/exit_menu-view.fxml"));
+        try {
+            addToRoot(root,loader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
