@@ -32,7 +32,6 @@ public class Level_Menu_Controller implements Initializable {
     public Button levelStartButton;
     @FXML
     public GridPane LevelDescriptionGrid;
-
     @FXML
     public ImageView Level1_Icon;
     @FXML
