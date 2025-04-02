@@ -72,6 +72,10 @@ public class AppTestLmikota extends Application {
             Thread skyEnemyThread = new Thread(skyEnemy);
             skyEnemyThread.start();
 
+            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+            addToRoot(root, jumpingEnemy.getEnemyImage());
+            Thread jumpingEnemyThread = new Thread(jumpingEnemy);
+            jumpingEnemyThread.start();
 
             player.getPlayerImage().toFront();
 
