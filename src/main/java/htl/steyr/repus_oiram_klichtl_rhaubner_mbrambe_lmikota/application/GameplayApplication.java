@@ -104,6 +104,7 @@ public class GameplayApplication extends Application {
             stage.setScene(gameplayScene);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Logo.png")));
             stage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
             stage.show();
         } catch (IOException e) {
@@ -112,7 +113,7 @@ public class GameplayApplication extends Application {
     }
 
     private void loadExitMenu(Pane root) {
-        System.out.println("load Exitmenu"); //debugging
+        System.out.println("load Exitmenu"); // debugging
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/exit_menu-view.fxml"));
 
         Platform.runLater(() -> {

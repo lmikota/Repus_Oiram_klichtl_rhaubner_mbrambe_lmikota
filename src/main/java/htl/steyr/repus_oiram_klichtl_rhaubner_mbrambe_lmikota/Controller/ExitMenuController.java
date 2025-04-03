@@ -18,6 +18,8 @@ public class ExitMenuController {
 
     @FXML
     public Text exitWarningText;
+    @FXML
+    public Text hintText;
 
     public void exitLevelButtonClicked(ActionEvent actionEvent) {
         if (exitWarningText.isVisible()) {
@@ -32,6 +34,7 @@ public class ExitMenuController {
             }
         }
         exitWarningText.setVisible(true);
+        hintText.setVisible(true);
     }
 
     private void closeCurrentWindow(ActionEvent actionEvent) {
