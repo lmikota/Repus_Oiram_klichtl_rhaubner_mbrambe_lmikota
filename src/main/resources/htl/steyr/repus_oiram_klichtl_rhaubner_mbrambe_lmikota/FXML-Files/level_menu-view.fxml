@@ -15,7 +15,7 @@
 <AnchorPane fx:id="level_menu_AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0"
             xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.Level_Menu_Controller">
+            fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.LevelMenuController">
     <children>
         <ImageView fitHeight="${level_menu_AnchorPane.height}" fitWidth="${level_menu_AnchorPane.width}"
                    pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

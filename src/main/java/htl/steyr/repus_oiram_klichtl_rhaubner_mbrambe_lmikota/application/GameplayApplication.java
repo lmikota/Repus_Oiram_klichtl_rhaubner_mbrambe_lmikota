@@ -6,7 +6,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +19,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AppTestLmikota extends Application {
+public class GameplayApplication extends Application {
     private static final int SCROLL_SPEED = 10;
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
@@ -37,8 +36,8 @@ public class AppTestLmikota extends Application {
     public void start(Stage primaryStage) {
         /**
          * @ToDo
-         * Background je nach Level matchen und ALLE 3 Hintergründe implementieren
-         * Zuerst aber noch mit ESC Level verlassen
+         * Background je nach Level matchen und ALLE 3 Hintergründe implementieren (erst wenn der Rest fertig ist, weil des ned elementar was am game ändert).
+         * Zuerst Projektmanagement usw. AP, Levels Bauen, Robin oder Marcel unterstützen bei Items/Gegner
          */
         try {
             MapDataReader mapDataReader;
@@ -72,7 +71,7 @@ public class AppTestLmikota extends Application {
             Thread skyEnemyThread = new Thread(skyEnemy);
             skyEnemyThread.start();
 
-            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Logo.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             addToRoot(root, jumpingEnemy.getEnemyImage());
             Thread jumpingEnemyThread = new Thread(jumpingEnemy);
             jumpingEnemyThread.start();
@@ -82,7 +81,7 @@ public class AppTestLmikota extends Application {
             scene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
             scene.setOnKeyPressed(event -> {
                 pressedKeys.add(event.getCode());
-                if(event.getCode().equals(KeyCode.F11) && stage.fullScreenProperty().get()) {
+                if (event.getCode().equals(KeyCode.F11) && stage.fullScreenProperty().get()) {
                     stage.setFullScreen(false);
                 } else if (event.getCode().equals(KeyCode.F11) && !stage.fullScreenProperty().get()) {
                     stage.setFullScreen(true);
@@ -111,9 +110,10 @@ public class AppTestLmikota extends Application {
     }
 
     private void loadExitMenu(Pane root) {
+        System.out.println("load Exitmenu");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/exit_menu-view.fxml"));
         try {
-            addToRoot(root,loader.load());
+            addToRoot(root, loader.load());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

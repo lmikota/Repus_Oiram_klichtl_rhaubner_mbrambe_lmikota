@@ -2,7 +2,7 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogs;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogsReader;
-import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application.AppTestLmikota;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application.GameplayApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Story_Scene_Controller implements Initializable {
+public class StorySceneController implements Initializable {
 
     @FXML
     public Button returnButton;
@@ -39,7 +39,8 @@ public class Story_Scene_Controller implements Initializable {
     public int selectedLevelID = 1;
 
     /* to load the controller out of the fxml */
-    public Story_Scene_Controller() {}
+    public StorySceneController() {
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -116,37 +117,37 @@ public class Story_Scene_Controller implements Initializable {
 
     @FXML
     public void onBeginJourneyButtonClicked(ActionEvent actionEvent) {
-        AppTestLmikota appTestLmikota = new AppTestLmikota();
+        GameplayApplication gameplayApplication = new GameplayApplication();
         if (getSelectedLevelID() > 0) {
             switch (getSelectedLevelID()) {
                 case 1:
-                    appTestLmikota.setSelectedLevel(1);
-                    appTestLmikota.start(new Stage());
+                    gameplayApplication.setSelectedLevel(1);
+                    gameplayApplication.start(new Stage());
                     closeCurrentWindow(actionEvent);
                     break;
                 case 2:
-                    appTestLmikota.setSelectedLevel(2);
-                    appTestLmikota.start(new Stage());
+                    gameplayApplication.setSelectedLevel(2);
+                    gameplayApplication.start(new Stage());
                     closeCurrentWindow(actionEvent);
                     break;
                 case 3:
-                    appTestLmikota.setSelectedLevel(3);
-                    appTestLmikota.start(new Stage());
+                    gameplayApplication.setSelectedLevel(3);
+                    gameplayApplication.start(new Stage());
                     closeCurrentWindow(actionEvent);
                     break;
                 case 4:
-                    appTestLmikota.setSelectedLevel(4);
-                    appTestLmikota.start(new Stage());
+                    gameplayApplication.setSelectedLevel(4);
+                    gameplayApplication.start(new Stage());
                     closeCurrentWindow(actionEvent);
                     break;
                 case 5:
-                    appTestLmikota.setSelectedLevel(5);
-                    appTestLmikota.start(new Stage());
+                    gameplayApplication.setSelectedLevel(5);
+                    gameplayApplication.start(new Stage());
                     closeCurrentWindow(actionEvent);
                     break;
                 case 6:
-                    appTestLmikota.setSelectedLevel(6);
-                    appTestLmikota.start(new Stage());
+                    gameplayApplication.setSelectedLevel(6);
+                    gameplayApplication.start(new Stage());
                     closeCurrentWindow(actionEvent);
                     break;
                 default:

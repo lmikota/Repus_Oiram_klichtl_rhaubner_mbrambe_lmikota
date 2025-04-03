@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class Level_Menu_Controller implements Initializable {
+public class LevelMenuController implements Initializable {
 
     @FXML
     public ImageView Level1_Icon;
@@ -110,7 +110,7 @@ public class Level_Menu_Controller implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/story_scene-view.fxml"));
                 Parent newRoot = loader.load();
 
-                Story_Scene_Controller storySceneController = loader.getController();
+                StorySceneController storySceneController = loader.getController();
                 storySceneController.setSelectedLevelID(getSelectedLevel());
 
                 Scene scene = returnButton.getScene();
