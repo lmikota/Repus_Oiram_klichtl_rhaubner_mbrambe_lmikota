@@ -4,6 +4,7 @@ import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -24,6 +25,7 @@ public class GameplayApplication extends Application {
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
     private int selectedLevel;
+    public static Scene gameplayScene;
 
     private Player player;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
@@ -55,7 +57,7 @@ public class GameplayApplication extends Application {
             bg2.setX(bg1.getImage().getWidth());
             addToRoot(root, tilemap.getTyleMapPane());
 
-            Scene scene = new Scene(root);
+            gameplayScene = new Scene(root);
             Stage stage = new Stage();
 
             player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
@@ -71,15 +73,15 @@ public class GameplayApplication extends Application {
             Thread skyEnemyThread = new Thread(skyEnemy);
             skyEnemyThread.start();
 
-            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Logo.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             addToRoot(root, jumpingEnemy.getEnemyImage());
             Thread jumpingEnemyThread = new Thread(jumpingEnemy);
             jumpingEnemyThread.start();
 
             player.getPlayerImage().toFront();
 
-            scene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
-            scene.setOnKeyPressed(event -> {
+            gameplayScene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
+            gameplayScene.setOnKeyPressed(event -> {
                 pressedKeys.add(event.getCode());
                 if (event.getCode().equals(KeyCode.F11) && stage.fullScreenProperty().get()) {
                     stage.setFullScreen(false);
@@ -89,7 +91,7 @@ public class GameplayApplication extends Application {
                     loadExitMenu(root);
                 }
             });
-            scene.setOnKeyReleased(event -> pressedKeys.remove(event.getCode()));
+            gameplayScene.setOnKeyReleased(event -> pressedKeys.remove(event.getCode()));
 
             AnimationTimer gameLoop = new AnimationTimer() {
                 public void handle(long now) {
@@ -99,7 +101,7 @@ public class GameplayApplication extends Application {
             gameLoop.start();
 
             stage.setTitle("Repus Oiram");
-            stage.setScene(scene);
+            stage.setScene(gameplayScene);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
             stage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
@@ -110,16 +112,32 @@ public class GameplayApplication extends Application {
     }
 
     private void loadExitMenu(Pane root) {
-        System.out.println("load Exitmenu");
+        System.out.println("load Exitmenu"); //debugging
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/exit_menu-view.fxml"));
-        try {
-            addToRoot(root, loader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+        Platform.runLater(() -> {
+            try {
+                Pane exitMenu = loader.load();
+
+                Stage exitStage = new Stage();
+                exitStage.setTitle("Exit Menu");
+                exitStage.setScene(new Scene(exitMenu));
+                exitStage.setResizable(false);
+
+                exitStage.initOwner(root.getScene().getWindow());
+                exitStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+                exitStage.show();
+
+                System.out.println("Exit-Menü erfolgreich geöffnet!"); //debugging
+            } catch (IOException e) {
+                System.out.println("Fehler beim Laden des Exit-Menüs: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
     }
 
-    private void updateGame(int map[][], Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
+
+    private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
