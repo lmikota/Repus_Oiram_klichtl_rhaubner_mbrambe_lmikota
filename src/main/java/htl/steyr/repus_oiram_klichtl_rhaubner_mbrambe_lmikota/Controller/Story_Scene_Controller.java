@@ -3,6 +3,8 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogs;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogsReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application.AppTestLmikota;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +13,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,17 +29,17 @@ public class Story_Scene_Controller implements Initializable {
     public Button returnButton;
     @FXML
     public Button beginJourney;
+    @FXML
     public Button nextDialog;
     @FXML
-    private Text dialogText;
+    public Text dialogText;
 
-    private StoryDialogs storyDialogs;
-    private int count = 0;
-    private int selectedLevelID = 1;
+    public StoryDialogs storyDialogs;
+    public int count = 0;
+    public int selectedLevelID = 1;
 
     /* to load the controller out of the fxml */
-    public Story_Scene_Controller() {
-    }
+    public Story_Scene_Controller() {}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,6 +59,29 @@ public class Story_Scene_Controller implements Initializable {
     private void showDialog() {
         if (count <= storyDialogs.getDialogs().size()) {
             dialogText.setText(storyDialogs.getDialogs().get(count).getDialog());
+
+            if (count < storyDialogs.getDialogs().size()) {
+                /* Get the full dialog text for the current index */
+                String fullText = storyDialogs.getDialogs().get(count).getDialog();
+
+                /* Clear the text field before starting the animation */
+                dialogText.setText("");
+
+                /* Create a Timeline animation to display text gradually */
+                Timeline timeline = new Timeline();
+
+                /* Loop through each character in the dialog text */
+                for (int i = 0; i < fullText.length(); i++) {
+                    final int index = i; // Store the current character index
+                    /* Add a KeyFrame that updates the text at regular intervals */
+                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(75 * i), e -> {
+                        /* Set the text to show characters up to the current index */
+                        dialogText.setText(fullText.substring(0, index + 1));
+                    }));
+                }
+                /* Start the animation */
+                timeline.play();
+            }
         }
     }
 
@@ -78,7 +102,7 @@ public class Story_Scene_Controller implements Initializable {
     }
 
     @FXML
-    public void onReturnButtonClicked(ActionEvent actionEvent) {
+    public void onReturnButtonClicked() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/level_menu-view.fxml"));
             Parent newRoot = loader.load();
@@ -145,7 +169,7 @@ public class Story_Scene_Controller implements Initializable {
         this.selectedLevelID = selectedLevelID;
     }
 
-    public void onNextDialogButtonClicked(ActionEvent actionEvent) {
+    public void onNextDialogButtonClicked() {
         if (count < storyDialogs.getDialogs().size() - 1) {
             count++;
             showDialog();

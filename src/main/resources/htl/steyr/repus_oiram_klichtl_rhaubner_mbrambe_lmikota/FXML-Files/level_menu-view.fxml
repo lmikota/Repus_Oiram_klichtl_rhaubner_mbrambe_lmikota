@@ -30,37 +30,6 @@
                 <Image url="@../img/Level-Menu.png"/>
             </image>
         </ImageView>
-        <HBox spacing="20.0" alignment="CENTER" fx:id="buttonGridHBox"
-              AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0">
-            <VBox fx:id="buttonHBox">
-                <Button fx:id="levelStartButton" focusTraversable="false" mnemonicParsing="false"
-                        onAction="#onLevelStartButtonClicked" prefHeight="45.0" prefWidth="204.0"
-                        styleClass="Button" stylesheets="@../style/ui-style.css" text="Start">
-                    <font>
-                        <Font size="28.0"/>
-                    </font>
-                </Button>
-                <Button fx:id="returnButton" focusTraversable="false" mnemonicParsing="false"
-                        onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="204.0"
-                        styleClass="Button" stylesheets="@../style/ui-style.css" text="Return">
-                    <font>
-                        <Font size="28.0"/>
-                    </font>
-                </Button>
-            </VBox>
-            <GridPane fx:id="LevelDescriptionGrid" prefHeight="170.0" prefWidth="675.0"
-                      styleClass="LevelDescription">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="152.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="536.0"/>
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints prefHeight="30.0"/>
-                    <RowConstraints prefHeight="30.0"/>
-                    <RowConstraints prefHeight="30.0"/>
-                </rowConstraints>
-            </GridPane>
-        </HBox>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text"
               text="Level-Overview" fx:id="levelOverviewText">
             <font>
@@ -68,7 +37,7 @@
             </font>
         </Text>
         <HBox alignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0"
-              fx:id="levelIcons1HBox">
+              fx:id="firstRowIconsHBox">
             <ImageView fx:id="Level1_Icon" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages">
                 <image>
@@ -101,7 +70,7 @@
             </ImageView>
         </HBox>
         <HBox spacing="20.0" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-              fx:id="levelIcons2HBox">
+              fx:id="secondLevelIconHBox">
             <ImageView fx:id="Level6_Icon" fitHeight="150.0" fitWidth="900.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="350.0"
                        AnchorPane.topAnchor="375.0">
@@ -109,6 +78,37 @@
                     <Image url="@../img/Level_Backgrounds/Level_6_Background/Level_6-Background.png"/>
                 </image>
             </ImageView>
+        </HBox>
+        <HBox spacing="20.0" alignment="CENTER" fx:id="buttonGridHBox"
+              AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0">
+            <VBox fx:id="buttonHBox">
+                <Button fx:id="levelStartButton" focusTraversable="false" mnemonicParsing="false"
+                        onAction="#onLevelStartButtonClicked" prefHeight="45.0" prefWidth="204.0"
+                        styleClass="Button" stylesheets="@../style/ui-style.css" text="Start">
+                    <font>
+                        <Font size="28.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="returnButton" focusTraversable="false" mnemonicParsing="false"
+                        onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="204.0"
+                        styleClass="Button" stylesheets="@../style/ui-style.css" text="Return">
+                    <font>
+                        <Font size="28.0"/>
+                    </font>
+                </Button>
+            </VBox>
+            <GridPane fx:id="LevelDescriptionGrid" prefHeight="170.0" prefWidth="675.0"
+                      styleClass="LevelDescription">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="152.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="536.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints prefHeight="30.0"/>
+                    <RowConstraints prefHeight="30.0"/>
+                    <RowConstraints prefHeight="30.0"/>
+                </rowConstraints>
+            </GridPane>
         </HBox>
     </children>
 </AnchorPane>

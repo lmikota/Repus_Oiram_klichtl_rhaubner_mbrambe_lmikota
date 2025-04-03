@@ -2,8 +2,11 @@
   {
     "levelID": 1,
     "dialogs": [
-      { "dialogID": 1, "dialog": "Hallo" },
-      { "dialogID": 2, "dialog": "Welt" }
+      { "dialogID": 1, "dialog": "Repus, a brave wizard, must rescue his princess, who was kidnapped by the dark Reswob."},
+      { "dialogID": 2, "dialog": "Five relics in the Guardian Towers are the key to breaking the cave's barriers." },
+      { "dialogID": 3, "dialog": "However, the towers are guarded by dangerous creatures, and traps are everywhere."},
+      { "dialogID": 4, "dialog": "With each tower, Repus’ power grows, but Reswob does everything to stop him."},
+      { "dialogID": 5, "dialog": "This is the first part of Repus journey, will he be brave enough to rescue his princess?"}
     ]
   },
   {
