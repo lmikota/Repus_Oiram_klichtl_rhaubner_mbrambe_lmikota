@@ -63,6 +63,9 @@ public class GameplayApplication extends Application {
             player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
             addToRoot(root, player.getPlayerImage());
 
+            SuperTrank superTrank = new SuperTrank(player ,new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/superTrank.png")), tilemap.getTILE_SIZE()/1.5);
+            addToRoot(root,superTrank.getImagetrank());
+
             FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             addToRoot(root, gegner.getEnemyImage());
             Thread gegnerThread = new Thread(gegner);
