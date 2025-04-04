@@ -12,7 +12,6 @@ public class SuperTrank extends Item {
                 "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/superTrank.png");
 
         setImagetrank(new ImageView(image));
-        activateSuperTrank(player);
         setImagesize(tranksize);
     }
 
