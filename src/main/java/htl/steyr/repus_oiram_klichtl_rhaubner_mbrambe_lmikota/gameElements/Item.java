@@ -6,9 +6,8 @@ public abstract class Item {
     private int tileNumber;
     private String imageFilePath;
 
-    public Item(String itemName, int tileNumber, String imageFilePath) {
+    public Item(String itemName, String imageFilePath) {
         setItemName(itemName);
-        setTileNumber(tileNumber);
         setImageFilePath(imageFilePath);
     }
 
@@ -26,14 +25,6 @@ public abstract class Item {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
-    }
-
-    public int getTileNumber() {
-        return tileNumber;
-    }
-
-    public void setTileNumber(int tileNumber) {
-        this.tileNumber = tileNumber;
     }
 
     public String getImageFilePath() {

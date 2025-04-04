@@ -68,11 +68,6 @@ public class Tilemap {
                      * Item allignment is centered
                      */
                     case -1:
-                        superTrank = new SuperTrank();
-                        imageView.setFitHeight(getTILE_SIZE()/1.5);
-                        imageView.setFitWidth(getTILE_SIZE()/1.5);
-                        imageView.setImage(new Image(getClass().getResourceAsStream(superTrank.getImageFilePath())));
-                        imageView.setX(imageView.getX() - getTILE_SIZE()/1.5);
                         break;
                     case 0:
                         break;
@@ -214,14 +209,6 @@ public class Tilemap {
 
     public String getTREE() {
         return TREE;
-    }
-
-    public SuperTrank getSuperTrank() {
-        return superTrank;
-    }
-
-    public void setSuperTrank(SuperTrank superTrank) {
-        this.superTrank = superTrank;
     }
 
     public String getTOWER_LEFT_ONE() {
