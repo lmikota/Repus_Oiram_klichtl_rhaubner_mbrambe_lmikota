@@ -20,10 +20,6 @@ public class SuperTrank extends Item {
         player.setHp(player.getHp() + 1);
     }
 
-    public ImageView getSupertrank() {
-        return supertrank;
-    }
-
     public void setImagetrank(ImageView supertrank) {
         this.supertrank = supertrank;
     }
@@ -35,9 +31,9 @@ public class SuperTrank extends Item {
     public void setImagesize(double tranksize){
         getImagetrank().setFitWidth(tranksize);
         getImagetrank().setFitHeight(tranksize);
-        getSupertrank().minHeight(tranksize);
+        getImagetrank().minHeight(tranksize);
         getImagetrank().minWidth(tranksize);
-        getSupertrank().maxHeight(tranksize);
-        getSupertrank().maxWidth(tranksize);
+        getImagetrank().maxHeight(tranksize);
+        getImagetrank().maxWidth(tranksize);
     }
 }
