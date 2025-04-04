@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Start_Menu_Controller {
+public class StartMenuController {
 
     @FXML
     public Button startButton;

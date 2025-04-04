@@ -1,7 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 
 public class FloorEnemy extends Enemy implements Runnable {
     private int map[][];

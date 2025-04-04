@@ -41,7 +41,7 @@ public class Enemy{
                 if(playerX == enemyX+j && playerY == enemyY+i){
                     player.setPlayerVelY(0);
 
-                    if(playerY < enemyY + 6){
+                    if(playerY > enemyY + 6){ //weiß noch nicht ob > oder < :-D
                         playerKillsEnemy();
                     }
 
