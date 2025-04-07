@@ -3,9 +3,13 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements.*;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -14,21 +18,36 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.Timer;
 
-public class GameplayApplication extends Application {
+public class GameplayApplication extends Application implements Initializable {
     private static final int SCROLL_SPEED = 10;
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
     private int selectedLevel;
     public static Scene gameplayScene;
+    private Timeline timerTimeline;
+    private int SecondsSinceStart = 0;
+    private static MapDataReader mapDataReader;
+    @FXML
+    private Text timerDisplay = new Text();
 
     private Player player;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -42,7 +61,6 @@ public class GameplayApplication extends Application {
          * Zuerst Projektmanagement usw. AP, Levels Bauen, Robin oder Marcel unterstützen bei Items/Gegner
          */
         try {
-            MapDataReader mapDataReader;
             mapDataReader = new MapDataReader();
             int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
             int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -52,12 +70,14 @@ public class GameplayApplication extends Application {
             ImageView bg1 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_1.png");
             ImageView bg2 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_2.png");
             Pane root = new Pane();
+            startTimer();
             addToRoot(root, bg1);
             addToRoot(root, bg2);
+            displayTimer(tilemap, root);
             bg2.setX(bg1.getImage().getWidth());
             addToRoot(root, tilemap.getTyleMapPane());
-
             gameplayScene = new Scene(root);
+            gameplayScene.getStylesheets().add(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/style/gameElementsStyle.css").toExternalForm());
             Stage stage = new Stage();
 
             player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
@@ -118,11 +138,32 @@ public class GameplayApplication extends Application {
         }
     }
 
+    public void displayTimer(Tilemap tilemap, Pane root) {
+        getTimerDisplay().setY((double) tilemap.SCREEN_HEIGHT / 10);
+        getTimerDisplay().setX((double) tilemap.SCREEN_WIDTH / 10);
+        getTimerDisplay().setId("timerDisplay");
+        addToRoot(root, getTimerDisplay());
+        System.out.println("in root drinnen"); // debugging
+    }
+
+    public void startTimer() {
+        setTimerTimeline(new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {
+            setSecondsSinceStart(getSecondsSinceStart() + 1);
+            getTimerDisplay().setText(String.valueOf(getSecondsSinceStart()));
+            System.out.println(getSecondsSinceStart());
+        })));
+        getTimerTimeline().setCycleCount(Timeline.INDEFINITE);
+        getTimerTimeline().play();
+    }
+
+    public void stopTimer () {
+        getTimerTimeline().stop();
+    }
+
     private void loadExitMenu(Pane root) {
         System.out.println("load Exitmenu"); // debugging
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/exit_menu-view.fxml"));
 
-        Platform.runLater(() -> {
             try {
                 Pane exitMenu = loader.load();
 
@@ -140,7 +181,6 @@ public class GameplayApplication extends Application {
                 System.out.println("Fehler beim Laden des Exit-Menüs: " + e.getMessage());
                 e.printStackTrace();
             }
-        });
     }
 
 
@@ -161,6 +201,7 @@ public class GameplayApplication extends Application {
         }
         offsetX = Math.max(0, Math.min(offsetX, totalTileLength * tileSize - screenWidth));
         root.setTranslateX(-offsetX);
+        timerDisplay.setTranslateX(offsetX);
     }
 
     public void addToRoot(Pane root, Node node) {
@@ -197,5 +238,25 @@ public class GameplayApplication extends Application {
 
     public void setSelectedLevel(int selectedLevel) {
         this.selectedLevel = selectedLevel;
+    }
+
+    public Timeline getTimerTimeline() {
+        return timerTimeline;
+    }
+
+    public void setTimerTimeline(Timeline timerTimeline) {
+        this.timerTimeline = timerTimeline;
+    }
+
+    public int getSecondsSinceStart() {
+        return SecondsSinceStart;
+    }
+
+    public void setSecondsSinceStart(int secondsSinceStart) {
+        SecondsSinceStart = secondsSinceStart;
+    }
+
+    public Text getTimerDisplay() {
+        return timerDisplay;
     }
 }
