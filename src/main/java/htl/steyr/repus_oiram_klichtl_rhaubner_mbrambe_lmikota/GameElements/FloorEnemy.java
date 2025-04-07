@@ -1,27 +1,16 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
 import javafx.scene.image.Image;
 
-import java.security.Timestamp;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.util.Random;
-
-public class JumpingEnemy extends Enemy implements Runnable {
+public class FloorEnemy extends Enemy implements Runnable {
     private int map[][];
-    private double enemyVelY = 0;
-    private boolean isBlockUnderIt = false;
-    private double enemyGravity = 0.4;
+    private int enemyVelY = 0;
+    private boolean isBlockUnderIt;
+    private double enemyGravity = 4;
 
-    private LocalTime lastJump;
-
-    private boolean isJumping = false;
-    private int jumpSpeed = -24;
-
-    public JumpingEnemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player, int map[][]) {
+    public FloorEnemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player, int map[][]) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player);
         this.map = map;
-        lastJump = LocalTime.now();
     }
 
     @Override
@@ -75,15 +64,7 @@ public class JumpingEnemy extends Enemy implements Runnable {
     }
 
     public void gravityOnEnemy(){
-        LocalTime now = LocalTime.now();
-
-        Duration duration = Duration.between(lastJump, now);
-        double deltaTime = duration.toSeconds();
-
-        if(deltaTime > 1 && isBlockUnderIt) {
-            enemyVelY = jumpSpeed;
-            lastJump = now;
-        }
+        isBlockUnderIt = false;
 
         enemyVelY += enemyGravity;
         double newYPosition = getEnemyImage().getY() + enemyVelY;
@@ -97,8 +78,6 @@ public class JumpingEnemy extends Enemy implements Runnable {
                 if (blockY >= 0 && blockY < map.length && isBlockSolid(map[blockY][blockX])) {
                     isBlockUnderIt = true;
                     break;
-                }else{
-                    isBlockUnderIt = false;
                 }
             }
         }
@@ -124,11 +103,11 @@ public class JumpingEnemy extends Enemy implements Runnable {
         this.map = map;
     }
 
-    public double getEnemyVelY() {
+    public int getEnemyVelY() {
         return enemyVelY;
     }
 
-    public void setEnemyVelY(double enemyVelY) {
+    public void setEnemyVelY(int enemyVelY) {
         this.enemyVelY = enemyVelY;
     }
 }

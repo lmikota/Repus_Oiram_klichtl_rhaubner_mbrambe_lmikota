@@ -20,7 +20,7 @@
                    AnchorPane.rightAnchor="0.0"
                    AnchorPane.topAnchor="0.0">
             <image>
-                <Image url="@../img/Backgrounds/StartScreenBackground.jpg"/>
+                <Image url="@../IMG/Backgrounds/StartScreenBackground.jpg"/>
             </image>
         </ImageView>
 
@@ -28,9 +28,9 @@
               AnchorPane.topAnchor="400.0" AnchorPane.bottomAnchor="0.0">
             <Button fx:id="startButton" focusTraversable="false" mnemonicParsing="false"
                     onAction="#onStartButtonClicked" prefHeight="65.0" prefWidth="242.0" styleClass="Button"
-                    stylesheets="@../style/ui-style.css" text="Start"/>
+                    stylesheets="@../CSS/ui-style.css" text="Start"/>
             <Button fx:id="exitButton" focusTraversable="false" mnemonicParsing="false" onAction="#onExitButtonClicked"
-                    prefHeight="65.0" prefWidth="242.0" styleClass="Button" stylesheets="@../style/ui-style.css"
+                    prefHeight="65.0" prefWidth="242.0" styleClass="Button" stylesheets="@../CSS/ui-style.css"
                     text="Exit"/>
         </VBox>
     </children>

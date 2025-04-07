@@ -11,7 +11,7 @@ public class LocalUserReader {
     private final Gson gson = new Gson();
 
     public LocalUser readLocalUsersUnlockedLevels() throws IOException {
-        File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON-Files/LocalUser.json");
+        File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json");
 
         try (JsonReader reader = new JsonReader(new FileReader(file))) {
             return gson.fromJson(reader, LocalUser.class);

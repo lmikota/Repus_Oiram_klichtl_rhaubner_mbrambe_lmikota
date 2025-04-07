@@ -2,7 +2,7 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogs;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogsReader;
-import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application.GameplayApplication;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application.GameplayApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -77,7 +77,7 @@ public class StorySceneController implements Initializable {
     @FXML
     public void onReturnButtonClicked() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/level_menu-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/level_menu-view.fxml"));
             Parent newRoot = loader.load();
 
             Scene scene = returnButton.getScene();

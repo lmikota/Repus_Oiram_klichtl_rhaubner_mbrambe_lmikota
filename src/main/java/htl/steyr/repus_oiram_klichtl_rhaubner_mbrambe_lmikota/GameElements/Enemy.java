@@ -1,11 +1,8 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-
-import java.awt.*;
 
 public class Enemy{
     private ImageView enemyImage;

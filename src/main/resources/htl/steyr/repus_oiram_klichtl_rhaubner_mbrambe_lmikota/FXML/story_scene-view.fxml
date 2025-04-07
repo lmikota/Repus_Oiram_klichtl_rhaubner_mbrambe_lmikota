@@ -18,14 +18,14 @@
                    pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <image>
-                <Image url="@../img/Backgrounds/Background.png"/>
+                <Image url="@../IMG/Backgrounds/Background.png"/>
             </image>
         </ImageView>
         <ImageView fitHeight="${storySceneAnchorPane.height}" fitWidth="${storySceneAnchorPane.width}"
                    pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <image>
-                <Image url="@../img/Backgrounds/MedievalPaperRoll.png"/>
+                <Image url="@../IMG/Backgrounds/MedievalPaperRoll.png"/>
             </image>
         </ImageView>
         <Text fx:id="dialogText" layoutX="373.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
@@ -34,15 +34,15 @@
         <HBox fx:id="buttonRowHBOX" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0">
             <Button fx:id="returnButton" focusTraversable="false" mnemonicParsing="false"
                     onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button"
-                    stylesheets="@../style/ui-style.css" text="Return">
+                    stylesheets="@../CSS/ui-style.css" text="Return">
             </Button>
             <Button fx:id="nextDialog" focusTraversable="false" mnemonicParsing="false"
                     onAction="#onNextDialogButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button"
-                    stylesheets="@../style/ui-style.css" text="Next Dialog">
+                    stylesheets="@../CSS/ui-style.css" text="Next Dialog">
             </Button>
             <Button fx:id="beginJourney" focusTraversable="false"
                     mnemonicParsing="false" onAction="#onBeginJourneyButtonClicked" prefHeight="45.0" prefWidth="200.0"
-                    styleClass="Button" stylesheets="@../style/ui-style.css" text="Beginn Journey">
+                    styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Beginn Journey">
             </Button>
         </HBox>
     </children>

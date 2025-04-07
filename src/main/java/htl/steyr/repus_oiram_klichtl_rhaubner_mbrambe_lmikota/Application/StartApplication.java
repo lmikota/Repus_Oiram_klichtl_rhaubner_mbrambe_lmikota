@@ -1,4 +1,4 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,9 +12,9 @@ import java.util.Objects;
 public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/start_menu-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/start_menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Icons/GameIcon.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Icons/GameIcon.png"))));
         stage.setTitle("Repus Oiram");
         stage.setScene(scene);
         stage.setFullScreen(true);
