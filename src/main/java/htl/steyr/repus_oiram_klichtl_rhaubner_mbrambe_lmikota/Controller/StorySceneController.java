@@ -14,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -26,19 +28,23 @@ import java.util.ResourceBundle;
 public class StorySceneController implements Initializable {
 
     @FXML
+    public AnchorPane storySceneAnchorPane;
+    @FXML
+    public Text dialogText;
+    @FXML
+    public StoryDialogs storyDialogs;
+    @FXML
+    public HBox buttonRowHBOX;
+    @FXML
     public Button returnButton;
     @FXML
     public Button beginJourney;
     @FXML
     public Button nextDialog;
-    @FXML
-    public Text dialogText;
-    @FXML
-    public StoryDialogs storyDialogs;
 
-    public int count = 0;
-    public int selectedLevelID = 1;
-    private Timeline currentTimeline;
+    public int count;
+    public int selectedLevelID;
+    public Timeline currentTimeline;
 
     /* to load the controller out of the fxml */
     public StorySceneController() {
@@ -46,19 +52,79 @@ public class StorySceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCount(0);
+        applyLayoutBindings();
+    }
 
-        StoryDialogsReader storyDialogsReader = new StoryDialogsReader();
-        storyDialogsReader.setSelectedLevelID(selectedLevelID);
+    @FXML
+    public void handleKeyPress(KeyEvent keyEvent) {
+        /**
+         * @TO-Do:
+         * irgendwann fertig machen
+         */
+//        KeyCode key = keyEvent.getCode();
+//        System.out.println("Key pressed: " + key);
+//        if (key == KeyCode.SPACE) {
+//            if (count < storyDialogs.getDialogs().size() - 1) {
+//                count++;
+//                showDialog();
+//            }
+//        }
+    }
 
+    /* ---------------------------------------------- Buttons Clicked ----------------------------------------------  */
+
+    @FXML
+    public void onReturnButtonClicked() {
         try {
-            storyDialogs = storyDialogsReader.readStoryDialogs();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/level_menu-view.fxml"));
+            Parent newRoot = loader.load();
 
-            showDialog();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("StoryDialogs.json could not be found!");
+            Scene scene = returnButton.getScene();
+            scene.setRoot(newRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    @FXML
+    public void onNextDialogButtonClicked() {
+        if (getCount() < storyDialogs.getDialogs().size() - 1) {
+            setCount(getCount() + 1);
+            showDialog();
+        } else {
+            nextDialog.setDisable(true);
+        }
+
+    }
+
+    @FXML
+    public void onBeginJourneyButtonClicked(ActionEvent actionEvent) {
+        GameplayApplication gameplayApplication = new GameplayApplication();
+        if (getSelectedLevelID() > 0) {
+            gameplayApplication.setSelectedLevel(getSelectedLevelID());
+            gameplayApplication.start(new Stage());
+            closeCurrentWindow(actionEvent);
+        }
+    }
+
+    /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
+
+    @FXML
+    public void applyLayoutBindings() {
+        /* Positioning and Spacing for the button row HBOX */
+        buttonRowHBOX.translateYProperty()
+                .bind(storySceneAnchorPane.heightProperty().multiply(0.8));
+        buttonRowHBOX.spacingProperty()
+                .bind(storySceneAnchorPane.widthProperty().multiply(0.15));
+
+        /* Place the dialogText around the middle of the screen */
+        dialogText.translateYProperty()
+                .bind(storySceneAnchorPane.heightProperty().multiply(0.12));
+        dialogText.setStyle("-fx-font-size: 50px");
+    }
+
+    @FXML
     private void showDialog() {
         if (count < storyDialogs.getDialogs().size()) {
             /* Get the full dialog text for the current index */
@@ -92,93 +158,34 @@ public class StorySceneController implements Initializable {
     }
 
     @FXML
-    public void handleKeyPress(KeyEvent keyEvent) {
-        /**
-         * @TO-Do:
-         * irgendwann fertig machen
-         */
-//        KeyCode key = keyEvent.getCode();
-//        System.out.println("Key pressed: " + key);
-//        if (key == KeyCode.SPACE) {
-//            if (count < storyDialogs.getDialogs().size() - 1) {
-//                count++;
-//                showDialog();
-//            }
-//        }
-    }
-
-    @FXML
-    public void onReturnButtonClicked() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/level_menu-view.fxml"));
-            Parent newRoot = loader.load();
-
-            Scene scene = returnButton.getScene();
-            scene.setRoot(newRoot);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    public void onBeginJourneyButtonClicked(ActionEvent actionEvent) {
-        GameplayApplication gameplayApplication = new GameplayApplication();
-        if (getSelectedLevelID() > 0) {
-            switch (getSelectedLevelID()) {
-                case 1:
-                    gameplayApplication.setSelectedLevel(1);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 2:
-                    gameplayApplication.setSelectedLevel(2);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 3:
-                    gameplayApplication.setSelectedLevel(3);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 4:
-                    gameplayApplication.setSelectedLevel(4);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 5:
-                    gameplayApplication.setSelectedLevel(5);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 6:
-                    gameplayApplication.setSelectedLevel(6);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                default:
-                    System.out.println("Unexpected Error while choosing Level");
-                    break;
-            }
-        }
-    }
-
     private void closeCurrentWindow(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentWindow.close();
     }
 
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------  */
+
     public int getSelectedLevelID() {
         return selectedLevelID;
     }
 
-    public void setSelectedLevelID(int selectedLevelID) {
-        this.selectedLevelID = selectedLevelID;
+    public int getCount() {
+        return count;
     }
 
-    public void onNextDialogButtonClicked() {
-        if (count < storyDialogs.getDialogs().size() - 1) {
-            count++;
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setupStory(int selectedLevelID) {
+        this.selectedLevelID = selectedLevelID;
+        StoryDialogsReader reader = new StoryDialogsReader();
+        reader.setSelectedLevelID(selectedLevelID);
+        try {
+            this.storyDialogs = reader.readStoryDialogs();
             showDialog();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("StoryDialogs.json could not be found!");
         }
     }
 }

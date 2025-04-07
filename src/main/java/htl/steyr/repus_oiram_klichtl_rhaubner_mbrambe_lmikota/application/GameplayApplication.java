@@ -6,7 +6,6 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +26,6 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.Timer;
 
 public class GameplayApplication extends Application implements Initializable {
     private static final int SCROLL_SPEED = 10;
@@ -67,8 +65,8 @@ public class GameplayApplication extends Application implements Initializable {
             System.out.println("widht: " + screenWidth);
             System.out.println("height: " + screenHeight);
             Tilemap tilemap = new Tilemap(mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
-            ImageView bg1 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_1.png");
-            ImageView bg2 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Level_Backgrounds/Level_1_Background/Level_1-Background_2.png");
+            ImageView bg1 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Backgrounds/Level_1_Background/Level_1-Background_1.png");
+            ImageView bg2 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Backgrounds/Level_1_Background/Level_1-Background_2.png");
             Pane root = new Pane();
             startTimer();
             addToRoot(root, bg1);
@@ -80,26 +78,26 @@ public class GameplayApplication extends Application implements Initializable {
             gameplayScene.getStylesheets().add(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/style/gameElementsStyle.css").toExternalForm());
             Stage stage = new Stage();
 
-            player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
+            player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/CharacterRepus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
             addToRoot(root, player.getPlayerImage());
 
-            SuperTrank superTrank = new SuperTrank(player ,new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/superTrank.png")), tilemap.getTILE_SIZE()/1.5);
+            SuperTrank superTrank = new SuperTrank(player ,new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Items/superTrank.png")), tilemap.getTILE_SIZE()/1.5);
             addToRoot(root,superTrank.getImagetrank());
 
-            SuperUmhang superUmhang = new SuperUmhang(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/SuperCape.png")), tilemap.getTILE_SIZE()/1.5);
+            SuperUmhang superUmhang = new SuperUmhang(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Items/SuperCape.png")), tilemap.getTILE_SIZE()/1.5);
             addToRoot(root, superUmhang.getImagecape());
 
-            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Enemys/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             addToRoot(root, gegner.getEnemyImage());
             Thread gegnerThread = new Thread(gegner);
             gegnerThread.start();
 
-            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/sprungmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
+            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Enemys/sprungmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
             addToRoot(root, skyEnemy.getEnemyImage());
             Thread skyEnemyThread = new Thread(skyEnemy);
             skyEnemyThread.start();
 
-            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Enemys/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             addToRoot(root, jumpingEnemy.getEnemyImage());
             Thread jumpingEnemyThread = new Thread(jumpingEnemy);
             jumpingEnemyThread.start();
@@ -130,7 +128,7 @@ public class GameplayApplication extends Application implements Initializable {
             stage.setScene(gameplayScene);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Logo.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Icons/GameIcon.png")));
             stage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
             stage.show();
         } catch (IOException e) {

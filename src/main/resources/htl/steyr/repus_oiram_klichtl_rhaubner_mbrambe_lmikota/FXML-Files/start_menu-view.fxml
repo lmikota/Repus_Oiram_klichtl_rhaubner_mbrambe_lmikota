@@ -20,7 +20,7 @@
                    AnchorPane.rightAnchor="0.0"
                    AnchorPane.topAnchor="0.0">
             <image>
-                <Image url="@../img/Start-Screen-Background.jpg"/>
+                <Image url="@../img/Backgrounds/StartScreenBackground.jpg"/>
             </image>
         </ImageView>
 

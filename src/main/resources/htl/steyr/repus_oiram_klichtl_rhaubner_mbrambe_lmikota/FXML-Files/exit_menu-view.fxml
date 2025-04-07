@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="416.0" fitWidth="639.0" layoutX="-6.0" pickOnBounds="true" AnchorPane.bottomAnchor="-16.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../img/Level_Backgrounds/Level_1_Background/Level_1-Background_1.png" />
+            <Image url="@../img/Backgrounds/Level_1_Background/Level_1-Background_1.png" />
          </image>
       </ImageView>
       <Button layoutX="463.0" layoutY="340.0" mnemonicParsing="false" onAction="#exitLevelButtonClicked" prefHeight="45.0" prefWidth="119.0" styleClass="Button" text="Exit Level" />

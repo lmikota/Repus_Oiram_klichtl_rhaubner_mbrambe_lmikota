@@ -5,27 +5,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.StorySceneController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<AnchorPane fx:id="storySceneAnchorPane" focusTraversable="true" maxHeight="1.7976931348623157E308"
+            maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress"
+            prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.StorySceneController">
     <children>
-      <Text fx:id="dialogText" layoutX="373.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="890.13671875">
-         <font>
-            <Font size="60.0" />
-         </font>
-      </Text>
-      <Button fx:id="returnButton" focusTraversable="false" layoutX="22.0" layoutY="800.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Return" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Button>
-      <Button fx:id="beginJourney" focusTraversable="false" layoutX="1338.0" layoutY="817.0" mnemonicParsing="false" onAction="#onBeginJourneyButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Beginn Journey" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Button>
-      <Button fx:id="nextDialog" focusTraversable="false" layoutX="716.0" layoutY="808.0" mnemonicParsing="false" onAction="#onNextDialogButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Next Dialog" AnchorPane.bottomAnchor="47.0">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Button>
+        <ImageView fitHeight="${storySceneAnchorPane.height}" fitWidth="${storySceneAnchorPane.width}"
+                   pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../img/Backgrounds/Background.png"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="${storySceneAnchorPane.height}" fitWidth="${storySceneAnchorPane.width}"
+                   pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../img/Backgrounds/MedievalPaperRoll.png"/>
+            </image>
+        </ImageView>
+        <Text fx:id="dialogText" layoutX="373.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
+              textAlignment="CENTER" wrappingWidth="890.13671875" styleClass="medievalFont">
+        </Text>
+        <HBox fx:id="buttonRowHBOX" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0">
+            <Button fx:id="returnButton" focusTraversable="false" mnemonicParsing="false"
+                    onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button"
+                    stylesheets="@../style/ui-style.css" text="Return">
+            </Button>
+            <Button fx:id="nextDialog" focusTraversable="false" mnemonicParsing="false"
+                    onAction="#onNextDialogButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button"
+                    stylesheets="@../style/ui-style.css" text="Next Dialog">
+            </Button>
+            <Button fx:id="beginJourney" focusTraversable="false"
+                    mnemonicParsing="false" onAction="#onBeginJourneyButtonClicked" prefHeight="45.0" prefWidth="200.0"
+                    styleClass="Button" stylesheets="@../style/ui-style.css" text="Beginn Journey">
+            </Button>
+        </HBox>
     </children>
 </AnchorPane>

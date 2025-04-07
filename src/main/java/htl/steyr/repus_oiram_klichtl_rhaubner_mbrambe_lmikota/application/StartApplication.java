@@ -14,7 +14,7 @@ public class StartApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/start_menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Logo.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Icons/GameIcon.png"))));
         stage.setTitle("Repus Oiram");
         stage.setScene(scene);
         stage.setFullScreen(true);

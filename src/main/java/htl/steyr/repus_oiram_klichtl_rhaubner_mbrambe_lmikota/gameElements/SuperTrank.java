@@ -2,14 +2,13 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.awt.*;
 
 public class SuperTrank extends Item {
     private ImageView supertrank;
 
     public SuperTrank(Player player, Image image, double tranksize) {
         super("Super-Trank",
-                "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/superTrank.png");
+                "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/GameElements/Items/superTrank.png");
 
         setImagetrank(new ImageView(image));
         setImagesize(tranksize);
