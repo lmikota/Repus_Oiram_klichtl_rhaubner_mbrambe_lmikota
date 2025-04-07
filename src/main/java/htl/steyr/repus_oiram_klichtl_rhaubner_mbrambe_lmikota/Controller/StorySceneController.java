@@ -33,10 +33,12 @@ public class StorySceneController implements Initializable {
     public Button nextDialog;
     @FXML
     public Text dialogText;
-
+    @FXML
     public StoryDialogs storyDialogs;
+
     public int count = 0;
     public int selectedLevelID = 1;
+    private Timeline currentTimeline;
 
     /* to load the controller out of the fxml */
     public StorySceneController() {
@@ -58,31 +60,34 @@ public class StorySceneController implements Initializable {
     }
 
     private void showDialog() {
-        if (count <= storyDialogs.getDialogs().size()) {
-            dialogText.setText(storyDialogs.getDialogs().get(count).getDialog());
+        if (count < storyDialogs.getDialogs().size()) {
+            /* Get the full dialog text for the current index */
+            String fullText = storyDialogs.getDialogs().get(count).getDialog();
 
-            if (count < storyDialogs.getDialogs().size()) {
-                /* Get the full dialog text for the current index */
-                String fullText = storyDialogs.getDialogs().get(count).getDialog();
-
-                /* Clear the text field before starting the animation */
-                dialogText.setText("");
-
-                /* Create a Timeline animation to display text gradually */
-                Timeline timeline = new Timeline();
-
-                /* Loop through each character in the dialog text */
-                for (int i = 0; i < fullText.length(); i++) {
-                    final int index = i; // Store the current character index
-                    /* Add a KeyFrame that updates the text at regular intervals */
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(75 * i), e -> {
-                        /* Set the text to show characters up to the current index */
-                        dialogText.setText(fullText.substring(0, index + 1));
-                    }));
-                }
-                /* Start the animation */
-                timeline.play();
+            /* Stop any running animation before starting a new one */
+            if (currentTimeline != null) {
+                currentTimeline.stop();
             }
+
+            /* Clear the text field before starting the animation */
+            dialogText.setText("");
+
+            /* Create a Timeline animation to display text gradually */
+            currentTimeline = new Timeline();
+
+            /* Loop through each character in the dialog text */
+            for (int i = 0; i < fullText.length(); i++) {
+                final int index = i; // Store the current character index
+
+                /* Add a KeyFrame that updates the text at regular intervals */
+                currentTimeline.getKeyFrames().add(new KeyFrame(Duration.millis(75 * i), e -> {
+                    /* Set the text to show characters up to the current index */
+                    dialogText.setText(fullText.substring(0, index + 1));
+                }));
+            }
+
+            /* Start the animation */
+            currentTimeline.play();
         }
     }
 

@@ -16,7 +16,7 @@ public class MapDataReader {
     /// @ToDo Über LevelID soll man bestimmte Level Laden können
     /// Man sollte sich mit ID aussuchen können, welches Level, jetzt passt das noch NICHT mit dem Ansatz
     /// Man wird verm. a for Schleife benötigen
-    final String fileName = "src/main/java/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/Data/MapData.json";
+    final String fileName = "src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON-Files/MapData.json";
     private HashMap<Integer,MapData> mapHm;
 
     public MapDataReader() throws IOException {
@@ -35,7 +35,6 @@ public class MapDataReader {
     public String getFileName() {
         return fileName;
     }
-
 
     public HashMap<Integer, MapData> getMapHm() {
         return mapHm;
