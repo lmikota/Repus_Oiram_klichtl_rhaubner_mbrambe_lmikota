@@ -1,4 +1,4 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,7 +7,6 @@ import javafx.scene.input.KeyCode;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Set;
-import java.util.Timer;
 
 public class Player implements Runnable {
     private ImageView playerImage;

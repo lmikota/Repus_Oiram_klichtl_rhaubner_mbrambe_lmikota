@@ -21,13 +21,13 @@
                    pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <image>
-                <Image url="@../img/Background.png"/>
+                <Image url="@../IMG/GameElements/Background.png"/>
             </image>
         </ImageView>
         <ImageView fitHeight="${level_menu_AnchorPane.height}" fitWidth="${level_menu_AnchorPane.width}"
                    pickOnBounds="true" preserveRatio="false">
             <image>
-                <Image url="@../img/Level-Menu.png"/>
+                <Image url="@../IMG/GameElements/Level-Menu.png"/>
             </image>
         </ImageView>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text"
@@ -41,31 +41,31 @@
             <ImageView fx:id="Level1_Icon" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages">
                 <image>
-                    <Image url="@../img/Level_Backgrounds/Level_1_Background/Level_1-Icon.png"/>
+                    <Image url="@../IMG/LevelBackgrounds/Level_1_Background/Level_1-Icon.png"/>
                 </image>
             </ImageView>
             <ImageView fx:id="Level2_Icon" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages">
                 <image>
-                    <Image url="@../img/Level_Backgrounds/Level_2_Background/Level_2-Icon.png"/>
+                    <Image url="@../IMG/LevelBackgrounds/Level_2_Background/Level_2-Icon.png"/>
                 </image>
             </ImageView>
             <ImageView fx:id="Level3_Icon" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages">
                 <image>
-                    <Image url="@../img/Level_Backgrounds/Level_3_Background/Level_3-Icon.png"/>
+                    <Image url="@../IMG/LevelBackgrounds/Level_3_Background/Level_3-Icon.png"/>
                 </image>
             </ImageView>
             <ImageView fx:id="Level4_Icon" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages">
                 <image>
-                    <Image url="@../img/Level_Backgrounds/Level_4_Background/Level_4-Icon.png"/>
+                    <Image url="@../IMG/LevelBackgrounds/Level_4_Background/Level_4-Icon.png"/>
                 </image>
             </ImageView>
             <ImageView fx:id="Level5_Icon" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages">
                 <image>
-                    <Image url="@../img/Level_Backgrounds/Level_5_Background/Level_5-Icon.png"/>
+                    <Image url="@../IMG/LevelBackgrounds/Level_5_Background/Level_5-Icon.png"/>
                 </image>
             </ImageView>
         </HBox>
@@ -75,7 +75,7 @@
                        pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="350.0"
                        AnchorPane.topAnchor="375.0">
                 <image>
-                    <Image url="@../img/Level_Backgrounds/Level_6_Background/Level_6-Background.png"/>
+                    <Image url="@../IMG/LevelBackgrounds/Level_6_Background/Level_6-Background.png"/>
                 </image>
             </ImageView>
         </HBox>

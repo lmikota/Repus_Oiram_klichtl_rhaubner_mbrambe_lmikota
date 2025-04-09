@@ -107,7 +107,7 @@ public class LevelMenuController implements Initializable {
     public void onLevelStartButtonClicked(ActionEvent actionEvent) {
         if (selectedLevel > 0) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/story_scene-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/story_scene-view.fxml"));
                 Parent newRoot = loader.load();
 
                 StorySceneController storySceneController = loader.getController();
@@ -178,7 +178,7 @@ public class LevelMenuController implements Initializable {
     @FXML
     public void onReturnButtonClicked() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/start_menu-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/start_menu-view.fxml"));
             Parent newRoot = loader.load();
 
             Scene scene = returnButton.getScene();

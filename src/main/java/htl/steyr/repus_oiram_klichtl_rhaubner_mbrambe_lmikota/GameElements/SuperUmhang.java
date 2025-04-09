@@ -1,13 +1,10 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Timer;
 
 public class SuperUmhang extends Item{
     private ImageView supercape;
@@ -16,7 +13,7 @@ public class SuperUmhang extends Item{
     private Duration duration;
 
     public SuperUmhang(Player player,Image imagecape, double capesize) {
-        super("Super-Umhang", "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/SuperCape.png");
+        super("Super-Umhang", "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png");
 
         setImagecape(new ImageView(imagecape));
         setImagesize(capesize);

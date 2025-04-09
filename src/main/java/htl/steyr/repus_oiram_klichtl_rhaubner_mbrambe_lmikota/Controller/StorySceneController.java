@@ -2,7 +2,7 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogs;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.StoryDialogsReader;
-import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application.GameplayApplication;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application.GameplayApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -105,7 +105,7 @@ public class StorySceneController implements Initializable {
     @FXML
     public void onReturnButtonClicked() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML-Files/level_menu-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/level_menu-view.fxml"));
             Parent newRoot = loader.load();
 
             Scene scene = returnButton.getScene();
@@ -119,41 +119,9 @@ public class StorySceneController implements Initializable {
     public void onBeginJourneyButtonClicked(ActionEvent actionEvent) {
         GameplayApplication gameplayApplication = new GameplayApplication();
         if (getSelectedLevelID() > 0) {
-            switch (getSelectedLevelID()) {
-                case 1:
-                    gameplayApplication.setSelectedLevel(1);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 2:
-                    gameplayApplication.setSelectedLevel(2);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 3:
-                    gameplayApplication.setSelectedLevel(3);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 4:
-                    gameplayApplication.setSelectedLevel(4);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 5:
-                    gameplayApplication.setSelectedLevel(5);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                case 6:
-                    gameplayApplication.setSelectedLevel(6);
-                    gameplayApplication.start(new Stage());
-                    closeCurrentWindow(actionEvent);
-                    break;
-                default:
-                    System.out.println("Unexpected Error while choosing Level");
-                    break;
-            }
+            gameplayApplication.setSelectedLevel(getSelectedLevelID());
+            gameplayApplication.start(new Stage());
+            closeCurrentWindow(actionEvent);
         }
     }
 

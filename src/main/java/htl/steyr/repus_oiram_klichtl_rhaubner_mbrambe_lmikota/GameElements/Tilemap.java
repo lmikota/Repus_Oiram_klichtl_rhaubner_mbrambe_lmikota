@@ -1,12 +1,11 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class Tilemap {
     public final int SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -16,26 +15,26 @@ public class Tilemap {
     private int cols;
     private int[][] tileMapPattern;
     private Pane tyleMapPane;
-    final String DIRT_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/3_dirtblock.png";
-    final String GRASS_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/4_grassblock.png";
-    final String STONE_DIRT_BLOCK = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/1_stonedirtblock.png";
-    final String STONE_DIRT_TRANSITION = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/2_stoneDirtTransition.png";
-    final String FLOATING_GRASS_LEFT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/5_floatingGrassblockLeft.png";
-    final String FLOATING_GRASS_RIGHT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/7_floatingGrassblockRight.png";
-    final String FLOATING_GRASS_MIDDLE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/6_floatingGrassBlockMiddle.png";
-    final String TREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/11_Tree.png";
-    final String TOWER_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks1.png";
-    final String TOWER_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks2.png";
-    final String TOWER_LEFT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks3.png";
-    final String TOWER_LEFT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/TurmLinks4.png";
-    final String TOWER_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts1.png";
-    final String TOWER_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts2.png";
-    final String TOWER_RIGHT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts3.png";
-    final String TOWER_RIGHT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/turmRechts4.png";
-    final String TREE_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/baumRechts1.png";
-    final String TREE_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/baumRechts2.png";
-    final String TREE_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bauLlinks1.png";
-    final String TREE_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/baumLinks2.png";
+    final String DIRT_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/3_dirtblock.png";
+    final String GRASS_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/4_grassblock.png";
+    final String STONE_DIRT_BLOCK = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/1_stonedirtblock.png";
+    final String STONE_DIRT_TRANSITION = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/2_stoneDirtTransition.png";
+    final String FLOATING_GRASS_LEFT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/5_floatingGrassblockLeft.png";
+    final String FLOATING_GRASS_RIGHT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/7_floatingGrassblockRight.png";
+    final String FLOATING_GRASS_MIDDLE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/6_floatingGrassBlockMiddle.png";
+    final String TREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/11_Tree.png";
+    final String TOWER_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks1.png";
+    final String TOWER_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks2.png";
+    final String TOWER_LEFT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks3.png";
+    final String TOWER_LEFT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks4.png";
+    final String TOWER_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts1.png";
+    final String TOWER_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts2.png";
+    final String TOWER_RIGHT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts3.png";
+    final String TOWER_RIGHT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts4.png";
+    final String TREE_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumRechts1.png";
+    final String TREE_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumRechts2.png";
+    final String TREE_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/bauLlinks1.png";
+    final String TREE_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumLinks2.png";
 
 
     private SuperTrank superTrank;
@@ -72,67 +71,67 @@ public class Tilemap {
                     case 0:
                         break;
                     case 1:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getSTONE_DIRT_BLOCK())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getSTONE_DIRT_BLOCK()))));
                         break;
                     case 2:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getSTONE_DIRT_TRANSITION())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getSTONE_DIRT_TRANSITION()))));
                         break;
                     case 3:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getDIRT_IMAGE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getDIRT_IMAGE()))));
                         break;
                     case 4:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getGRASS_IMAGE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getGRASS_IMAGE()))));
                         break;
                     case 5:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_LEFT())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getFLOATING_GRASS_LEFT()))));
                         break;
                     case 6:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_MIDDLE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getFLOATING_GRASS_MIDDLE()))));
                         break;
                     case 7:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getFLOATING_GRASS_RIGHT())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getFLOATING_GRASS_RIGHT()))));
                         break;
                     case 187:
                         // invisible Border
                         break;
                     case 11:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE()))));
                         break;
                     case 12:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_ONE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_ONE()))));
                         break;
                     case 13:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_ONE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_ONE()))));
                         break;
                     case 14:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_TWO())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_TWO()))));
                         break;
                     case 15:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_TWO())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_TWO()))));
                         break;
                     case 16:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_THREE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_THREE()))));
                         break;
                     case 17:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_THREE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_THREE()))));
                         break;
                     case 18:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_LEFT_FOUR())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_FOUR()))));
                         break;
                     case 19:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTOWER_RIGHT_FOUR())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_FOUR()))));
                         break;
                     case 20:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_LEFT_ONE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_LEFT_ONE()))));
                         break;
                     case 21:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_RIGHT_ONE())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_RIGHT_ONE()))));
                         break;
                     case 22:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_LEFT_TWO())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_LEFT_TWO()))));
                         break;
                     case 23:
-                        imageView.setImage(new Image(getClass().getResourceAsStream(getTREE_RIGHT_TWO())));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_RIGHT_TWO()))));
                         break;
                 }
 

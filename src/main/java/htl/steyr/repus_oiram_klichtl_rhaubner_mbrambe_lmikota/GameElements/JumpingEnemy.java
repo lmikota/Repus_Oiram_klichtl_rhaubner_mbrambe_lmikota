@@ -1,11 +1,9 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
 import javafx.scene.image.Image;
 
-import java.security.Timestamp;
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Random;
 
 public class JumpingEnemy extends Enemy implements Runnable {
     private int map[][];
