@@ -10,7 +10,6 @@ public class SuperTrank extends Item {
     public SuperTrank(Player player, Image image, double tranksize) {
         super("Super-Trank",
                 "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/superTrank.png");
-
         setImagetrank(new ImageView(image));
         setImagesize(tranksize);
     }

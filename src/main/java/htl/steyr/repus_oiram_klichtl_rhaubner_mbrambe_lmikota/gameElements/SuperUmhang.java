@@ -1,20 +1,39 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.Timer;
+
 public class SuperUmhang extends Item{
     private ImageView supercape;
+    private LocalTime start = LocalTime.now();
+    private LocalTime end;
+    private Duration duration;
 
-    public SuperUmhang(Image imagecape, double capesize) {
+    public SuperUmhang(Player player,Image imagecape, double capesize) {
         super("Super-Umhang", "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/SuperCape.png");
 
         setImagecape(new ImageView(imagecape));
         setImagesize(capesize);
     }
 
-    public void activateSuperCape() {
+    public void setCapeEffect(Player pl){
+        pl.setCapeEffect(true);
+        start = LocalTime.now();
+    }
 
+    public void isactivateSuperCape(Player player) {
+        end = LocalTime.now();
+        duration = Duration.between(start, end);
+        double deltaTime = duration.toSeconds();
+        if (deltaTime >= 30.0) {
+            player.setCapeEffect(false);
+        }
     }
 
     public ImageView getImagecape() {

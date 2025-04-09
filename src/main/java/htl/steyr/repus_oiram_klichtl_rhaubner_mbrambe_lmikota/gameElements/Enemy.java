@@ -45,7 +45,7 @@ public class Enemy{
                         playerKillsEnemy();
                     }
 
-                    if(!getPlayer().isSafeTime() && !isDead()){
+                    if(!getPlayer().isSafeTime() && !isDead() && !getPlayer().isCapeEffect()){
                         onEnemyHitsPlayer();
                     }
                     setPlayerTouching(true);

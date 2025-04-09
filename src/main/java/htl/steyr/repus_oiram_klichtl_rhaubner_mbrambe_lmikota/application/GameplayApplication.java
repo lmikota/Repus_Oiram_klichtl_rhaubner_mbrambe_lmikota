@@ -28,6 +28,7 @@ public class GameplayApplication extends Application {
     public static Scene gameplayScene;
 
     private Player player;
+    private SuperUmhang cape;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
 
     public static void main(String[] args) {
@@ -66,7 +67,7 @@ public class GameplayApplication extends Application {
             SuperTrank superTrank = new SuperTrank(player ,new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/superTrank.png")), tilemap.getTILE_SIZE()/1.5);
             addToRoot(root,superTrank.getImagetrank());
 
-            SuperUmhang superUmhang = new SuperUmhang(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/SuperCape.png")), tilemap.getTILE_SIZE()/1.5);
+            SuperUmhang superUmhang = new SuperUmhang(player ,new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/SuperCape.png")), tilemap.getTILE_SIZE()/1.5);
             addToRoot(root, superUmhang.getImagecape());
 
 //            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
@@ -149,6 +150,7 @@ public class GameplayApplication extends Application {
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
+        cape.isactivateSuperCape(player);
     }
 
     public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {

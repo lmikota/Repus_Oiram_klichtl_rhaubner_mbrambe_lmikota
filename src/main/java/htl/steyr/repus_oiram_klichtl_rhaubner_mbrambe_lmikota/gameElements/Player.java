@@ -23,6 +23,7 @@ public class Player implements Runnable {
     private int hp = 3;
     private boolean safeTime = false;
     private boolean plinkHigh = false;
+    private boolean CapeEffect = false;
 
     private final double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
@@ -228,5 +229,13 @@ public class Player implements Runnable {
 
     public void setPlinkHigh(boolean plinkHigh) {
         this.plinkHigh = plinkHigh;
+    }
+
+    public boolean isCapeEffect() {
+        return CapeEffect;
+    }
+
+    public void setCapeEffect(boolean capeEffect) {
+        CapeEffect = capeEffect;
     }
 }
