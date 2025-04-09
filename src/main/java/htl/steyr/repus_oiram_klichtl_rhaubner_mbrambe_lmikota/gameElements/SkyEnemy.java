@@ -1,6 +1,7 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 public class SkyEnemy extends Enemy implements Runnable {
     public SkyEnemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player) {

@@ -1,8 +1,11 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+
+import java.awt.*;
 
 public class Enemy{
     private ImageView enemyImage;
@@ -42,7 +45,7 @@ public class Enemy{
                         playerKillsEnemy();
                     }
 
-                    if(!getPlayer().isSafeTime() && !isDead()){
+                    if(!getPlayer().isSafeTime() && !isDead() && !getPlayer().isCapeEffect()){
                         onEnemyHitsPlayer();
                     }
                     setPlayerTouching(true);

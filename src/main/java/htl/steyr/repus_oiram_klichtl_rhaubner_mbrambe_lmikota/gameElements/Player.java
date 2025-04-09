@@ -1,4 +1,4 @@
-package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
+package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Set;
+import java.util.Timer;
 
 public class Player implements Runnable {
     private ImageView playerImage;
@@ -22,6 +23,7 @@ public class Player implements Runnable {
     private int hp = 3;
     private boolean safeTime = false;
     private boolean plinkHigh = false;
+    private boolean CapeEffect = false;
 
     private final double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
@@ -227,5 +229,13 @@ public class Player implements Runnable {
 
     public void setPlinkHigh(boolean plinkHigh) {
         this.plinkHigh = plinkHigh;
+    }
+
+    public boolean isCapeEffect() {
+        return CapeEffect;
+    }
+
+    public void setCapeEffect(boolean capeEffect) {
+        CapeEffect = capeEffect;
     }
 }

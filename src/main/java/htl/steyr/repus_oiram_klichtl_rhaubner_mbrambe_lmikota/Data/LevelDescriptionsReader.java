@@ -14,7 +14,7 @@ public class LevelDescriptionsReader {
     }
 
     public LevelDescription readLevelDescription() throws IOException {
-        File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LevelDescriptions.json");
+        File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON-Files/LevelDescriptions.json");
 
         Reader reader = new FileReader(file);
         LevelDescription[] levels = gson.fromJson(reader, LevelDescription[].class);

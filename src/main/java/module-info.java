@@ -7,12 +7,12 @@ module htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota {
     requires java.logging;
 
     // Nur existierende Packages exportieren!
-    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application;
-    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
+    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application;
+    exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.gameElements;
     exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
     exports htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data;
 
-    opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application to javafx.fxml;
+    opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.application to javafx.fxml;
     opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller to javafx.fxml;
     opens htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data to com.google.gson;
 }

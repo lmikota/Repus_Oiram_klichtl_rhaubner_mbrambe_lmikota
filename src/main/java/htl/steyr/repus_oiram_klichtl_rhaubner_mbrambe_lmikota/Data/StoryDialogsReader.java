@@ -16,7 +16,7 @@ public class StoryDialogsReader {
     }
 
     public StoryDialogs readStoryDialogs() throws FileNotFoundException {
-        File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/StoryDialogs.json");
+        File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON-Files/StoryDialogs.json");
 
         Reader reader = new FileReader(file);
         StoryDialogs[] dialogs = gson.fromJson(reader, StoryDialogs[].class);
