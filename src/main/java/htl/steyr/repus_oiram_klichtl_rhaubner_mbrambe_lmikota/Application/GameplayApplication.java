@@ -258,3 +258,4 @@ public class GameplayApplication extends Application implements Initializable {
         return timerDisplay;
     }
 }
+
