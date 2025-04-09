@@ -12,17 +12,17 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <Button fx:id="returnButton" focusTraversable="false" layoutX="22.0" layoutY="800.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Return" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0">
+      <Button fx:id="returnButton" focusTraversable="false" layoutX="22.0" layoutY="800.0" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Return" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button fx:id="beginJourney" focusTraversable="false" layoutX="1338.0" layoutY="817.0" mnemonicParsing="false" onAction="#onBeginJourneyButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Beginn Journey" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <Button fx:id="beginJourney" focusTraversable="false" layoutX="1338.0" layoutY="817.0" mnemonicParsing="false" onAction="#onBeginJourneyButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Beginn Journey" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
          <font>
             <Font size="28.0" />
          </font>
       </Button>
-      <Button fx:id="nextDialog" focusTraversable="false" layoutX="716.0" layoutY="808.0" mnemonicParsing="false" onAction="#onNextDialogButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../style/ui-style.css" text="Next Dialog" AnchorPane.bottomAnchor="47.0">
+      <Button fx:id="nextDialog" focusTraversable="false" layoutX="716.0" layoutY="808.0" mnemonicParsing="false" onAction="#onNextDialogButtonClicked" prefHeight="45.0" prefWidth="200.0" styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Next Dialog" AnchorPane.bottomAnchor="47.0">
          <font>
             <Font size="28.0" />
          </font>
