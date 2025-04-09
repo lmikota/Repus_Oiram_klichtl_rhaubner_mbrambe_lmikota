@@ -45,7 +45,7 @@ public class GameplayApplication extends Application implements Initializable {
     private Text timerDisplay = new Text();
 
     private Player player;
-    //    private SuperUmhang cape;
+    private SuperUmhang cape;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
 
     public static void main(String[] args) {
@@ -86,8 +86,8 @@ public class GameplayApplication extends Application implements Initializable {
             SuperTrank superTrank = new SuperTrank(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/superTrank.png")), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, superTrank.getImagetrank());
 
-            SuperUmhang superUmhang = new SuperUmhang(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png")), tilemap.getTILE_SIZE() / 1.5);
-            addToRoot(root, superUmhang.getImagecape());
+            cape = new SuperUmhang(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png")), tilemap.getTILE_SIZE() / 1.5);
+            addToRoot(root, cape.getImagecape());
 
 //            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
 //            addToRoot(root, gegner.getEnemyImage());
@@ -168,7 +168,7 @@ public class GameplayApplication extends Application implements Initializable {
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
-//        cape.isactivateSuperCape(player);
+        cape.isactivateSuperCape(player);
     }
 
     public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {
