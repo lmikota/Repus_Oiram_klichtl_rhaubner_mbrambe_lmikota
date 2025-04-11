@@ -42,7 +42,7 @@ public class GameplayApplication extends Application implements Initializable {
     private static MapDataReader mapDataReader;
 
     @FXML
-    private Text timerDisplay = new Text();
+    public static Text timerDisplay = new Text();
 
     private Player player;
     private SuperUmhang cape;
@@ -89,17 +89,17 @@ public class GameplayApplication extends Application implements Initializable {
             cape = new SuperUmhang(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png")), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, cape.getImagecape());
 
-//            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+//            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
 //            addToRoot(root, gegner.getEnemyImage());
 //            Thread gegnerThread = new Thread(gegner);
 //            gegnerThread.start();
 //
-//            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/sprungmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
+//            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/sprungmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
 //            addToRoot(root, skyEnemy.getEnemyImage());
 //            Thread skyEnemyThread = new Thread(skyEnemy);
 //            skyEnemyThread.start();
 //
-//            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+//            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
 //            addToRoot(root, jumpingEnemy.getEnemyImage());
 //            Thread jumpingEnemyThread = new Thread(jumpingEnemy);
 //            jumpingEnemyThread.start();
@@ -114,6 +114,7 @@ public class GameplayApplication extends Application implements Initializable {
                 } else if (event.getCode().equals(KeyCode.F11) && !stage.fullScreenProperty().get()) {
                     stage.setFullScreen(true);
                 } else if (event.getCode().equals(KeyCode.ESCAPE)) {
+                    stopTimer();
                     loadExitMenu(root);
                 }
             });
@@ -239,10 +240,19 @@ public class GameplayApplication extends Application implements Initializable {
 
 
     public void startTimer() {
+
         setTimerTimeline(new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {
             setSecondsSinceStart(getSecondsSinceStart() + 1);
-            getTimerDisplay().setText(String.valueOf(getSecondsSinceStart()));
-            System.out.println(getSecondsSinceStart());
+            int secs;
+            int mins;
+
+            secs = getSecondsSinceStart() % 60;
+            mins = getSecondsSinceStart() / 60;
+
+            String time = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+            getTimerDisplay().setText(time);
+
+            System.out.println(mins);
         })));
 
 
