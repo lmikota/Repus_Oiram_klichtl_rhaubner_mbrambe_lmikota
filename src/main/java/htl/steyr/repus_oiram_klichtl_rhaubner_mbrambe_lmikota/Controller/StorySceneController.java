@@ -142,6 +142,8 @@ public class StorySceneController implements Initializable {
         if (count < storyDialogs.getDialogs().size() - 1) {
             count++;
             showDialog();
+        } else {
+            nextDialog.setDisable(true);
         }
     }
 }

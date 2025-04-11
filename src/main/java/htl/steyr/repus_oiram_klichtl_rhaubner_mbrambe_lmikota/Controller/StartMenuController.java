@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 
 
 import java.io.IOException;
@@ -28,6 +30,32 @@ public class StartMenuController {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void onMenuButtonClicked(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/menu-view.fxml"));
+            Parent menuRoot = loader.load();
+
+            Scene menuScene = new Scene(menuRoot);
+
+            javafx.stage.Stage menuStage = new javafx.stage.Stage();
+            menuStage.setTitle("Menü");
+            menuStage.setScene(menuScene);
+            menuStage.setResizable(false);
+
+            javafx.stage.Window currentWindow = startButton.getScene().getWindow();
+            menuStage.initOwner(currentWindow);
+
+            menuStage.initModality(Modality.WINDOW_MODAL);
+            menuStage.initOwner(startButton.getScene().getWindow());
+
+            menuStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
