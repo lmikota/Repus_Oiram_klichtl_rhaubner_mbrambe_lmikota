@@ -42,7 +42,7 @@ public class GameplayApplication extends Application implements Initializable {
     private static MapDataReader mapDataReader;
 
     @FXML
-    private Text timerDisplay = new Text();
+    public static Text timerDisplay = new Text();
 
     private Player player;
     private SuperUmhang cape;
@@ -109,6 +109,7 @@ public class GameplayApplication extends Application implements Initializable {
                 } else if (event.getCode().equals(KeyCode.F11) && !stage.fullScreenProperty().get()) {
                     stage.setFullScreen(true);
                 } else if (event.getCode().equals(KeyCode.ESCAPE)) {
+                    stopTimer();
                     loadExitMenu(root);
                 }
             });
@@ -157,6 +158,7 @@ public class GameplayApplication extends Application implements Initializable {
 
     }
 
+
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
@@ -176,7 +178,6 @@ public class GameplayApplication extends Application implements Initializable {
         offsetX = Math.max(0, Math.min(offsetX, totalTileLength * tileSize - screenWidth));
 
         root.setTranslateX(-offsetX);
-        System.out.println(offsetX);
         timerDisplay.setTranslateX(offsetX);
     }
 
@@ -233,11 +234,21 @@ public class GameplayApplication extends Application implements Initializable {
         System.out.println("in root drinnen"); // debugging
     }
 
+
     public void startTimer() {
+
         setTimerTimeline(new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {
             setSecondsSinceStart(getSecondsSinceStart() + 1);
-            getTimerDisplay().setText(String.valueOf(getSecondsSinceStart()));
-            System.out.println(getSecondsSinceStart());
+            int secs;
+            int mins;
+
+            secs = getSecondsSinceStart() % 60;
+            mins = getSecondsSinceStart() / 60;
+
+            String time = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+            getTimerDisplay().setText(time);
+
+            System.out.println(mins);
         })));
 
         getTimerTimeline().setCycleCount(Timeline.INDEFINITE);
