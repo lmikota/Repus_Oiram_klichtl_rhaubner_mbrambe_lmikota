@@ -38,11 +38,12 @@ public class Enemy{
                 if(playerX == enemyX+j && playerY == enemyY+i){
                     player.setPlayerVelY(0);
 
-                    if(playerY > enemyY + 6){ //weiß noch nicht ob > oder < :-D
+                    if(playerY < enemyY){ //weiß noch nicht ob > oder < :-D
                         playerKillsEnemy();
                     }
 
                     if(!getPlayer().isSafeTime() && !isDead() && !getPlayer().isCapeEffect()){
+                        System.out.println("test");
                         onEnemyHitsPlayer();
                     }
                     setPlayerTouching(true);
@@ -54,16 +55,13 @@ public class Enemy{
     }
 
     public void playerKillsEnemy() {
-        System.out.println("Gegner wurde getroffen!");
         setDead(true);
-        System.out.println("isDead: " + isDead());
     }
 
     public void onEnemyHitsPlayer(){
         if(!playerTouching){
             getPlayer().setHp(getPlayer().getHp()-1);
             if(getPlayer().getHp() == 0){
-                System.out.println("tot");
                 javafx. application. Platform. exit();
             }else{
                 Thread startSafeTime = new Thread(getPlayer());

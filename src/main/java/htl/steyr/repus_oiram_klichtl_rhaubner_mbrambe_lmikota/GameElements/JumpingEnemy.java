@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 
 import java.time.Duration;
@@ -35,7 +36,11 @@ public class JumpingEnemy extends Enemy implements Runnable {
 
                     Thread.sleep(20);
                     setEnemyX(getEnemyX()+2);
-                    getEnemyImage().setX(getEnemyX());
+
+                    Platform.runLater(() -> {
+                        getEnemyImage().setX(getEnemyX());
+                    });
+
                     checkPlayerHitBox();
 
                     if(isDead()){
@@ -55,7 +60,11 @@ public class JumpingEnemy extends Enemy implements Runnable {
 
                     Thread.sleep(20);
                     setEnemyX(getEnemyX()-2);
-                    getEnemyImage().setX(getEnemyX());
+
+                    Platform.runLater(() -> {
+                        getEnemyImage().setX(getEnemyX());
+                    });
+
                     checkPlayerHitBox();
 
                     if(isDead()){

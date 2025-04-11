@@ -89,20 +89,15 @@ public class GameplayApplication extends Application implements Initializable {
             cape = new SuperUmhang(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png")), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, cape.getImagecape());
 
-//            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
-//            addToRoot(root, gegner.getEnemyImage());
-//            Thread gegnerThread = new Thread(gegner);
-//            gegnerThread.start();
-//
-//            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/sprungmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
-//            addToRoot(root, skyEnemy.getEnemyImage());
-//            Thread skyEnemyThread = new Thread(skyEnemy);
-//            skyEnemyThread.start();
-//
-//            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Vogel.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 100, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
-//            addToRoot(root, jumpingEnemy.getEnemyImage());
-//            Thread jumpingEnemyThread = new Thread(jumpingEnemy);
-//            jumpingEnemyThread.start();
+            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+            addToRoot(root, gegner.getEnemyImage());
+            Thread gegnerThread = new Thread(gegner);
+            gegnerThread.start();
+
+            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
+            addToRoot(root, skyEnemy.getEnemyImage());
+            Thread skyEnemyThread = new Thread(skyEnemy);
+            skyEnemyThread.start();
 
             player.getPlayerImage().toFront();
 
@@ -162,7 +157,6 @@ public class GameplayApplication extends Application implements Initializable {
 
     }
 
-
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
@@ -180,7 +174,9 @@ public class GameplayApplication extends Application implements Initializable {
             offsetX -= SCROLL_SPEED;
         }
         offsetX = Math.max(0, Math.min(offsetX, totalTileLength * tileSize - screenWidth));
+
         root.setTranslateX(-offsetX);
+        System.out.println(offsetX);
         timerDisplay.setTranslateX(offsetX);
     }
 
@@ -237,7 +233,6 @@ public class GameplayApplication extends Application implements Initializable {
         System.out.println("in root drinnen"); // debugging
     }
 
-
     public void startTimer() {
         setTimerTimeline(new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {
             setSecondsSinceStart(getSecondsSinceStart() + 1);
@@ -245,11 +240,9 @@ public class GameplayApplication extends Application implements Initializable {
             System.out.println(getSecondsSinceStart());
         })));
 
-
         getTimerTimeline().setCycleCount(Timeline.INDEFINITE);
         getTimerTimeline().play();
     }
-
 
     public void stopTimer() {
         getTimerTimeline().stop();
