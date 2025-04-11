@@ -18,6 +18,8 @@ public class StartMenuController {
     @FXML
     public Button startButton;
 
+    /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
+
     @FXML
     public void onStartButtonClicked(ActionEvent actionEvent) {
         try {
@@ -29,33 +31,34 @@ public class StartMenuController {
             scene.setRoot(newRoot);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error loading level menu: " + e.getMessage());
         }
     }
 
     @FXML
     public void onMenuButtonClicked(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/menu-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/menu-view.fxml"));
             Parent menuRoot = loader.load();
 
             Scene menuScene = new Scene(menuRoot);
 
+            /* Set up a new stage (window) for the menu */
             javafx.stage.Stage menuStage = new javafx.stage.Stage();
-            menuStage.setTitle("Menü");
+            menuStage.setTitle("Menu");
             menuStage.setScene(menuScene);
             menuStage.setResizable(false);
 
+            /* Make the new stage modal and set its owner to the current window */
             javafx.stage.Window currentWindow = startButton.getScene().getWindow();
             menuStage.initOwner(currentWindow);
-
             menuStage.initModality(Modality.WINDOW_MODAL);
-            menuStage.initOwner(startButton.getScene().getWindow());
 
             menuStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error loading menu: " + e.getMessage());
         }
     }
 

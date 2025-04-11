@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,15 +29,20 @@ public class StorySceneController implements Initializable {
     @FXML
     public Button returnButton;
     @FXML
-    public Button beginJourney;
+    public Button beginJourneyButton;
     @FXML
-    public Button nextDialog;
+    public Button nextDialogButton;
     @FXML
     public Text dialogText;
-
+    @FXML
+    public AnchorPane storySceneAnchorPane;
+    @FXML
     public StoryDialogs storyDialogs;
+
     public int count = 0;
     public int selectedLevelID = 1;
+
+    public Timeline currentTimeline;
 
     /* to load the controller out of the fxml */
     public StorySceneController() {
@@ -55,34 +61,46 @@ public class StorySceneController implements Initializable {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("StoryDialogs.json could not be found!");
         }
+        applyLayoutBindings();
     }
 
-    private void showDialog() {
-        if (count <= storyDialogs.getDialogs().size()) {
-            dialogText.setText(storyDialogs.getDialogs().get(count).getDialog());
+    /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
-            if (count < storyDialogs.getDialogs().size()) {
-                /* Get the full dialog text for the current index */
-                String fullText = storyDialogs.getDialogs().get(count).getDialog();
+    @FXML
+    public void onReturnButtonClicked() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/level_menu-view.fxml"));
+            Parent newRoot = loader.load();
 
-                /* Clear the text field before starting the animation */
-                dialogText.setText("");
+            Scene scene = returnButton.getScene();
+            scene.setRoot(newRoot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-                /* Create a Timeline animation to display text gradually */
-                Timeline timeline = new Timeline();
+    @FXML
+    public void onNextDialogButtonClicked() {
+        if (count < storyDialogs.getDialogs().size() - 1) {
+            count++;
 
-                /* Loop through each character in the dialog text */
-                for (int i = 0; i < fullText.length(); i++) {
-                    final int index = i; // Store the current character index
-                    /* Add a KeyFrame that updates the text at regular intervals */
-                    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(75 * i), e -> {
-                        /* Set the text to show characters up to the current index */
-                        dialogText.setText(fullText.substring(0, index + 1));
-                    }));
-                }
-                /* Start the animation */
-                timeline.play();
-            }
+            // Setze den Text sofort zurück (verhindert Überlappung)
+            dialogText.setText("");
+
+            // Starte die neue Animation
+            showDialog();
+        } else {
+            nextDialogButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void onBeginJourneyButtonClicked(ActionEvent actionEvent) {
+        GameplayApplication gameplayApplication = new GameplayApplication();
+        if (getSelectedLevelID() > 0) {
+            gameplayApplication.setSelectedLevel(getSelectedLevelID());
+            gameplayApplication.start(new Stage());
+            closeCurrentWindow(actionEvent);
         }
     }
 
@@ -102,33 +120,99 @@ public class StorySceneController implements Initializable {
 //        }
     }
 
-    @FXML
-    public void onReturnButtonClicked() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/level_menu-view.fxml"));
-            Parent newRoot = loader.load();
+    /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
 
-            Scene scene = returnButton.getScene();
-            scene.setRoot(newRoot);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    @FXML
+    private void showDialog() {
+        /* Stop the current animation if one is running */
+        if (currentTimeline != null) {
+            currentTimeline.stop();
+        }
+
+        /* Set the full dialog text initially (serves as fallback) */
+        dialogText.setText(storyDialogs.getDialogs().get(count).getDialog());
+
+        if (count < storyDialogs.getDialogs().size()) {
+            /* Get the full dialog text for the current index */
+            String fullText = storyDialogs.getDialogs().get(count).getDialog();
+
+            /* Clear the text field before starting animation */
+            dialogText.setText("");
+
+            /* Create new Timeline for character-by-character animation */
+            currentTimeline = new Timeline();
+
+            /* Build animation by adding keyframes for each character */
+            for (int i = 0; i < fullText.length(); i++) {
+                /* Store current character index */
+                final int index = i;
+                currentTimeline.getKeyFrames().add(
+                        new KeyFrame(Duration.millis(75 * i), e -> {
+                            /* Update text to show characters up to current index */
+                            dialogText.setText(fullText.substring(0, index + 1));
+                        })
+                );
+            }
+
+            /* Start the animation */
+            currentTimeline.play();
         }
     }
 
     @FXML
-    public void onBeginJourneyButtonClicked(ActionEvent actionEvent) {
-        GameplayApplication gameplayApplication = new GameplayApplication();
-        if (getSelectedLevelID() > 0) {
-            gameplayApplication.setSelectedLevel(getSelectedLevelID());
-            gameplayApplication.start(new Stage());
-            closeCurrentWindow(actionEvent);
-        }
-    }
-
     private void closeCurrentWindow(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentWindow.close();
     }
+
+    @FXML
+    private void applyLayoutBindings() {
+
+        /* Centering the Next Dialog button horizontally */
+        nextDialogButton.translateXProperty().bind(
+                storySceneAnchorPane.widthProperty()
+                        .subtract(nextDialogButton.prefWidth(-1))
+                        .divide(2)
+        );
+
+        /* Positionierung des Dialog-Texts */
+        dialogText.translateXProperty().bind(
+                storySceneAnchorPane.widthProperty()
+                        .subtract(dialogText.prefWidth(-1))
+                        .divide(2)
+        );
+
+        dialogText.translateYProperty().bind(
+                storySceneAnchorPane.heightProperty()
+                        .subtract(dialogText.prefHeight(-1))
+                        .divide(3)
+        );
+
+        /* Return-Button: Links unten */
+        returnButton.translateYProperty().bind(
+                storySceneAnchorPane.heightProperty().multiply(0.80)
+        );
+        returnButton.translateXProperty().bind(
+                storySceneAnchorPane.widthProperty().multiply(0.05) // 5% Abstand vom linken Rand
+        );
+
+        /* Next-Dialog-Button: Zentriert unten */
+        nextDialogButton.translateYProperty().bind(
+                storySceneAnchorPane.heightProperty().multiply(0.80)
+        );
+
+        /* Begin-Journey-Button: Rechts unten */
+        beginJourneyButton.translateYProperty().bind(
+                storySceneAnchorPane.heightProperty().multiply(0.80)
+        );
+        beginJourneyButton.translateXProperty().bind(
+                storySceneAnchorPane.widthProperty()
+                        .subtract(beginJourneyButton.prefWidth(-1))
+                        .multiply(0.95) // 5% Abstand vom rechten Rand
+        );
+    }
+
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------  */
 
     public int getSelectedLevelID() {
         return selectedLevelID;
@@ -136,14 +220,5 @@ public class StorySceneController implements Initializable {
 
     public void setSelectedLevelID(int selectedLevelID) {
         this.selectedLevelID = selectedLevelID;
-    }
-
-    public void onNextDialogButtonClicked() {
-        if (count < storyDialogs.getDialogs().size() - 1) {
-            count++;
-            showDialog();
-        } else {
-            nextDialog.setDisable(true);
-        }
     }
 }

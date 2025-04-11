@@ -16,8 +16,8 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -41,7 +41,7 @@ public class LevelMenuController implements Initializable {
     public ImageView Level6_Icon;
 
     @FXML
-    public AnchorPane level_menu_AnchorPane;
+    public AnchorPane levelMenuAnchorPane;
     @FXML
     public HBox firstRowIconsHBox;
     @FXML
@@ -57,11 +57,11 @@ public class LevelMenuController implements Initializable {
     @FXML
     public Text levelOverviewText;
     @FXML
-    public GridPane LevelDescriptionGrid;
+    public GridPane levelDescriptionGrid;
 
     public int selectedLevel;
 
-    private Map<ImageView, Integer> levelMap;
+    public Map<ImageView, Integer> levelMap;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -100,8 +100,10 @@ public class LevelMenuController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setLayout();
+        applyLayoutBindings();
     }
+
+    /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
     @FXML
     public void onLevelStartButtonClicked(ActionEvent actionEvent) {
@@ -123,6 +125,7 @@ public class LevelMenuController implements Initializable {
         }
     }
 
+    @FXML
     public void onLevelSelected(MouseEvent mouseEvent) throws IOException {
         clearFromSelectionClass();
         ImageView selectedLevel = (ImageView) mouseEvent.getSource();
@@ -134,45 +137,15 @@ public class LevelMenuController implements Initializable {
         LevelDescription levelDescription = reader.readLevelDescription();
 
         if (levelDescription != null) {
-            LevelDescriptionGrid.add(new Text("Name"), 0, 0);
-            LevelDescriptionGrid.add(new Text(levelDescription.getName()), 1, 0);
+            levelDescriptionGrid.add(new Text("Name"), 0, 0);
+            levelDescriptionGrid.add(new Text(levelDescription.getName()), 1, 0);
 
-            LevelDescriptionGrid.add(new Text("Description"), 0, 1);
-            LevelDescriptionGrid.add(new Text(levelDescription.getDescription()), 1, 1);
+            levelDescriptionGrid.add(new Text("Description"), 0, 1);
+            levelDescriptionGrid.add(new Text(levelDescription.getDescription()), 1, 1);
 
-            LevelDescriptionGrid.add(new Text("Difficulty"), 0, 2);
-            LevelDescriptionGrid.add(new Text(levelDescription.getDifficulty()), 1, 2);
+            levelDescriptionGrid.add(new Text("Difficulty"), 0, 2);
+            levelDescriptionGrid.add(new Text(levelDescription.getDifficulty()), 1, 2);
         }
-    }
-
-    private void clearFromSelectionClass() {
-        /* Node is a base class for the graphical elements */
-        List<Node> icons = Arrays.asList(Level1_Icon, Level2_Icon, Level3_Icon, Level4_Icon, Level5_Icon, Level6_Icon);
-
-        for (Node icon : icons) {
-            /* If Node is not used, the style could not be changed */
-            icon.getStyleClass().remove("selected-image-view");
-        }
-        /* the Grid gets cleared */
-        LevelDescriptionGrid.getChildren().clear();
-    }
-
-    private int getLevelIdByImageView(ImageView levelImageView) {
-        Integer level = levelMap.get(levelImageView);
-        if (level != null) {
-            setSelectedLevel(level);
-            return level;
-        }
-        return -1;
-    }
-
-    public void disableLevelIcon(ImageView icon) {
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setSaturation(-1);
-        icon.setEffect(colorAdjust);
-        icon.setDisable(true);
-        icon.setOnMouseClicked(null);
-        icon.setStyle("-fx-opacity: 0.75");
     }
 
     @FXML
@@ -188,17 +161,53 @@ public class LevelMenuController implements Initializable {
         }
     }
 
-    public void setLayout() {
+    /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
+
+    @FXML
+    private void clearFromSelectionClass() {
+        /* Node is a base class for the graphical elements */
+        List<Node> icons = Arrays.asList(Level1_Icon, Level2_Icon, Level3_Icon, Level4_Icon, Level5_Icon, Level6_Icon);
+
+        for (Node icon : icons) {
+            /* If Node is not used, the style could not be changed */
+            icon.getStyleClass().remove("selected-image-view");
+        }
+        /* the Grid gets cleared */
+        levelDescriptionGrid.getChildren().clear();
+    }
+
+    @FXML
+    private int getLevelIdByImageView(ImageView levelImageView) {
+        Integer level = levelMap.get(levelImageView);
+        if (level != null) {
+            setSelectedLevel(level);
+            return level;
+        }
+        return -1;
+    }
+
+    @FXML
+    public void disableLevelIcon(ImageView icon) {
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setSaturation(-1);
+        icon.setEffect(colorAdjust);
+        icon.setDisable(true);
+        icon.setOnMouseClicked(null);
+        icon.setStyle("-fx-opacity: 0.75");
+    }
+
+    @FXML
+    public void applyLayoutBindings() {
 
         /* Positioning and spacing for the first row of level icons */
         firstRowIconsHBox.translateYProperty()
-                .bind(level_menu_AnchorPane.heightProperty().multiply(0.25));
+                .bind(levelMenuAnchorPane.heightProperty().multiply(0.25));
         firstRowIconsHBox.spacingProperty()
-                .bind(level_menu_AnchorPane.widthProperty().multiply(0.025));
+                .bind(levelMenuAnchorPane.widthProperty().multiply(0.025));
 
         /* Positioning for the second row of level icons */
         secondLevelIconHBox.translateYProperty()
-                .bind(level_menu_AnchorPane.heightProperty().multiply(0.45));
+                .bind(levelMenuAnchorPane.heightProperty().multiply(0.45));
 
         /* List of level icons for uniform sizing */
         List<ImageView> levelIcons = new ArrayList<>(List.of(
@@ -207,46 +216,47 @@ public class LevelMenuController implements Initializable {
 
         /* Binding height and width for level icons */
         for (ImageView icon : levelIcons) {
-            icon.fitHeightProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.15));
-            icon.fitWidthProperty().bind(level_menu_AnchorPane.widthProperty().multiply(0.10));
+            icon.fitHeightProperty().bind(levelMenuAnchorPane.heightProperty().multiply(0.15));
+            icon.fitWidthProperty().bind(levelMenuAnchorPane.widthProperty().multiply(0.10));
         }
 
         /* Special sizing for Level 6 icon */
         Level6_Icon.fitHeightProperty()
-                .bind(level_menu_AnchorPane.heightProperty().multiply(0.15));
+                .bind(levelMenuAnchorPane.heightProperty().multiply(0.15));
         Level6_Icon.fitWidthProperty()
-                .bind(level_menu_AnchorPane.widthProperty().multiply(0.60));
+                .bind(levelMenuAnchorPane.widthProperty().multiply(0.60));
 
         /* Centering the level overview text horizontally */
         levelOverviewText.translateXProperty().bind(
-                level_menu_AnchorPane.widthProperty()
+                levelMenuAnchorPane.widthProperty()
                         .subtract(levelOverviewText.prefWidth(-1))
                         .divide(2)
         );
 
         /* Positioning level overview text with a fixed offset from the top */
         levelOverviewText.translateYProperty().bind(
-                level_menu_AnchorPane.heightProperty().multiply(0.2)
+                levelMenuAnchorPane.heightProperty().multiply(0.2)
                         .subtract(levelOverviewText.getLayoutBounds().getHeight() / 2)
         );
 
         /* Positioning and spacing for button grid */
         buttonGridHBox.translateYProperty()
-                .bind(level_menu_AnchorPane.heightProperty().multiply(0.65));
+                .bind(levelMenuAnchorPane.heightProperty().multiply(0.65));
         buttonGridHBox.spacingProperty()
-                .bind(level_menu_AnchorPane.widthProperty().multiply(0.05));
+                .bind(levelMenuAnchorPane.widthProperty().multiply(0.025));
 
         /* Resizing button grid */
-        buttonGridHBox.prefWidthProperty()
-                .bind(level_menu_AnchorPane.widthProperty().multiply(0.8));
         buttonGridHBox.prefHeightProperty()
-                .bind(level_menu_AnchorPane.heightProperty().multiply(0.15));
+                .bind(levelMenuAnchorPane.heightProperty().multiply(0.15));
 
         /* Spacing adjustment for buttons */
-        buttonHBox.spacingProperty().bind(level_menu_AnchorPane.heightProperty().multiply(0.02));
+        buttonHBox.spacingProperty()
+                .bind(levelMenuAnchorPane.heightProperty().multiply(0.02));
+
+        levelDescriptionGrid.prefWidthProperty().bind(levelMenuAnchorPane.widthProperty().multiply(0.475));
     }
 
-    /* Getter and Setter */
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------  */
 
     public int getSelectedLevel() {
         return selectedLevel;
