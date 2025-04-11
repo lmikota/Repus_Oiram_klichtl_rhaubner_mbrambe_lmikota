@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application;
 
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,10 @@ public class StartApplication extends Application {
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
+
+//        String backgroundMusicFilePath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/";
+//        MusicPlayer musicPlayer = new MusicPlayer();
+//        musicPlayer.playMusic(backgroundMusicFilePath);
     }
 
     public static void main(String[] args) {
