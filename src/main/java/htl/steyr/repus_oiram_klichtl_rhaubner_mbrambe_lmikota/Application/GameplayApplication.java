@@ -155,11 +155,10 @@ public class GameplayApplication extends Application implements Initializable {
             System.out.println("Fehler beim Laden des Exit-Menüs: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
 
-
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
+        player.checkPlayerLegalHeight();
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());

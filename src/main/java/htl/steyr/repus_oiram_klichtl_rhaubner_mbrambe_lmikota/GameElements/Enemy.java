@@ -62,7 +62,7 @@ public class Enemy{
         if(!playerTouching){
             getPlayer().setHp(getPlayer().getHp()-1);
             if(getPlayer().getHp() == 0){
-                javafx. application. Platform. exit();
+                getPlayer().onPlayerDead();
             }else{
                 Thread startSafeTime = new Thread(getPlayer());
                 startSafeTime.start();

@@ -81,7 +81,18 @@ public class Player implements Runnable {
         playerImage.setFitWidth(playerSize);
     }
 
-    public void playerMovementY(int map[][], Set<KeyCode> pressedKeys, double GRAVITY) {
+    public void checkPlayerLegalHeight(){
+        double screenHeight = getTileSize() * 18;
+        if(getPlayerImage().getY() > screenHeight){
+            onPlayerDead();
+        }
+    }
+
+    public void onPlayerDead(){
+        javafx. application. Platform. exit();
+    }
+
+    public void playerMovementY(int map[][],Set<KeyCode> pressedKeys, double GRAVITY) {
         if (pressedKeys.contains(KeyCode.SPACE) && !isJumping && isBlockUnderIt) {
             playerVelY = JUMP_SPEED;
             isJumping = true;
