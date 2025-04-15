@@ -156,8 +156,6 @@ public class GameplayApplication extends Application implements Initializable {
             exitStage.initOwner(root.getScene().getWindow());
             exitStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
             exitStage.show();
-
-            System.out.println("Exit-Menü erfolgreich geöffnet!"); //debugging
         } catch (IOException e) {
             System.out.println("Fehler beim Laden des Exit-Menüs: " + e.getMessage());
             e.printStackTrace();
@@ -173,8 +171,6 @@ public class GameplayApplication extends Application implements Initializable {
     private void winLevel() {
         Gson gson = new Gson();
         try (FileWriter wr = new FileWriter("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json")) {
-            // hashmap mit highscore befüllen
-            System.out.println(LevelMenuController.localUser);
             LevelMenuController.localUser.updateHighscores(getSelectedLevel(), getTime());
             gson.toJson(LevelMenuController.localUser, wr);
         } catch (IOException e) {
@@ -184,6 +180,11 @@ public class GameplayApplication extends Application implements Initializable {
     }
 
 
+    /**
+     * @ToDo
+     * winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
+     */
+
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
         player.playerMovementX(pressedKeys, map);
@@ -191,7 +192,7 @@ public class GameplayApplication extends Application implements Initializable {
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
         cape.isactivateSuperCape(player);
-        if (player.getPlayerImage().getX() == tilemap.getTileMapLengthInPixel() - tilemap.getTILE_SIZE() && !isLevelWon()) {
+        if (player.getPlayerImage().getX() == tilemap.getTileMapLengthInPixel() * 0.75 && !isLevelWon()) {
             setLevelWon(true);
             winLevel();
         }
