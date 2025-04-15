@@ -1,5 +1,8 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application;
 
+import com.google.gson.Gson;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.LevelMenuController;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUserReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements.*;
 import javafx.animation.AnimationTimer;
@@ -22,8 +25,10 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.awt.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -34,6 +39,8 @@ public class GameplayApplication extends Application implements Initializable {
     private double offsetX = 0;
     private int selectedLevel;
     public static Scene gameplayScene;
+    private String time;
+    private boolean levelWon = false;
 
     private Timeline timerTimeline;
 
@@ -163,6 +170,28 @@ public class GameplayApplication extends Application implements Initializable {
 
     }
 
+    /**
+     * @ToDo Mache hier, dass der highScore in der Json gesaved wird.
+     */
+
+    private void closeWindow() {
+        Stage stage = (Stage) gameplayScene.getWindow();
+        stage.close();
+    }
+
+    private void winLevel() {
+        Gson gson = new Gson();
+        try (FileWriter wr = new FileWriter("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json")) {
+            // hashmap mit highscore befüllen
+            System.out.println(LevelMenuController.localUser);
+            LevelMenuController.localUser.updateHighscores(getSelectedLevel(), getTime());
+            gson.toJson(LevelMenuController.localUser, wr);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        closeWindow();
+    }
+
 
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.playerMovementX(pressedKeys, map);
@@ -170,6 +199,10 @@ public class GameplayApplication extends Application implements Initializable {
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
         cape.isactivateSuperCape(player);
+        if (player.getPlayerImage().getX() == tilemap.getTileMapLengthInPixel() - tilemap.getTILE_SIZE() && !isLevelWon()) {
+            setLevelWon(true);
+            winLevel();
+        }
     }
 
     public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {
@@ -249,10 +282,9 @@ public class GameplayApplication extends Application implements Initializable {
             secs = getSecondsSinceStart() % 60;
             mins = getSecondsSinceStart() / 60;
 
-            String time = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
-            getTimerDisplay().setText(time);
-
-            System.out.println(mins);
+            setTime((mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs);
+            getTimerDisplay().setText(getTime());
+            // System.out.println(time); debugging
         })));
 
 
@@ -283,6 +315,22 @@ public class GameplayApplication extends Application implements Initializable {
 
     public Text getTimerDisplay() {
         return timerDisplay;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public boolean isLevelWon() {
+        return levelWon;
+    }
+
+    public void setLevelWon(boolean levelWon) {
+        this.levelWon = levelWon;
     }
 }
 

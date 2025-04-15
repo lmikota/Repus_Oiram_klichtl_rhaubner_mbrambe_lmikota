@@ -1,5 +1,7 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data;
 
+import java.util.HashMap;
+
 public class LocalUser {
 
     private String level_1;
@@ -8,14 +10,16 @@ public class LocalUser {
     private String level_4;
     private String level_5;
     private String level_6;
+    private HashMap<Integer ,String > highscores;
 
-    public LocalUser(String level_1, String level_2, String level_3, String level_4, String level_5, String level_6) {
+    public LocalUser(String level_1, String level_2, String level_3, String level_4, String level_5, String level_6, HashMap<Integer, String> highscores) {
         setLevel_1(level_1);
         setLevel_2(level_2);
         setLevel_3(level_3);
         setLevel_4(level_4);
         setLevel_5(level_5);
         setLevel_6(level_6);
+        setHighscores(highscores);
     }
 
     public String getLevel_1() {
@@ -64,5 +68,17 @@ public class LocalUser {
 
     public void setLevel_6(String level_6) {
         this.level_6 = level_6;
+    }
+
+    public HashMap<Integer, String> getHighscores() {
+        return highscores;
+    }
+
+    public void setHighscores(HashMap<Integer, String> highscores) {
+        this.highscores = highscores;
+    }
+
+    public void updateHighscores(int level, String highscore) {
+        highscores.replace(level,highscore);
     }
 }

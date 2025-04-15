@@ -62,6 +62,7 @@ public class LevelMenuController implements Initializable {
     public int selectedLevel;
 
     private Map<ImageView, Integer> levelMap;
+    public  static LocalUser localUser;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,7 +78,8 @@ public class LevelMenuController implements Initializable {
 
         LocalUserReader localUserReader = new LocalUserReader();
         try {
-            LocalUser localUser = localUserReader.readLocalUsersUnlockedLevels();
+            localUser = localUserReader.readLocalUser();
+
 
             /* look if the user has unlocked the levels */
             if (localUser != null) {
