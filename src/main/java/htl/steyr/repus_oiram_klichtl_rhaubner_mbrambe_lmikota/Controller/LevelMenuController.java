@@ -61,9 +61,8 @@ public class LevelMenuController implements Initializable {
 
     public int selectedLevel;
 
-    private Map<ImageView, Integer> levelMap;
-    public  static LocalUser localUser;
     public Map<ImageView, Integer> levelMap;
+    public  static LocalUser localUser;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
