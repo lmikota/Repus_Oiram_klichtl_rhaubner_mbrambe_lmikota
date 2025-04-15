@@ -34,7 +34,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 public class GameplayApplication extends Application implements Initializable {
-    private static final int SCROLL_SPEED = 10;
+    private static final int SCROLL_SPEED = 4;
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
     private int selectedLevel;
@@ -164,10 +164,6 @@ public class GameplayApplication extends Application implements Initializable {
         }
 
     }
-
-    /**
-     * @ToDo Mache hier, dass der highScore in der Json gesaved wird.
-     */
 
     private void closeWindow() {
         Stage stage = (Stage) gameplayScene.getWindow();
