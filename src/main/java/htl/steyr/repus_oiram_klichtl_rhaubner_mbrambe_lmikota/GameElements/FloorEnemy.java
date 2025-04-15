@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 
 public class FloorEnemy extends Enemy implements Runnable {
@@ -24,9 +25,13 @@ public class FloorEnemy extends Enemy implements Runnable {
                         return;
                     }
 
-                    Thread.sleep(20);
+                    Thread.sleep(15);
                     setEnemyX(getEnemyX()+2);
-                    getEnemyImage().setX(getEnemyX());
+
+                    Platform.runLater(() -> {
+                        getEnemyImage().setX(getEnemyX());
+                    });
+
                     checkPlayerHitBox();
 
                     if(isDead()){
@@ -44,9 +49,13 @@ public class FloorEnemy extends Enemy implements Runnable {
                         return;
                     }
 
-                    Thread.sleep(20);
+                    Thread.sleep(15);
                     setEnemyX(getEnemyX()-2);
-                    getEnemyImage().setX(getEnemyX());
+
+                    Platform.runLater(() -> {
+                        getEnemyImage().setX(getEnemyX());
+                    });
+
                     checkPlayerHitBox();
 
                     if(isDead()){

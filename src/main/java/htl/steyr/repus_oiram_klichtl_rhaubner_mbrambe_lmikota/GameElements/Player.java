@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -42,10 +43,10 @@ public class Player implements Runnable {
             deltaTime = duration.toSeconds();
 
             if(isPlinkHigh()){
-                getPlayerImage().setOpacity(0.75);
+                Platform.runLater(() -> getPlayerImage().setOpacity(0.75));
                 setPlinkHigh(false);
             }else{
-                getPlayerImage().setOpacity(0.25);
+                Platform.runLater(() -> getPlayerImage().setOpacity(0.25));
                 setPlinkHigh(true);
             }
 
@@ -54,11 +55,10 @@ public class Player implements Runnable {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
         } while (deltaTime < 0.5);
 
         setSafeTime(false);
-        getPlayerImage().setOpacity(1.0);
+        Platform.runLater(() -> getPlayerImage().setOpacity(1));
     }
 
     public Player(Image playerImage, double playerSize, double tileSize) {
@@ -81,7 +81,18 @@ public class Player implements Runnable {
         playerImage.setFitWidth(playerSize);
     }
 
-    public void playerMovementY(int map[][], Set<KeyCode> pressedKeys, double GRAVITY) {
+    public void checkPlayerLegalHeight(){
+        double screenHeight = getTileSize() * 18;
+        if(getPlayerImage().getY() > screenHeight){
+            onPlayerDead();
+        }
+    }
+
+    public void onPlayerDead(){
+        javafx. application. Platform. exit();
+    }
+
+    public void playerMovementY(int map[][],Set<KeyCode> pressedKeys, double GRAVITY) {
         if (pressedKeys.contains(KeyCode.SPACE) && !isJumping && isBlockUnderIt) {
             playerVelY = JUMP_SPEED;
             isJumping = true;

@@ -12,32 +12,30 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<AnchorPane fx:id="level_menu_AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+<AnchorPane fx:id="levelMenuAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0"
             xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.LevelMenuController">
     <children>
-        <ImageView fitHeight="${level_menu_AnchorPane.height}" fitWidth="${level_menu_AnchorPane.width}"
+        <ImageView fitHeight="${levelMenuAnchorPane.height}" fitWidth="${levelMenuAnchorPane.width}"
                    pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <image>
                 <Image url="@../IMG/GameElements/Background.png"/>
             </image>
         </ImageView>
-        <ImageView fitHeight="${level_menu_AnchorPane.height}" fitWidth="${level_menu_AnchorPane.width}"
+        <ImageView fitHeight="${levelMenuAnchorPane.height}" fitWidth="${levelMenuAnchorPane.width}"
                    pickOnBounds="true" preserveRatio="false">
             <image>
                 <Image url="@../IMG/GameElements/Level-Menu.png"/>
             </image>
         </ImageView>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text"
-              text="Level-Overview" fx:id="levelOverviewText">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="Level-Overview" fx:id="levelOverviewText">
             <font>
                 <Font size="45.0"/>
             </font>
         </Text>
-        <HBox alignment="CENTER" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0"
-              fx:id="firstRowIconsHBox">
+        <HBox alignment="CENTER" fx:id="firstRowIconsHBox" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <ImageView fx:id="Level1_Icon" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#onLevelSelected"
                        pickOnBounds="true" styleClass="LevelImages">
                 <image>
@@ -69,18 +67,15 @@
                 </image>
             </ImageView>
         </HBox>
-        <HBox spacing="20.0" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-              fx:id="secondLevelIconHBox">
+        <HBox alignment="CENTER" fx:id="secondLevelIconHBox" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <ImageView fx:id="Level6_Icon" fitHeight="150.0" fitWidth="900.0" onMouseClicked="#onLevelSelected"
-                       pickOnBounds="true" styleClass="LevelImages" AnchorPane.leftAnchor="350.0"
-                       AnchorPane.topAnchor="375.0">
+                       pickOnBounds="true" styleClass="LevelImages">
                 <image>
                     <Image url="@../IMG/LevelBackgrounds/Level_6_Background/Level_6-Background.png"/>
                 </image>
             </ImageView>
         </HBox>
-        <HBox spacing="20.0" alignment="CENTER" fx:id="buttonGridHBox"
-              AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0">
+        <HBox alignment="CENTER" fx:id="buttonGridHBox" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <VBox fx:id="buttonHBox">
                 <Button fx:id="levelStartButton" focusTraversable="false" mnemonicParsing="false"
                         onAction="#onLevelStartButtonClicked" prefHeight="45.0" prefWidth="204.0"
@@ -97,7 +92,7 @@
                     </font>
                 </Button>
             </VBox>
-            <GridPane fx:id="LevelDescriptionGrid" prefHeight="170.0" prefWidth="675.0"
+            <GridPane fx:id="levelDescriptionGrid" prefHeight="170.0" prefWidth="675.0"
                       styleClass="LevelDescription">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="152.0"/>
