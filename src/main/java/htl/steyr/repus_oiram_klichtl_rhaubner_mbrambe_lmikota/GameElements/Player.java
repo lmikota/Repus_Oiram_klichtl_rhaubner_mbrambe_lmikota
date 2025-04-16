@@ -87,8 +87,7 @@ public class Player implements Runnable {
         if(getPlayerImage().getY() > screenHeight){
             onPlayerDead();
             String fallingIntoVoidSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/fallingIntoVoidSound.wav";
-            MusicPlayer musicPlayer = new MusicPlayer();
-            musicPlayer.playSound(fallingIntoVoidSound);
+            MusicPlayer.getInstance().playMusic(fallingIntoVoidSound);
         }
     }
 
