@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -85,6 +86,9 @@ public class Player implements Runnable {
         double screenHeight = getTileSize() * 18;
         if(getPlayerImage().getY() > screenHeight){
             onPlayerDead();
+            String fallingIntoVoidSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/fallingIntoVoidSound.wav";
+            MusicPlayer musicPlayer = new MusicPlayer();
+            musicPlayer.playSound(fallingIntoVoidSound);
         }
     }
 

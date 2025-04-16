@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
@@ -39,6 +40,9 @@ public class Enemy{
                     player.setPlayerVelY(0);
 
                     if(playerY < enemyY){ //weiß noch nicht ob > oder < :-D
+                        String enemyDeathSoundPath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/enemyDeathSound.wav";
+                        MusicPlayer musicPlayer = new MusicPlayer();
+                        musicPlayer.playSound(enemyDeathSoundPath);
                         playerKillsEnemy();
                     }
 
@@ -63,6 +67,9 @@ public class Enemy{
             getPlayer().setHp(getPlayer().getHp()-1);
             if(getPlayer().getHp() == 0){
                 getPlayer().onPlayerDead();
+                String deathSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/deathSound.wav";
+                MusicPlayer musicPlayer = new MusicPlayer();
+                musicPlayer.playSound(deathSound);
             }else{
                 Thread startSafeTime = new Thread(getPlayer());
                 startSafeTime.start();
