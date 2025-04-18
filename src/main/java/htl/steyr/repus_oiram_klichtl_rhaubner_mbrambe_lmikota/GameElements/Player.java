@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application.GameplayApplication;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
@@ -28,6 +29,8 @@ public class Player implements Runnable {
 
     private double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
+
+    private GameplayApplication gameplayApplication;
 
     @Override
     public void run() {
@@ -62,7 +65,8 @@ public class Player implements Runnable {
         Platform.runLater(() -> getPlayerImage().setOpacity(1));
     }
 
-    public Player(Image playerImage, double playerSize, double tileSize) {
+    public Player(Image playerImage, double playerSize, double tileSize, GameplayApplication gameplayApplication) {
+        setGameplayApplication(gameplayApplication);
         setPlayerImage(playerImage);
         setPlayerSize(playerSize);
         changePlayerSize(getPlayerSize());
@@ -82,17 +86,21 @@ public class Player implements Runnable {
         playerImage.setFitWidth(playerSize);
     }
 
-    public void checkPlayerLegalHeight(){
+    public void checkPlayerLegalHeight() {
         double screenHeight = getTileSize() * 18;
-        if(getPlayerImage().getY() > screenHeight){
+        if (getPlayerImage().getY() > screenHeight) {
             onPlayerDead();
             String fallingIntoVoidSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/fallingIntoVoidSound.wav";
             MusicPlayer.getInstance().playMusic(fallingIntoVoidSound);
         }
     }
 
+    public void onPlayerSuccess(){
+        getGameplayApplication().onPlayerWinLevel();
+    }
+
     public void onPlayerDead(){
-        javafx. application. Platform. exit();
+        getGameplayApplication().onPlayerLoseLevel();
     }
 
     public void playerMovementY(int map[][],Set<KeyCode> pressedKeys, double GRAVITY) {
@@ -163,6 +171,8 @@ public class Player implements Runnable {
             for (int y = topTileY; y <= bottomTileY; y++) {
                 if (rightTileX < map[0].length && isBlockSolid(map[y][rightTileX])) {
                     return true;
+                }else if(isWinningBlock(map[y][rightTileX])){
+                    onPlayerSuccess();
                 }
             }
         } else {
@@ -180,6 +190,10 @@ public class Player implements Runnable {
 
     public boolean isBlockSolid(int block) {
         return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187;
+    }
+
+    public boolean isWinningBlock(int block) {
+        return block == -1;
     }
 
     public ImageView getPlayerImage() {
@@ -254,5 +268,13 @@ public class Player implements Runnable {
 
     public void setCapeEffect(boolean capeEffect) {
         CapeEffect = capeEffect;
+    }
+
+    public GameplayApplication getGameplayApplication() {
+        return gameplayApplication;
+    }
+
+    public void setGameplayApplication(GameplayApplication gameplayApplication) {
+        this.gameplayApplication = gameplayApplication;
     }
 }

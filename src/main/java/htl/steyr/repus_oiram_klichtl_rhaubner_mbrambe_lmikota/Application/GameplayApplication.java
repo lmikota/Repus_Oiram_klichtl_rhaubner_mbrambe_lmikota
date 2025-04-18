@@ -38,7 +38,6 @@ public class GameplayApplication extends Application implements Initializable {
     private int selectedLevel;
     public static Scene gameplayScene;
     private String time;
-    private boolean levelWon = false;
     private ImageView bg1;
     private ImageView bg2;
 
@@ -91,7 +90,7 @@ public class GameplayApplication extends Application implements Initializable {
             gameplayScene = new Scene(root);
             gameplayScene.getStylesheets().add(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/CSS/gameElementsStyle.css").toExternalForm());
 
-            player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
+            player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE(), this);
             addToRoot(root, player.getPlayerImage());
 
             SuperTrank superTrank = new SuperTrank(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/superTrank.png")), tilemap.getTILE_SIZE() / 1.5);
@@ -192,7 +191,15 @@ public class GameplayApplication extends Application implements Initializable {
         stage.close();
     }
 
-    private void winLevel() {
+    public void onPlayerLoseLevel() {
+        closeWindow();
+    }
+
+    /**
+     * @ToDo
+     * winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
+     */
+    public void onPlayerWinLevel() {
         Gson gson = new Gson();
         try (FileWriter wr = new FileWriter("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json")) {
             LevelMenuController.localUser.updateHighscores(getSelectedLevel(), getTime());
@@ -202,11 +209,6 @@ public class GameplayApplication extends Application implements Initializable {
         }
         closeWindow();
     }
-
-
-    /**
-     * @ToDo winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
-     */
 
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
@@ -231,11 +233,6 @@ public class GameplayApplication extends Application implements Initializable {
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
         cape.isactivateSuperCape(player);
-        boots.bootsactivecheck(player);
-        if (player.getPlayerImage().getX() == tilemap.getTileMapLengthInPixel() * 0.75 && !isLevelWon()) {
-            setLevelWon(true);
-            winLevel();
-        }
     }
 
     public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {
@@ -356,14 +353,6 @@ public class GameplayApplication extends Application implements Initializable {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public boolean isLevelWon() {
-        return levelWon;
-    }
-
-    public void setLevelWon(boolean levelWon) {
-        this.levelWon = levelWon;
     }
 
     public ImageView getBg1() {
