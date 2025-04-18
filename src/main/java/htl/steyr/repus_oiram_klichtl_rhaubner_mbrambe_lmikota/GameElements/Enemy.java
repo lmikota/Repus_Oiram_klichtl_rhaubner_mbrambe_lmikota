@@ -39,7 +39,7 @@ public class Enemy{
                 if(playerX == enemyX+j && playerY == enemyY+i){
                     player.setPlayerVelY(0);
 
-                    if(playerY < enemyY){ //weiß noch nicht ob > oder < :-D
+                    if(playerY <= enemyY + 5){ //weiß noch nicht ob > oder < :-D
                         String enemyDeathSoundPath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/enemyDeathSound.wav";
                         MusicPlayer.getInstance().playMusic(enemyDeathSoundPath);
 
