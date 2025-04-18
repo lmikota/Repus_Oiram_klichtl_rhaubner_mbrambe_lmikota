@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -28,10 +29,7 @@ import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 public class GameplayApplication extends Application implements Initializable {
     private static final int SCROLL_SPEED = 4;
@@ -52,6 +50,10 @@ public class GameplayApplication extends Application implements Initializable {
 
     @FXML
     public static Text timerDisplay = new Text();
+
+    ImageView heart1 = new ImageView();
+    ImageView heart2 = new ImageView();
+    ImageView heart3 = new ImageView();
 
     private Player player;
     private SuperUmhang cape;
@@ -111,6 +113,23 @@ public class GameplayApplication extends Application implements Initializable {
             Thread skyEnemyThread = new Thread(skyEnemy);
             skyEnemyThread.start();
 
+            heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+            heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+            heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+
+            addToRoot(root, heart1);
+            addToRoot(root, heart2);
+            addToRoot(root, heart3);
+
+            heart1.setX(250);
+            heart1.setY(15);
+
+            heart2.setX(315);
+            heart2.setY(15);
+
+            heart3.setX(380);
+            heart3.setY(15);
+
             player.getPlayerImage().toFront();
 
             gameplayScene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
@@ -159,7 +178,7 @@ public class GameplayApplication extends Application implements Initializable {
             exitStage.setResizable(false);
 
             exitStage.initOwner(root.getScene().getWindow());
-            exitStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            exitStage.initModality(Modality.APPLICATION_MODAL);
             exitStage.show();
         } catch (IOException e) {
             System.out.println("Fehler beim Laden des Exit-Menüs: " + e.getMessage());
@@ -191,6 +210,22 @@ public class GameplayApplication extends Application implements Initializable {
 
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
+        switch (player.getHp()) {
+            case 3:
+                break;
+            case 2:
+                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                break;
+            case 1:
+                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                break;
+            case 0:
+                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                break;
+        }
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
@@ -290,7 +325,6 @@ public class GameplayApplication extends Application implements Initializable {
         getTimerTimeline().setCycleCount(Timeline.INDEFINITE);
         getTimerTimeline().play();
     }
-
 
     public void stopTimer() {
         getTimerTimeline().stop();

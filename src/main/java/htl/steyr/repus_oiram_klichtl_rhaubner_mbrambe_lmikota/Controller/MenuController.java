@@ -26,6 +26,8 @@ public class MenuController implements Initializable {
         volumeSlider.setMax(1.0);    /* maximum volume */
         volumeSlider.setValue(0.6);  /* start volume (60%) */
 
+        volumeIcon.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/medium-volume.png"))));
+
         volumeSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             float volumePercent = newVal.floatValue();
             float dB = volumeToDecibels(volumePercent);

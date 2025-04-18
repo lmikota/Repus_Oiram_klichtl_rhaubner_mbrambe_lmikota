@@ -64,8 +64,8 @@
 /* -------------------------------------------------- Volume Slider ------------------------------------------------- */
 
 .volumeSlider .track {
-    -fx-background-color: orange; /* Macht den Strich schwarz */
-    -fx-pref-height: 5px;        /* Wie dick soll der Strich sein */
+    -fx-background-color: orange;
+    -fx-pref-height: 5px;
 }
 
 .volumeSlider .thumb {

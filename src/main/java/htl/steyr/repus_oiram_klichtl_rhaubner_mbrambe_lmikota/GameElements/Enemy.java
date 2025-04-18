@@ -41,7 +41,7 @@ public class Enemy{
 
                     if(playerY <= enemyY + 10){ //weiß noch nicht ob > oder < :-D
                         String enemyDeathSoundPath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/enemyDeathSound.wav";
-                        MusicPlayer.getInstance().playMusic(enemyDeathSoundPath);
+                        MusicPlayer.getInstance().playSound(enemyDeathSoundPath);
 
                         playerKillsEnemy();
                     }
@@ -68,7 +68,7 @@ public class Enemy{
             if(getPlayer().getHp() == 0){
                 getPlayer().onPlayerDead();
                 String deathSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/deathSound.wav";
-                MusicPlayer.getInstance().playMusic(deathSound);
+                MusicPlayer.getInstance().playSound(deathSound);
             }else{
                 Thread startSafeTime = new Thread(getPlayer());
                 startSafeTime.start();

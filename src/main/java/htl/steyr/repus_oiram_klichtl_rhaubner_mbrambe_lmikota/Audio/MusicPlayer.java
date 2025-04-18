@@ -20,20 +20,6 @@ public class MusicPlayer {
         /* private constructor, helps to make it a singleton */
     }
 
-    public static MusicPlayer getInstance() {
-        if (instance == null) {
-            instance = new MusicPlayer();
-        }
-        return instance;
-    }
-
-    public void setVolume(float volume) {
-        currentVolume = volume;
-        if (volumeControl != null) {
-            volumeControl.setValue(currentVolume);
-        }
-    }
-
     public void playMusic(String filepath) {
         try {
             URL soundUrl = Objects.requireNonNull(getClass().getResource(filepath));
@@ -72,5 +58,19 @@ public class MusicPlayer {
             clip.stop();
             clip.close();
         }
+    }
+
+    public void setVolume(float volume) {
+        currentVolume = volume;
+        if (volumeControl != null) {
+            volumeControl.setValue(currentVolume);
+        }
+    }
+
+    public static MusicPlayer getInstance() {
+        if (instance == null) {
+            instance = new MusicPlayer();
+        }
+        return instance;
     }
 }
