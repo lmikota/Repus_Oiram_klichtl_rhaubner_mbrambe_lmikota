@@ -41,6 +41,8 @@ public class GameplayApplication extends Application implements Initializable {
     public static Scene gameplayScene;
     private String time;
     private boolean levelWon = false;
+    private ImageView bg1;
+    private ImageView bg2;
 
     private Timeline timerTimeline;
 
@@ -73,19 +75,18 @@ public class GameplayApplication extends Application implements Initializable {
             System.out.println("widht: " + screenWidth);
             System.out.println("height: " + screenHeight);
             Tilemap tilemap = new Tilemap(mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
-            ImageView bg1 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_1_Background/Level_1-Background_1.png");
-            ImageView bg2 = createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_1_Background/Level_1-Background_2.png");
+            setBg1(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_"+getSelectedLevel()+"_Background/Level_"+getSelectedLevel()+"-Background_1.png"));
+            setBg2(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_"+getSelectedLevel()+"_Background/Level_"+getSelectedLevel()+"-Background_2.png"));
             Pane root = new Pane();
             startTimer();
             addToRoot(root, bg1);
             addToRoot(root, bg2);
             displayTimer(tilemap, root);
-            bg2.setX(bg1.getImage().getWidth());
+            getBg2().setX(bg1.getImage().getWidth());
             addToRoot(root, tilemap.getTyleMapPane());
 
             gameplayScene = new Scene(root);
             gameplayScene.getStylesheets().add(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/CSS/gameElementsStyle.css").toExternalForm());
-            Stage stage = new Stage();
 
             player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE());
             addToRoot(root, player.getPlayerImage());
@@ -111,10 +112,10 @@ public class GameplayApplication extends Application implements Initializable {
             gameplayScene.setOnKeyPressed(event -> pressedKeys.add(event.getCode()));
             gameplayScene.setOnKeyPressed(event -> {
                 pressedKeys.add(event.getCode());
-                if (event.getCode().equals(KeyCode.F11) && stage.fullScreenProperty().get()) {
-                    stage.setFullScreen(false);
-                } else if (event.getCode().equals(KeyCode.F11) && !stage.fullScreenProperty().get()) {
-                    stage.setFullScreen(true);
+                if (event.getCode().equals(KeyCode.F11) && primaryStage.fullScreenProperty().get()) {
+                    primaryStage.setFullScreen(false);
+                } else if (event.getCode().equals(KeyCode.F11) && !primaryStage.fullScreenProperty().get()) {
+                    primaryStage.setFullScreen(true);
                 } else if (event.getCode().equals(KeyCode.ESCAPE)) {
                     stopTimer();
                     loadExitMenu(root);
@@ -129,13 +130,13 @@ public class GameplayApplication extends Application implements Initializable {
             };
             gameLoop.start();
 
-            stage.setTitle("Repus Oiram");
-            stage.setScene(gameplayScene);
-            stage.setFullScreen(true);
-            stage.setFullScreenExitHint("");
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Logo.png")));
-            stage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
-            stage.show();
+            primaryStage.setTitle("Repus Oiram");
+            primaryStage.setScene(gameplayScene);
+            primaryStage.setFullScreen(true);
+            primaryStage.setFullScreenExitHint("");
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Logo.png")));
+            primaryStage.fullScreenExitKeyProperty().setValue(KeyCodeCombination.NO_MATCH);
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -181,8 +182,7 @@ public class GameplayApplication extends Application implements Initializable {
 
 
     /**
-     * @ToDo
-     * winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
+     * @ToDo winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
      */
 
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
@@ -325,6 +325,22 @@ public class GameplayApplication extends Application implements Initializable {
 
     public void setLevelWon(boolean levelWon) {
         this.levelWon = levelWon;
+    }
+
+    public ImageView getBg1() {
+        return bg1;
+    }
+
+    public void setBg1(ImageView bg1) {
+        this.bg1 = bg1;
+    }
+
+    public ImageView getBg2() {
+        return bg2;
+    }
+
+    public void setBg2(ImageView bg2) {
+        this.bg2 = bg2;
     }
 }
 
