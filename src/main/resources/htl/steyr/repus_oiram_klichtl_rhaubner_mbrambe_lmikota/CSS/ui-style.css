@@ -60,3 +60,17 @@
     -fx-font-size: 40;
     -fx-font-family: fantasy;
 }
+
+/* -------------------------------------------------- Volume Slider ------------------------------------------------- */
+
+.volumeSlider .track {
+    -fx-background-color: orange; /* Macht den Strich schwarz */
+    -fx-pref-height: 5px;        /* Wie dick soll der Strich sein */
+}
+
+.volumeSlider .thumb {
+    -fx-background-color: orange;
+    -fx-border-color: black;
+    -fx-shape: "M50,0 A50,50 0 1 1 49.9,0 Z"; /* makes the slider to a circle */
+    -fx-padding: 8px;
+}

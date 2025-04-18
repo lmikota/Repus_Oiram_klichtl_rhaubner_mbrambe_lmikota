@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class StartMenuController {
 
@@ -28,7 +29,7 @@ public class StartMenuController {
             Parent newRoot = loader.load();
 
             Scene scene = startButton.getScene();
-            scene.getStylesheets().add(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/CSS/ui-style.css").toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/CSS/ui-style.css")).toExternalForm());
             scene.setRoot(newRoot);
 
         } catch (IOException e) {
@@ -66,5 +67,6 @@ public class StartMenuController {
     @FXML
     public void onExitButtonClicked(ActionEvent actionEvent) {
         Platform.exit();
+        MusicPlayer.getInstance().stopMusic();
     }
 }

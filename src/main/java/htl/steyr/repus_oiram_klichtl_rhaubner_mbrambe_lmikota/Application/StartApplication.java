@@ -20,7 +20,6 @@ public class StartApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/start_menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Logo.png"))));
         stage.setTitle("Repus Oiram");
         stage.setScene(scene);
