@@ -80,16 +80,21 @@ public class LocalUser {
     }
 
     public void updateHighscores(int level, String highscore) {
-        String[] currentTimeParts = getHighscores().get(level).split(":");
-        String[] newTimeParts = highscore.split(":");
-
-        int currentMinutes = Integer.parseInt(currentTimeParts[0]);
-        int currentSeconds = Integer.parseInt(currentTimeParts[1]);
-        int newMinutes = Integer.parseInt(newTimeParts[0]);
-        int newSeconds = Integer.parseInt(newTimeParts[1]);
-
-        if (newMinutes < currentMinutes || (newMinutes == currentMinutes && newSeconds < currentSeconds)) {
+        if (getHighscores().get(level).equals("no")) {
+            // erster Highscore Eintrag
             highscores.replace(level, highscore);
+        } else {
+            String[] currentTimeParts = getHighscores().get(level).split(":");
+            String[] newTimeParts = highscore.split(":");
+
+            int currentMinutes = Integer.parseInt(currentTimeParts[0]);
+            int currentSeconds = Integer.parseInt(currentTimeParts[1]);
+            int newMinutes = Integer.parseInt(newTimeParts[0]);
+            int newSeconds = Integer.parseInt(newTimeParts[1]);
+
+            if (newMinutes < currentMinutes || (newMinutes == currentMinutes && newSeconds < currentSeconds)) {
+                highscores.replace(level, highscore);
+            }
         }
     }
 }
