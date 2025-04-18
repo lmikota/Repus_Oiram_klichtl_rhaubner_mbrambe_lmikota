@@ -55,6 +55,7 @@ public class GameplayApplication extends Application implements Initializable {
 
     private Player player;
     private SuperUmhang cape;
+    private SuperBoots boots;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
 
     public static void main(String[] args) {
@@ -96,6 +97,9 @@ public class GameplayApplication extends Application implements Initializable {
 
             cape = new SuperUmhang(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png")), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, cape.getImagecape());
+
+            boots = new SuperBoots(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperBoots.png")), tilemap.getTILE_SIZE() / 1.5);
+            addToRoot(root, boots.getSuperboots());
 
             FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             addToRoot(root, gegner.getEnemyImage());
@@ -192,6 +196,7 @@ public class GameplayApplication extends Application implements Initializable {
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
         cape.isactivateSuperCape(player);
+        boots.bootsactivecheck(player);
         if (player.getPlayerImage().getX() == tilemap.getTileMapLengthInPixel() * 0.75 && !isLevelWon()) {
             setLevelWon(true);
             winLevel();

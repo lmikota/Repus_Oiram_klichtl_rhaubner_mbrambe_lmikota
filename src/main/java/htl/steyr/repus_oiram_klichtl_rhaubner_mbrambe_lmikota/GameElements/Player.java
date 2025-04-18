@@ -26,7 +26,7 @@ public class Player implements Runnable {
     private boolean plinkHigh = false;
     private boolean CapeEffect = false;
 
-    private final double JUMP_SPEED = -15;
+    private double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
 
     @Override
@@ -194,6 +194,10 @@ public class Player implements Runnable {
         getPlayerImage().minHeight(getPlayerSize());
         getPlayerImage().maxHeight(getPlayerSize());
         getPlayerImage().maxWidth(getPlayerSize());
+    }
+
+    public void setJUMP_SPEED(double JUMP_SPEED) {
+        this.JUMP_SPEED = JUMP_SPEED;
     }
 
     public double getPlayerSize() {
