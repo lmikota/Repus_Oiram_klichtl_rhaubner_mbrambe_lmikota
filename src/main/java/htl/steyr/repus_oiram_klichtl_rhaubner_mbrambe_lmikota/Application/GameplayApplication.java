@@ -117,14 +117,14 @@ public class GameplayApplication extends Application{
             addToRoot(root, heart2);
             addToRoot(root, heart3);
 
-            heart1.setX(250);
-            heart1.setY(15);
+            heart1.setX(-10);
+            heart1.setY(-15);
 
-            heart2.setX(315);
-            heart2.setY(15);
+            heart2.setX(55);
+            heart2.setY(-15);
 
-            heart3.setX(380);
-            heart3.setY(15);
+            heart3.setX(120);
+            heart3.setY(-15);
 
             player.getPlayerImage().toFront();
 
@@ -217,8 +217,7 @@ public class GameplayApplication extends Application{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        gameplayScene
-.setOnKeyPressed(null);
+        gameplayScene.setOnKeyPressed(null);
         gameplayScene.setOnKeyReleased(null);
         // closeWindow();
     }
@@ -301,10 +300,9 @@ public class GameplayApplication extends Application{
     }
 
     public void displayTimer(Tilemap tilemap, Pane root) {
+        getTimerDisplay().setY(60);
 
-        getTimerDisplay().setY((double) tilemap.SCREEN_HEIGHT / 10);
-
-        getTimerDisplay().setX((double) tilemap.SCREEN_WIDTH / 10);
+        getTimerDisplay().setX(1340);
 
         getTimerDisplay().setId("timerDisplay");
 
@@ -314,7 +312,6 @@ public class GameplayApplication extends Application{
 
 
     public void startTimer() {
-
         setTimerTimeline(new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {
             setSecondsSinceStart(getSecondsSinceStart() + 1);
             int secs;
