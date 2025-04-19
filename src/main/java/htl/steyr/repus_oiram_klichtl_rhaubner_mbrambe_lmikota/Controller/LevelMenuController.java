@@ -1,5 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
+import com.google.gson.Gson;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescription;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescriptionsReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUser;
@@ -21,6 +22,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -62,7 +65,8 @@ public class LevelMenuController implements Initializable {
     public int selectedLevel;
 
     public Map<ImageView, Integer> levelMap;
-    public  static LocalUser localUser;
+    public static LocalUser localUser;
+    private final Gson gson = new Gson();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,9 +84,22 @@ public class LevelMenuController implements Initializable {
         try {
             localUser = localUserReader.readLocalUser();
 
-
             /* look if the user has unlocked the levels */
             if (localUser != null) {
+                for (int i = 1; i < 7; i++) {
+                    if (!localUser.getHighscores().get(i).equals("no")) { // wen größer als 2, dann steht nicht mehr "no" sondern eine zeit wie 01:00 in der json
+                        System.out.println("Halllllllo");
+                        System.out.println(i);
+                        System.out.println(localUser.getHighscores().get(i));
+                        try (FileWriter wr = new FileWriter("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json")) {
+                            localUser.updateLevelLock(i);
+                            gson.toJson(localUser, wr);
+                        } catch (IOException e) {
+                            System.err.println(e.getMessage());
+                        }
+                    }
+                }
+
                 if ("locked".equals(localUser.getLevel_2())) {
                     disableLevelIcon(Level2_Icon);
                 }

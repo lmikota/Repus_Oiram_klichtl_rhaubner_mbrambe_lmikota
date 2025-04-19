@@ -97,4 +97,25 @@ public class LocalUser {
             }
         }
     }
+
+    public void updateLevelLock(int level) {
+        switch (level) {
+            case 1:
+                setLevel_2("unlocked");
+                System.out.println(getLevel_1());
+                break;
+            case 2:
+                setLevel_3("unlocked");
+                break;
+            case 3:
+                setLevel_4("unlocked");
+                break;
+            case 4:
+                setLevel_5("unlocked");
+                break;
+            case 5:
+                setLevel_6("unlocked");
+                break;
+        }
+    }
 }
