@@ -10,9 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
-import javafx.geometry.Pos;
-
 
 import java.io.IOException;
 import java.util.Objects;
@@ -49,10 +46,10 @@ public class StartMenuController {
         try {
             if (menuOverlay == null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                        "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/menu-view.fxml"));
+                        "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/volume_settings-view.fxml"));
                 menuOverlay = loader.load();
 
-                MenuController menuController = loader.getController();
+                VolumeSettingsController menuController = loader.getController();
                 menuController.setMenuOverlay(menuOverlay);
 
                 rootPane.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {

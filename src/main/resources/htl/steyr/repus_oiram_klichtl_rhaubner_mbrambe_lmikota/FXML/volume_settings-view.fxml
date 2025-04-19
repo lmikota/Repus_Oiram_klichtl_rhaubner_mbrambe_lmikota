@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="menuRoot" alignment="CENTER" maxHeight="300.0" maxWidth="400.0" prefHeight="289.0" prefWidth="400.0" styleClass="menuAnchorPane" stylesheets="@../CSS/ui-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.MenuController">
+<StackPane fx:id="menuRoot" alignment="CENTER" maxHeight="300.0" maxWidth="400.0" prefHeight="289.0" prefWidth="400.0" styleClass="menuAnchorPane" stylesheets="@../CSS/ui-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.VolumeSettingsController">
     <children>
         <!-- Hintergrundbild -->
         <ImageView fitHeight="300.0" fitWidth="370.0" preserveRatio="false">
