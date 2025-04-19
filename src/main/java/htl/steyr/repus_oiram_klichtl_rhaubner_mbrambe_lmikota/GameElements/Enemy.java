@@ -31,32 +31,41 @@ public class Enemy{
     }
 
     public void checkPlayerHitBox() {
-        double playerX = getPlayer().getPlayerImage().getX();
-        double playerY = getPlayer().getPlayerImage().getY();
+        if (isDead()) return;
 
-        for(int i = -getTileSize()/2; i < getTileSize()/2; i += 1){
-            for(int j = -getTileSize()/2; j < getTileSize()/2; j += 1){
-                if(playerX == enemyX+j && playerY == enemyY+i){
-                    player.setPlayerVelY(0);
+        ImageView playerImage = player.getPlayerImage();
+        ImageView enemyImage = getEnemyImage();
 
-                    if(playerY <= enemyY + 5){
-                        String enemyDeathSoundPath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/enemyDeathSound.wav";
-                        MusicPlayer.getInstance().playSound(enemyDeathSoundPath);
+        double playerX = playerImage.getX();
+        double playerY = playerImage.getY();
+        double playerWidth = playerImage.getFitWidth();
+        double playerHeight = playerImage.getFitHeight();
 
-                        playerKillsEnemy();
-                    }
+        double enemyX = enemyImage.getX(); // FIXED
+        double enemyY = enemyImage.getY(); // FIXED
+        double enemyWidth = enemyImage.getFitWidth();
+        double enemyHeight = enemyImage.getFitHeight();
 
-                    if(!getPlayer().isSafeTime() && !isDead() && !getPlayer().isCapeEffect()){
-                        System.out.println("test");
-                        onEnemyHitsPlayer();
-                    }
-                    setPlayerTouching(true);
-                }else{
-                    setPlayerTouching(false);
-                }
+        boolean xOverlap = playerX + playerWidth > enemyX && playerX < enemyX + enemyWidth;
+        boolean yOverlap = playerY + playerHeight > enemyY && playerY < enemyY + enemyHeight;
+
+        if (xOverlap && yOverlap) {
+            double playerBottom = playerY + playerHeight;
+            double enemyTop = enemyY;
+
+            // präziser Stomp-Check:
+            boolean isStomp = player.getPlayerVelY() > 0 && playerBottom > enemyTop && playerBottom < enemyTop + enemyHeight / 2;
+
+            if (isStomp) {
+                playerKillsEnemy();
+                player.setPlayerVelY(-5);
+                MusicPlayer.getInstance().playSound("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/enemyDeathSound.wav");
+            } else if (!player.isSafeTime() && !player.isCapeEffect()) {
+                onEnemyHitsPlayer();
             }
         }
     }
+
 
     public void playerKillsEnemy() {
         setDead(true);
@@ -65,7 +74,9 @@ public class Enemy{
     public void onEnemyHitsPlayer(){
         if(!playerTouching){
             getPlayer().setHp(getPlayer().getHp()-1);
+            System.out.println("1 leben verloren");
             if(getPlayer().getHp() == 0){
+                System.out.println("kein leben mehr");
                 getPlayer().onPlayerDead();
                 String deathSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/deathSound.wav";
                 MusicPlayer.getInstance().playSound(deathSound);

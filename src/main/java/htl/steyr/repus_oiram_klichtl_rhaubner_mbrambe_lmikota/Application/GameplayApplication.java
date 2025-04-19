@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class GameplayApplication extends Application implements Initializable {
+public class GameplayApplication extends Application{
     private static final int SCROLL_SPEED = 4;
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
@@ -180,7 +180,6 @@ public class GameplayApplication extends Application implements Initializable {
             System.out.println("Fehler beim Laden des Exit-Menüs: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     private void closeWindow() {
@@ -260,6 +259,9 @@ public class GameplayApplication extends Application implements Initializable {
 
         root.setTranslateX(-offsetX);
         timerDisplay.setTranslateX(offsetX);
+        heart3.setTranslateX(offsetX);
+        heart2.setTranslateX(offsetX);
+        heart1.setTranslateX(offsetX);
     }
 
     public void addToRoot(Pane root, Node node) {
@@ -296,11 +298,6 @@ public class GameplayApplication extends Application implements Initializable {
 
     public void setSelectedLevel(int selectedLevel) {
         this.selectedLevel = selectedLevel;
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     public void displayTimer(Tilemap tilemap, Pane root) {
