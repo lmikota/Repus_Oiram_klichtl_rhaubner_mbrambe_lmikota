@@ -9,7 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
+import javafx.geometry.Pos;
 
 
 import java.io.IOException;
@@ -19,6 +21,11 @@ public class StartMenuController {
 
     @FXML
     public Button startButton;
+
+    @FXML
+    private StackPane rootPane;
+    @FXML
+    private Parent menuOverlay;
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
@@ -34,34 +41,34 @@ public class StartMenuController {
 
         } catch (IOException e) {
             System.err.println("Error loading level menu: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
     @FXML
     public void onMenuButtonClicked(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                    "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/menu-view.fxml"));
-            Parent menuRoot = loader.load();
+            if (menuOverlay == null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/menu-view.fxml"));
+                menuOverlay = loader.load();
 
-            Scene menuScene = new Scene(menuRoot);
+                MenuController menuController = loader.getController();
+                menuController.setMenuOverlay(menuOverlay);
 
-            /* Set up a new stage (window) for the menu */
-            javafx.stage.Stage menuStage = new javafx.stage.Stage();
-            menuStage.setTitle("Menu");
-            menuStage.setScene(menuScene);
-            menuStage.setResizable(false);
+                rootPane.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                    if (menuOverlay.isVisible() && !menuOverlay.getBoundsInParent().contains(e.getX(), e.getY())) {
+                        menuOverlay.setVisible(false);
+                    }
+                });
+            }
 
-            /* Make the new stage modal and set its owner to the current window */
-            javafx.stage.Window currentWindow = startButton.getScene().getWindow();
-            menuStage.initOwner(currentWindow);
-            menuStage.initModality(Modality.WINDOW_MODAL);
-
-            menuStage.show();
+            if (!rootPane.getChildren().contains(menuOverlay)) {
+                rootPane.getChildren().add(menuOverlay);
+            }
+            menuOverlay.setVisible(true);
 
         } catch (IOException e) {
-            System.err.println("Error loading menu: " + e.getMessage());
+            System.out.println("Error while loading the menu:" + e.getMessage());
         }
     }
 

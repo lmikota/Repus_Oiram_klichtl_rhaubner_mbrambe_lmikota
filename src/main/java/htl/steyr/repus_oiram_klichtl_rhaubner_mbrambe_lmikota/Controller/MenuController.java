@@ -1,8 +1,11 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +20,8 @@ public class MenuController implements Initializable {
     public Slider volumeSlider;
     @FXML
     public ImageView volumeIcon;
+    @FXML
+    private Parent menuOverlay;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,5 +53,17 @@ public class MenuController implements Initializable {
         }
         /* dB = 20 * log10(volume) */
         return (float) (20.0 * Math.log10(volumePercent));
+    }
+
+    @FXML
+    public void setMenuOverlay(Parent menuOverlay) {
+        this.menuOverlay = menuOverlay;
+    }
+
+    @FXML
+    public void onMenuExitButtonClicked(ActionEvent actionEvent) {
+        if (menuOverlay != null) {
+            menuOverlay.setVisible(false);
+        }
     }
 }

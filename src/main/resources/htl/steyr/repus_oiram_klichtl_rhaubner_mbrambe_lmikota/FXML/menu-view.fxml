@@ -4,18 +4,37 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="menuAnchorpane" maxHeight="250.0" maxWidth="400.0" prefHeight="250.0" prefWidth="400.0" styleClass="menuAnchorPane" stylesheets="@../CSS/ui-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.MenuController">
-   <children>
-      <ImageView fitHeight="250.0" fitWidth="400.0" pickOnBounds="true">
-         <image>
-            <Image url="@../IMG/GameElements/Background.png" />
-         </image>
-      </ImageView>
-      <Button focusTraversable="false" layoutX="14.0" layoutY="193.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Restart Level" />
-      <Button focusTraversable="false" layoutX="226.0" layoutY="193.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Leave Level" />
-      <Slider fx:id="volumeSlider" focusTraversable="false" layoutX="84.0" layoutY="95.0" prefHeight="61.0" prefWidth="305.0" styleClass="volumeSlider" stylesheets="@../CSS/ui-style.css" />
-      <ImageView fx:id="volumeIcon" fitHeight="60.0" fitWidth="60.0" layoutX="11.0" layoutY="95.0" pickOnBounds="true" />
-   </children>
-</AnchorPane>
+<StackPane fx:id="menuRoot" alignment="CENTER" maxHeight="300.0" maxWidth="400.0" prefHeight="289.0" prefWidth="400.0" styleClass="menuAnchorPane" stylesheets="@../CSS/ui-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.MenuController">
+    <children>
+        <!-- Hintergrundbild -->
+        <ImageView fitHeight="300.0" fitWidth="370.0" preserveRatio="false">
+            <image>
+                <Image url="@../IMG/GameElements/volumeSettings.png" />
+            </image>
+        </ImageView>
+
+        <!-- Menü-Inhalt -->
+        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="371.0" spacing="15">
+            <children>
+                <!-- Titel -->
+                <Text text="Game and Sound Volume" />
+
+                <!-- Lautstärke-Zeile -->
+                <HBox alignment="CENTER" spacing="10">
+                    <children>
+                        <ImageView fx:id="volumeIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" />
+                        <Slider fx:id="volumeSlider" prefWidth="200.0" styleClass="volumeSlider" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+        <!-- Button ganz unten im StackPane -->
+        <Button mnemonicParsing="false" onAction="#onMenuExitButtonClicked" opacity="0.0" prefHeight="66.0" prefWidth="52.0" text="Button" StackPane.alignment="BOTTOM_CENTER" />
+    </children>
+</StackPane>
