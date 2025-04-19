@@ -40,5 +40,4 @@ public class ExitMenuController {
         currentWindow.close();
     }
 
-
 }

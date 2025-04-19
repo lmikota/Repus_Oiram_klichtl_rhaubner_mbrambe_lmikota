@@ -2,6 +2,7 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application;
 
 import com.google.gson.Gson;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.LevelMenuController;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUser;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUserReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements.*;
@@ -31,7 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class GameplayApplication extends Application{
+public class GameplayApplication extends Application {
     private static final int SCROLL_SPEED = 4;
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
@@ -40,7 +41,9 @@ public class GameplayApplication extends Application{
     private String time;
     private ImageView bg1;
     private ImageView bg2;
+    private Pane root = new Pane();
     public static boolean levelWon = false;
+    private boolean endScreenLoaded = false;
 
     private Timeline timerTimeline;
 
@@ -76,7 +79,6 @@ public class GameplayApplication extends Application{
             Tilemap tilemap = new Tilemap(mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
             setBg1(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_" + getSelectedLevel() + "_Background/Level_" + getSelectedLevel() + "-Background_1.png"));
             setBg2(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_" + getSelectedLevel() + "_Background/Level_" + getSelectedLevel() + "-Background_2.png"));
-            Pane root = new Pane();
             startTimer();
             addToRoot(root, bg1);
             addToRoot(root, bg2);
@@ -189,12 +191,7 @@ public class GameplayApplication extends Application{
 
     public void onPlayerLoseLevel() {
         levelWon = false;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/endscreen-view.fxml"));
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadEndScreen();
         //closeWindow();
     }
 
@@ -210,17 +207,35 @@ public class GameplayApplication extends Application{
             System.err.println(e.getMessage());
         }
         levelWon = true;
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/endscreen-view.fxml"));
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadEndScreen();
         gameplayScene.setOnKeyPressed(null);
         gameplayScene.setOnKeyReleased(null);
         // closeWindow();
     }
+
+    private void loadEndScreen() {
+        Platform.runLater(() -> {
+            if (!endScreenLoaded) {
+                endScreenLoaded = true;
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/endscreen-view.fxml"));
+                    AnchorPane endScreenPane = loader.load();
+
+                    Stage endScreenStage = new Stage();
+                    endScreenStage.setTitle("Exit Menu");
+                    endScreenStage.setScene(new Scene(endScreenPane));
+                    endScreenStage.setResizable(false);
+
+                    endScreenStage.initOwner(root.getScene().getWindow());
+                    endScreenStage.initModality(Modality.APPLICATION_MODAL);
+                    endScreenStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
         switch (player.getHp()) {

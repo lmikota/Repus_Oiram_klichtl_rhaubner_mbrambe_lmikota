@@ -34,6 +34,7 @@ public class StartMenuController {
 
         } catch (IOException e) {
             System.err.println("Error loading level menu: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
