@@ -46,10 +46,10 @@ public class Player implements Runnable {
             duration = Duration.between(start, end);
             deltaTime = duration.toSeconds();
 
-            if(isPlinkHigh()){
+            if (isPlinkHigh()) {
                 Platform.runLater(() -> getPlayerImage().setOpacity(0.75));
                 setPlinkHigh(false);
-            }else{
+            } else {
                 Platform.runLater(() -> getPlayerImage().setOpacity(0.25));
                 setPlinkHigh(true);
             }
@@ -95,15 +95,15 @@ public class Player implements Runnable {
         }
     }
 
-    public void onPlayerSuccess(){
+    public void onPlayerSuccess() {
         getGameplayApplication().onPlayerWinLevel();
     }
 
-    public void onPlayerDead(){
+    public void onPlayerDead() {
         getGameplayApplication().onPlayerLoseLevel();
     }
 
-    public void playerMovementY(int map[][],Set<KeyCode> pressedKeys, double GRAVITY) {
+    public void playerMovementY(int map[][], Set<KeyCode> pressedKeys, double GRAVITY) {
         if (pressedKeys.contains(KeyCode.SPACE) && !isJumping && isBlockUnderIt) {
             playerVelY = JUMP_SPEED;
             isJumping = true;
@@ -125,7 +125,7 @@ public class Player implements Runnable {
                 } else if (blockY >= 0 && blockY < map.length && isBlockSolid(map[blockY][blockX])) {
                     isBlockUnderIt = true;
                     break;
-                }else{
+                } else {
                     isBlockUnderIt = false;
                     isBlockOverIt = false;
                 }
@@ -170,9 +170,12 @@ public class Player implements Runnable {
 
             for (int y = topTileY; y <= bottomTileY; y++) {
                 if (rightTileX < map[0].length && isBlockSolid(map[y][rightTileX])) {
-                    return true;
-                }else if(isWinningBlock(map[y][rightTileX])){
-                    onPlayerSuccess();
+                    if (rightTileX < map[0].length && isWinningBlock(map[y][rightTileX])) {
+                        onPlayerSuccess();
+                        return true;
+                    } else {
+                        return true;
+                    }
                 }
             }
         } else {
@@ -189,7 +192,7 @@ public class Player implements Runnable {
     }
 
     public boolean isBlockSolid(int block) {
-        return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187;
+        return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 || block == -1;
     }
 
     public boolean isWinningBlock(int block) {

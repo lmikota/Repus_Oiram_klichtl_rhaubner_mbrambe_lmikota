@@ -40,6 +40,7 @@ public class GameplayApplication extends Application implements Initializable {
     private String time;
     private ImageView bg1;
     private ImageView bg2;
+    public static boolean levelWon = false;
 
     private Timeline timerTimeline;
 
@@ -72,13 +73,9 @@ public class GameplayApplication extends Application implements Initializable {
          */
         try {
             mapDataReader = new MapDataReader();
-            int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-            int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-            System.out.println("widht: " + screenWidth);
-            System.out.println("height: " + screenHeight);
             Tilemap tilemap = new Tilemap(mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
-            setBg1(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_"+getSelectedLevel()+"_Background/Level_"+getSelectedLevel()+"-Background_1.png"));
-            setBg2(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_"+getSelectedLevel()+"_Background/Level_"+getSelectedLevel()+"-Background_2.png"));
+            setBg1(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_" + getSelectedLevel() + "_Background/Level_" + getSelectedLevel() + "-Background_1.png"));
+            setBg2(createBackGround("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/LevelBackgrounds/Level_" + getSelectedLevel() + "_Background/Level_" + getSelectedLevel() + "-Background_2.png"));
             Pane root = new Pane();
             startTimer();
             addToRoot(root, bg1);
@@ -192,12 +189,18 @@ public class GameplayApplication extends Application implements Initializable {
     }
 
     public void onPlayerLoseLevel() {
-        closeWindow();
+        levelWon = false;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/endscreen-view.fxml"));
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //closeWindow();
     }
 
     /**
-     * @ToDo
-     * winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
+     * @ToDo winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
      */
     public void onPlayerWinLevel() {
         Gson gson = new Gson();
@@ -207,9 +210,19 @@ public class GameplayApplication extends Application implements Initializable {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        closeWindow();
-    }
+        levelWon = true;
+        try {
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/endscreen-view.fxml"));
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        gameplayScene
+.setOnKeyPressed(null);
+        gameplayScene.setOnKeyReleased(null);
+        // closeWindow();
+    }
     private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
         switch (player.getHp()) {
