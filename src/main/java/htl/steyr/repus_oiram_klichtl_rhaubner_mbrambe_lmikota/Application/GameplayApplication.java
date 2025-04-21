@@ -1,7 +1,9 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application;
 
 import com.google.gson.Gson;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.GameMenuController;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.LevelMenuController;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.VolumeSettingsController;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUser;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUserReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader;
@@ -14,12 +16,16 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,6 +48,7 @@ public class GameplayApplication extends Application {
     private ImageView bg1;
     private ImageView bg2;
     private Pane root = new Pane();
+    private StackPane overlayContainer;
     public static boolean levelWon = false;
     private boolean endScreenLoaded = false;
 
@@ -54,9 +61,12 @@ public class GameplayApplication extends Application {
     @FXML
     public static Text timerDisplay = new Text();
 
-    ImageView heart1 = new ImageView();
-    ImageView heart2 = new ImageView();
-    ImageView heart3 = new ImageView();
+    @FXML
+    private ImageView heart1 = new ImageView();
+    @FXML
+    private ImageView heart2 = new ImageView();
+    @FXML
+    private ImageView heart3 = new ImageView();
 
     private Player player;
     private SuperUmhang cape;
@@ -163,26 +173,49 @@ public class GameplayApplication extends Application {
         }
     }
 
+    @FXML
     private void loadExitMenu(Pane root) {
-        System.out.println("load Exitmenu"); // debugging
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/exit_menu-view.fxml"));
-
         try {
-            Pane exitMenu = loader.load();
+            if (overlayContainer == null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/game_menu-view.fxml"));
+                Parent menuOverlay = loader.load();
 
-            Stage exitStage = new Stage();
-            exitStage.setTitle("Exit Menu");
-            exitStage.setScene(new Scene(exitMenu));
-            exitStage.setResizable(false);
+                GameMenuController menuCtrl = loader.getController();
+                menuCtrl.setMenuOverlay(menuOverlay);
 
-            exitStage.initOwner(root.getScene().getWindow());
-            exitStage.initModality(Modality.APPLICATION_MODAL);
-            exitStage.show();
+                overlayContainer = new StackPane();
+                /* Bind the overlay size to match the root pane dimensions */
+                overlayContainer.prefWidthProperty().bind(root.widthProperty());
+                overlayContainer.prefHeightProperty().bind(root.heightProperty());
+
+                /* Add the menu overlay to the container and center it */
+                overlayContainer.getChildren().add(menuOverlay);
+                StackPane.setAlignment(menuOverlay, Pos.CENTER);
+
+                /*
+                 * Add a click filter on the overlay container to hide the menu
+                 * when clicking outside its bounds
+                 */
+                overlayContainer.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                    Bounds bounds = menuOverlay.getBoundsInParent();
+                    if (!bounds.contains(e.getX(), e.getY())) {
+                        overlayContainer.setVisible(false);
+                    }
+                });
+            }
+
+            /* Add the overlay container to the root if not already present */
+            if (!root.getChildren().contains(overlayContainer)) {
+                addToRoot(root, overlayContainer);
+            }
+
+            overlayContainer.setVisible(true);
+
         } catch (IOException e) {
-            System.out.println("Fehler beim Laden des Exit-Menüs: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
     private void closeWindow() {
         Stage stage = (Stage) gameplayScene.getWindow();
@@ -324,7 +357,6 @@ public class GameplayApplication extends Application {
         addToRoot(root, getTimerDisplay());
         System.out.println("in root drinnen"); // debugging
     }
-
 
     public void startTimer() {
         setTimerTimeline(new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {

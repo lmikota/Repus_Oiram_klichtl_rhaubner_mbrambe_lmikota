@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.Objects;
@@ -22,9 +23,10 @@ public class VolumeSettingsController implements Initializable {
     @FXML
     private Parent menuOverlay;
 
+    MusicPlayer musicPlayer = MusicPlayer.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        MusicPlayer musicPlayer = MusicPlayer.getInstance();
 
         volumeSlider.setMin(0.0);    /* completely shut */
         volumeSlider.setMax(1.0);    /* maximum volume */
@@ -64,5 +66,10 @@ public class VolumeSettingsController implements Initializable {
         if (menuOverlay != null) {
             menuOverlay.setVisible(false);
         }
+    }
+
+    public void onVolumeIconImageClicked(MouseEvent mouseEvent) {
+        // @TODO: finish later
+        musicPlayer.setVolume(0);
     }
 }

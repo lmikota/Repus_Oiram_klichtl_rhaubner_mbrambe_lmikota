@@ -18,7 +18,6 @@ public class StartMenuController {
 
     @FXML
     public Button startButton;
-
     @FXML
     private StackPane rootPane;
     @FXML

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="volumeOverlayPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="333.0" stylesheets="@../CSS/ui-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.GameMenuController">
+   <children>
+      <ImageView fitHeight="402.0" fitWidth="460.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../IMG/GameElements/pausedMenu.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="348.0" spacing="20">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onPlayButtonClicked" prefWidth="200.0" styleClass="Button" text="PLAY" />
+            <Button mnemonicParsing="false" onAction="#onRestartButtonClicked" prefWidth="200.0" styleClass="Button" text="RESTART" />
+            <Button mnemonicParsing="false" onAction="#onOptionButtonClicked" prefWidth="200.0" styleClass="Button" text="OPTIONS" />
+            <Button mnemonicParsing="false" onAction="#onQuitButtonClicked" prefWidth="200.0" styleClass="Button" text="QUIT" />
+         </children>
+      </VBox>
+   </children>
+</StackPane>
