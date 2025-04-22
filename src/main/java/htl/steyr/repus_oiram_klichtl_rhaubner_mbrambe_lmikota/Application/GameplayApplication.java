@@ -42,7 +42,7 @@ public class GameplayApplication extends Application {
     private static final int SCROLL_SPEED = 4;
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
-    private int selectedLevel;
+    private static int selectedLevel;
     public static Scene gameplayScene;
     private String time;
     private ImageView bg1;
@@ -224,6 +224,8 @@ public class GameplayApplication extends Application {
 
     public void onPlayerLoseLevel() {
         levelWon = false;
+        gameplayScene.setOnKeyPressed(null);
+        gameplayScene.setOnKeyReleased(null);
         loadEndScreen();
         //closeWindow();
     }
@@ -339,7 +341,7 @@ public class GameplayApplication extends Application {
         }
     }
 
-    public int getSelectedLevel() {
+    public static int getSelectedLevel() {
         return selectedLevel;
     }
 
