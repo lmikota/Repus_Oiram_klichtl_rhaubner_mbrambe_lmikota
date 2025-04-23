@@ -69,6 +69,7 @@ public class GameplayApplication extends Application {
     private Player player;
     private SuperUmhang cape;
     private SuperBoots boots;
+    private SuperTrank trank;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
 
     public static void main(String[] args) {
@@ -106,8 +107,8 @@ public class GameplayApplication extends Application {
             player = new Player(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png"))), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE(), this);
             addToRoot(gameLayer, player.getPlayerImage());
 
-            SuperTrank superTrank = new SuperTrank(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/superTrank.png"))), tilemap.getTILE_SIZE() / 1.5);
-            addToRoot(gameLayer, superTrank.getImagetrank());
+            trank = new SuperTrank(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/superTrank.png"))), tilemap.getTILE_SIZE() / 1.5);
+            addToRoot(gameLayer, trank.getImagetrank());
 
             cape = new SuperUmhang(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png"))), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(gameLayer, cape.getImagecape());
@@ -331,6 +332,7 @@ public class GameplayApplication extends Application {
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
         cape.isactivateSuperCape(player);
+        boots.bootsactivecheck(player);
     }
 
     public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {
