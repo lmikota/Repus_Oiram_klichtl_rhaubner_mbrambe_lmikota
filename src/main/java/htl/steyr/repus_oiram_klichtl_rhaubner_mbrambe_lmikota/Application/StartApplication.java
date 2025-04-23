@@ -13,6 +13,7 @@ import java.util.Objects;
 public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        /* start the background music */
         String backgroundMusicFilePath = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/backgroundmusic.wav";
         MusicPlayer.getInstance().playMusic(backgroundMusicFilePath);
 
@@ -20,6 +21,7 @@ public class StartApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Logo.png"))));
         stage.setTitle("Repus Oiram");
+        stage.setFullScreenExitHint("");
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();

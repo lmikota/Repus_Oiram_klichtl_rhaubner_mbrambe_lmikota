@@ -30,6 +30,8 @@ public class Player implements Runnable {
     private double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
 
+    private boolean dead = false;
+
     private GameplayApplication gameplayApplication;
 
     @Override
@@ -89,9 +91,12 @@ public class Player implements Runnable {
     public void checkPlayerLegalHeight() {
         double screenHeight = getTileSize() * 18;
         if (getPlayerImage().getY() > screenHeight) {
-            onPlayerDead();
-            String fallingIntoVoidSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/fallingIntoVoidSound.wav";
-            MusicPlayer.getInstance().playMusic(fallingIntoVoidSound);
+            if (!dead) {
+                dead = true;
+                String fallingIntoVoidSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/fallingIntoVoidSound.wav";
+                MusicPlayer.getInstance().playSound(fallingIntoVoidSound);
+                onPlayerDead();
+            }
         }
     }
 
