@@ -6,11 +6,13 @@ public class MapData {
     private int id;
     private int[][] mapData;
     private HashMap<Integer, String> filePaths;
+    private HashMap<String, HashMap<Integer,Double[]>> enemies;
 
-    public MapData(int id, int[][] mapData, HashMap<Integer, String> filePaths) {
+    public MapData(int id, int[][] mapData, HashMap<Integer, String> filePaths, HashMap<String, HashMap<Integer, Double[]>> enemies) {
         setMapData(mapData);
         setId(id);
         setFilePaths(filePaths);
+        setEnemies(enemies);
     }
 
     public int getMapWidth(int tileSize) {
@@ -43,5 +45,13 @@ public class MapData {
 
     public void setFilePaths(HashMap<Integer, String> filePaths) {
         this.filePaths = filePaths;
+    }
+
+    public HashMap<String, HashMap<Integer, Double[]>> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(HashMap<String, HashMap<Integer, Double[]>> enemies) {
+        this.enemies = enemies;
     }
 }

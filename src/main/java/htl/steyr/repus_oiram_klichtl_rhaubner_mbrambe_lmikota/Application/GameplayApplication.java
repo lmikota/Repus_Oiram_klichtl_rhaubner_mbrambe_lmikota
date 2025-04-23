@@ -99,27 +99,68 @@ public class GameplayApplication extends Application {
             gameplayScene = new Scene(root);
             gameplayScene.getStylesheets().add(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/CSS/gameElementsStyle.css").toExternalForm());
 
-            player = new Player(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png")), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE(), this);
+            player = new Player(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png"))), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE(), this);
             addToRoot(root, player.getPlayerImage());
 
-            SuperTrank superTrank = new SuperTrank(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/superTrank.png")), tilemap.getTILE_SIZE() / 1.5);
+            SuperTrank superTrank = new SuperTrank(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/superTrank.png"))), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, superTrank.getImagetrank());
 
-            cape = new SuperUmhang(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png")), tilemap.getTILE_SIZE() / 1.5);
+            cape = new SuperUmhang(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png"))), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, cape.getImagecape());
 
-            boots = new SuperBoots(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperBoots.png")), tilemap.getTILE_SIZE() / 1.5);
+            boots = new SuperBoots(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperBoots.png"))), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, boots.getSuperboots());
 
-//            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+//            FloorEnemy gegner = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
+//                    mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(), mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(1)[0] * tilemap.getTILE_SIZE(), mapDataReader.getMapHm().get(1).getEnemies().get("floorEnemies").get(1)[1]);
 //            addToRoot(root, gegner.getEnemyImage());
 //            Thread gegnerThread = new Thread(gegner);
 //            gegnerThread.start();
+//
+//            FloorEnemy gegnerr = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
+//                    mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(), mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(2)[0], mapDataReader.getMapHm().get(1).getEnemies().get("floorEnemies").get(2)[1]);
+//            addToRoot(root, gegnerr.getEnemyImage());
+//            Thread gegnerrThread = new Thread(gegnerr);
+//            gegnerrThread.start();
+////
+//            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
+//                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(1)[0] * tilemap.getTILE_SIZE(), mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(1)[1] * tilemap.getTILE_SIZE());
+//            addToRoot(root, skyEnemy.getEnemyImage());
+//            Thread skyEnemyThread = new Thread(skyEnemy);
+//            skyEnemyThread.start();
 
-            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
-            addToRoot(root, skyEnemy.getEnemyImage());
-            Thread skyEnemyThread = new Thread(skyEnemy);
-            skyEnemyThread.start();
+            for (String enemyType : mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().keySet()) {
+                switch (enemyType) {
+                    case "floorEnemies":
+                        for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").size(); i++) {
+                            FloorEnemy floorEnemy = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
+                            addToRoot(root, floorEnemy.getEnemyImage());
+                            new Thread(floorEnemy).start();
+                        }
+                        break;
+                    case "skyEnemies":
+                        for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").size(); i++) {
+                            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
+                            addToRoot(root, skyEnemy.getEnemyImage());
+                            new Thread(skyEnemy).start();
+                        }
+                        break;
+                    case "jumpingEnemies":
+                        for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").size(); i++) {
+                            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/sprungmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
+                            addToRoot(root, jumpingEnemy.getEnemyImage());
+                            new Thread(jumpingEnemy).start();
+                        }
+                }
+            }
 
             heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
             heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));

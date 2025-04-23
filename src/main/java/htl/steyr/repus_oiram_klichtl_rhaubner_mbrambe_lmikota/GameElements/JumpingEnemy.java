@@ -17,8 +17,8 @@ public class JumpingEnemy extends Enemy implements Runnable {
     private boolean isJumping = false;
     private int jumpSpeed = -24;
 
-    public JumpingEnemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player, int map[][]) {
-        super(enemyImage, enemySize, tileSize, enemyMovementX, player);
+    public JumpingEnemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player, int map[][], double xCord, double yCord) {
+        super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
         this.map = map;
         lastJump = LocalTime.now();
     }

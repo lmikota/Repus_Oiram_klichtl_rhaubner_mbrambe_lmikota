@@ -4,8 +4,8 @@ import javafx.application.Platform;
 import javafx.scene.image.Image;
 
 public class SkyEnemy extends Enemy implements Runnable {
-    public SkyEnemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player) {
-        super(enemyImage, enemySize, tileSize, enemyMovementX, player);
+    public SkyEnemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player, double xCord, double yCord) {
+        super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
     }
 
     @Override
