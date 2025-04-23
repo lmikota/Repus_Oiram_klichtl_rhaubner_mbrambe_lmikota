@@ -164,6 +164,9 @@ public class LevelMenuController implements Initializable {
 
             levelDescriptionGrid.add(new Text("Difficulty"), 0, 2);
             levelDescriptionGrid.add(new Text(levelDescription.getDifficulty()), 1, 2);
+
+            levelDescriptionGrid.add(new Text("Record Time"), 0, 3);
+            levelDescriptionGrid.add(new Text(localUser.getHighscores().get(levelDescription.getId())), 1, 3);
         }
     }
 

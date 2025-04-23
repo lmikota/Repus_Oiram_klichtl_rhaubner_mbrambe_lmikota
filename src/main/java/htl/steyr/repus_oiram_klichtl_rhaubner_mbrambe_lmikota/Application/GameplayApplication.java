@@ -52,7 +52,7 @@ public class GameplayApplication extends Application {
 
     private Timeline timerTimeline;
 
-    private int SecondsSinceStart = 0;
+    private int secondsSinceStart = 0;
 
     private static MapDataReader mapDataReader;
 
@@ -431,11 +431,11 @@ public class GameplayApplication extends Application {
     }
 
     public int getSecondsSinceStart() {
-        return SecondsSinceStart;
+        return secondsSinceStart;
     }
 
     public void setSecondsSinceStart(int secondsSinceStart) {
-        SecondsSinceStart = secondsSinceStart;
+        this.secondsSinceStart = secondsSinceStart;
     }
 
     public Text getTimerDisplay() {
@@ -466,4 +466,3 @@ public class GameplayApplication extends Application {
         this.bg2 = bg2;
     }
 }
-
