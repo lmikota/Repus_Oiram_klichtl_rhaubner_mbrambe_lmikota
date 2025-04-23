@@ -5,10 +5,12 @@ import java.net.URL;
 import java.util.Objects;
 
 public class MusicPlayer {
+
     private static MusicPlayer instance;
 
     private Clip musicClip;
     private Clip soundClip;
+
     private FloatControl volumeControl;
     private float currentVolume = -10.0f;
 
