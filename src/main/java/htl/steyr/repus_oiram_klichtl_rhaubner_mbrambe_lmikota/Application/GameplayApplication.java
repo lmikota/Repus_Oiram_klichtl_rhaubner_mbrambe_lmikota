@@ -42,7 +42,7 @@ public class GameplayApplication extends Application {
     private static final int SCROLL_SPEED = 4;
     private final double GRAVITY = 0.5;
     private double offsetX = 0;
-    private int selectedLevel;
+    private static int selectedLevel;
     public static Scene gameplayScene;
     private String time;
     private ImageView bg1;
@@ -111,10 +111,10 @@ public class GameplayApplication extends Application {
             boots = new SuperBoots(player, new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperBoots.png")), tilemap.getTILE_SIZE() / 1.5);
             addToRoot(root, boots.getSuperboots());
 
-            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
-            addToRoot(root, gegner.getEnemyImage());
-            Thread gegnerThread = new Thread(gegner);
-            gegnerThread.start();
+//            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
+//            addToRoot(root, gegner.getEnemyImage());
+//            Thread gegnerThread = new Thread(gegner);
+//            gegnerThread.start();
 
             SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
             addToRoot(root, skyEnemy.getEnemyImage());
@@ -223,7 +223,10 @@ public class GameplayApplication extends Application {
     }
 
     public void onPlayerLoseLevel() {
+        stopTimer();
         levelWon = false;
+        gameplayScene.setOnKeyPressed(null);
+        gameplayScene.setOnKeyReleased(null);
         loadEndScreen();
         //closeWindow();
     }
@@ -232,6 +235,7 @@ public class GameplayApplication extends Application {
      * @ToDo winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
      */
     public void onPlayerWinLevel() {
+        stopTimer();
         Gson gson = new Gson();
         try (FileWriter wr = new FileWriter("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json")) {
             LevelMenuController.localUser.updateHighscores(getSelectedLevel(), getTime());
@@ -339,7 +343,7 @@ public class GameplayApplication extends Application {
         }
     }
 
-    public int getSelectedLevel() {
+    public static int getSelectedLevel() {
         return selectedLevel;
     }
 
