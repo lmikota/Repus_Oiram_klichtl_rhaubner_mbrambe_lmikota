@@ -12,15 +12,15 @@ public class Enemy{
     private double enemyX;
     private double enemyY;
     private int tileSize;
-    private int enemyMovementX;
-    private int oneMovementSite;
+    private double enemyMovementX;
+    private double oneMovementSite;
 
     private boolean playerTouching;
     private Player player;
 
     private boolean dead = false;
 
-    public Enemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player, double xCord, double yCord) {
+    public Enemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, double xCord, double yCord) {
         setEnemySize(enemySize);
         setEnemyImage(enemyImage);
         setTileSize(tileSize);
@@ -140,19 +140,19 @@ public class Enemy{
         this.tileSize = tileSize;
     }
 
-    public int getEnemyMovementX() {
+    public double getEnemyMovementX() {
         return enemyMovementX;
     }
 
-    public void setEnemyMovementX(int enemyMovementX) {
+    public void setEnemyMovementX(double enemyMovementX) {
         this.enemyMovementX = enemyMovementX;
     }
 
-    public int getOneMovementSite() {
+    public double getOneMovementSite() {
         return oneMovementSite;
     }
 
-    public void setOneMovementSite(int oneMovementSite) {
+    public void setOneMovementSite(double oneMovementSite) {
         this.oneMovementSite = oneMovementSite;
     }
 

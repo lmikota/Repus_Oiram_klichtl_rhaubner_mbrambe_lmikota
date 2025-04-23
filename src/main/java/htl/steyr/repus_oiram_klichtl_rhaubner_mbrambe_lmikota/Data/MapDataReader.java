@@ -15,8 +15,6 @@ public class MapDataReader {
     HashMap<Integer, String> filePaths;
     HashMap<String, HashMap<Integer, Double[]>> enemies;
 
-    /* ---------------------------------------------- Getter & Setter ----------------------------------------------- */
-
     public MapDataReader() throws IOException {
         mapHm = new HashMap<>();
         initializeMapData(getFileName());
