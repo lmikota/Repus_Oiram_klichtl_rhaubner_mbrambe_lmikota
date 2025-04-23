@@ -70,7 +70,7 @@ public class StartMenuController {
 
     @FXML
     public void onExitButtonClicked(ActionEvent actionEvent) {
-        Platform.exit();
         MusicPlayer.getInstance().stopMusic();
+        Platform.exit();
     }
 }
