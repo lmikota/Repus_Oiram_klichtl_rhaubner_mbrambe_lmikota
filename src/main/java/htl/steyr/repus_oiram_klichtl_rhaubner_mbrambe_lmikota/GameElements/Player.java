@@ -32,6 +32,10 @@ public class Player implements Runnable {
 
     private boolean dead = false;
 
+    SuperBoots superboots = new SuperBoots(this);
+    SuperTrank superTrank = new SuperTrank(this);
+    SuperUmhang superUmhang = new SuperUmhang(this);
+
     private GameplayApplication gameplayApplication;
 
     @Override
@@ -124,15 +128,19 @@ public class Player implements Runnable {
             int blockX = (int) ((getPlayerImage().getX() + i) / getTileSize());
 
             if (blockX >= 0 && blockX < map[0].length) {
-                if (blockYAbovePlayer >= 0 && blockYAbovePlayer < map.length && isBlockSolid(map[blockYAbovePlayer][blockX])) {
-                    isBlockOverIt = true;
-                    break;
-                } else if (blockY >= 0 && blockY < map.length && isBlockSolid(map[blockY][blockX])) {
-                    isBlockUnderIt = true;
-                    break;
-                } else {
-                    isBlockUnderIt = false;
-                    isBlockOverIt = false;
+                if(isItemBlock(map[blockYAbovePlayer][blockX]) || isItemBlock(map[blockY][blockX])) {
+
+                }else{
+                    if (blockYAbovePlayer >= 0 && blockYAbovePlayer < map.length && isBlockSolid(map[blockYAbovePlayer][blockX])) {
+                        isBlockOverIt = true;
+                        break;
+                    } else if (blockY >= 0 && blockY < map.length && isBlockSolid(map[blockY][blockX])) {
+                        isBlockUnderIt = true;
+                        break;
+                    } else {
+                        isBlockUnderIt = false;
+                        isBlockOverIt = false;
+                    }
                 }
             }
         }
@@ -174,12 +182,16 @@ public class Player implements Runnable {
             int rightTileX = (int) ((futurePlayerX + playerImage.getFitWidth()) / getTileSize());
 
             for (int y = topTileY; y <= bottomTileY; y++) {
-                if (rightTileX < map[0].length && isBlockSolid(map[y][rightTileX])) {
-                    if (rightTileX < map[0].length && isWinningBlock(map[y][rightTileX])) {
-                        onPlayerSuccess();
-                        return true;
-                    } else {
-                        return true;
+                if(isItemBlock(map[y][rightTileX])) {
+                    activatedItem(map[y][rightTileX]);
+                }else{
+                    if (rightTileX < map[0].length && isBlockSolid(map[y][rightTileX])) {
+                        if (rightTileX < map[0].length && isWinningBlock(map[y][rightTileX])) {
+                            onPlayerSuccess();
+                            return true;
+                        } else {
+                            return true;
+                        }
                     }
                 }
             }
@@ -187,8 +199,12 @@ public class Player implements Runnable {
             int leftTileX = (int) (futurePlayerX / getTileSize());
 
             for (int y = topTileY; y <= bottomTileY; y++) {
-                if (leftTileX >= 0 && isBlockSolid(map[y][leftTileX])) {
-                    return true;
+                if(isItemBlock(map[y][leftTileX])) {
+                   activatedItem(map[y][leftTileX]);
+                }else{
+                    if (leftTileX >= 0 && isBlockSolid(map[y][leftTileX])) {
+                        return true;
+                    }
                 }
             }
         }
@@ -197,11 +213,29 @@ public class Player implements Runnable {
     }
 
     public boolean isBlockSolid(int block) {
-        return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 || block == -1;
+        return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 || block == 12 || block == 13 || block == 14 || block == 15 || block == 16 || block == 17 || block == 18 || block == 19 ;
+    }
+
+    public boolean isItemBlock(int block){
+        return block == -1 || block == -2 || block == -3;
+    }
+
+    public void activatedItem(int item) {
+        switch (item) {
+            case -1 -> {
+                superboots.activateBootsEffect();
+            }
+            case -2 -> {
+                superTrank.activateTrankEffect();
+            }
+            case -3 -> {
+                superUmhang.activateCapeEffect();
+            }
+        }
     }
 
     public boolean isWinningBlock(int block) {
-        return block == -1;
+        return block == 12 || block == 13 || block == 14 || block == 15 || block == 16 || block == 17 || block == 18 || block == 19;
     }
 
     public ImageView getPlayerImage() {
