@@ -107,27 +107,6 @@ public class GameplayApplication extends Application {
             addToRoot(gameLayer, player.getPlayerImage());
 
 
-//            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
-//            addToRoot(gameLayer, gegner.getEnemyImage());
-//            Thread gegnerThread = new Thread(gegner);
-//            gegnerThread.start();
-//
-//            FloorEnemy gegnerr = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
-//                    mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(), mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(2)[0], mapDataReader.getMapHm().get(1).getEnemies().get("floorEnemies").get(2)[1]);
-//            addToRoot(root, gegnerr.getEnemyImage());
-//            Thread gegnerrThread = new Thread(gegnerr);
-//            gegnerrThread.start();
-////
-//            SkyEnemy skyEnemy = new SkyEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
-//                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(1)[0] * tilemap.getTILE_SIZE(), mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(1)[1] * tilemap.getTILE_SIZE());
-//            addToRoot(root, skyEnemy.getEnemyImage());
-//            Thread skyEnemyThread = new Thread(skyEnemy);
-//            skyEnemyThread.start();
-
-//            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
-//            addToRoot(gameLayer, skyEnemy.getEnemyImage());
-//            Thread skyEnemyThread = new Thread(skyEnemy);
-//            skyEnemyThread.start();
 
             for (String enemyType : mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().keySet()) {
                 switch (enemyType) {
@@ -201,6 +180,9 @@ public class GameplayApplication extends Application {
                 }
             };
             gameLoop.start();
+
+            System.out.println(mapDataReader.getMapHm().get(getSelectedLevel()).getMapData().length);
+            System.out.println(tilemap.getTileMapLengthInPixel() / tilemap.getTILE_SIZE());
 
             primaryStage.setTitle("Repus Oiram");
             primaryStage.setScene(gameplayScene);
