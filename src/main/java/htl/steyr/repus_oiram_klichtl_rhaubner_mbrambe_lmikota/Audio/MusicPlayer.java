@@ -7,14 +7,14 @@ import java.util.Objects;
 public class MusicPlayer {
     private static MusicPlayer instance;
 
-    private Clip musicClip;      // Dediziert für Hintergrundmusik
-    private Clip soundClip;      // Dediziert für Soundeffekte
+    private Clip musicClip;
+    private Clip soundClip;
     private FloatControl volumeControl;
     private float currentVolume = -10.0f;
 
     public void playMusic(String filepath) {
         try {
-            stopMusic(); // Stoppe bisherige Musik
+            stopMusic();
             URL soundUrl = Objects.requireNonNull(getClass().getResource(filepath));
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundUrl);
             musicClip = AudioSystem.getClip();
@@ -26,15 +26,14 @@ public class MusicPlayer {
             musicClip.start();
             musicClip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
-            throw new RuntimeException("Fehler beim Abspielen: " + e.getMessage());
+            throw new RuntimeException("Error while playing: " + e.getMessage());
         }
     }
 
     public void playSound(String filepath) {
         try {
-            // Nutze soundClip für Effekte
             if (soundClip != null && soundClip.isRunning()) {
-                soundClip.stop(); // Stoppe aktuellen Soundeffekt
+                soundClip.stop();
             }
             URL soundUrl = Objects.requireNonNull(getClass().getResource(filepath));
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundUrl);
@@ -46,7 +45,7 @@ public class MusicPlayer {
 
             soundClip.start();
         } catch (Exception e) {
-            throw new RuntimeException("Fehler beim Abspielen: " + e.getMessage());
+            throw new RuntimeException("Error while playing: " + e.getMessage());
         }
     }
 
