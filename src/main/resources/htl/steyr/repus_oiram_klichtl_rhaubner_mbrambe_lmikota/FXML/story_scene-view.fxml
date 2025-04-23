@@ -8,11 +8,10 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="storySceneAnchorPane" focusTraversable="true" maxHeight="1.7976931348623157E308"
-            maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress"
-            prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
+            maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0"
+            prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.StorySceneController"
-            stylesheets="@../CSS/ui-style.css">
+            stylesheets="@../CSS/style.css">
     <children>
         <ImageView fitHeight="${storySceneAnchorPane.height}" fitWidth="${storySceneAnchorPane.width}"
                    pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

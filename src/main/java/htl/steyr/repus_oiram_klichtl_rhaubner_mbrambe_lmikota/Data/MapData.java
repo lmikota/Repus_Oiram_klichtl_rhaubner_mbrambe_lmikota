@@ -15,13 +15,7 @@ public class MapData {
         setEnemies(enemies);
     }
 
-    public int getMapWidth(int tileSize) {
-        int mapsize = 0;
-        for (int i = 0; i < getMapData().length; i++) {
-            mapsize = i * tileSize;
-        }
-        return mapsize;
-    }
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------- */
 
     public int[][] getMapData() {
         return mapData;

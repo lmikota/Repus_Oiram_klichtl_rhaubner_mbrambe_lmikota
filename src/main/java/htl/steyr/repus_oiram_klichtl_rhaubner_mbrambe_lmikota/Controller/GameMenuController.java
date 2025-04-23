@@ -22,8 +22,10 @@ public class GameMenuController {
     @FXML
     private Parent settingsOverlay;
 
+    /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
+
     @FXML
-    public void onPlayButtonClicked(ActionEvent actionEvent) {
+    public void onPlayButtonClicked() {
         if (menuOverlay != null) {
             menuOverlay.setVisible(false);
         }
@@ -38,7 +40,7 @@ public class GameMenuController {
     }
 
     @FXML
-    public void onOptionButtonClicked(ActionEvent actionEvent) {
+    public void onOptionButtonClicked() {
         try {
             if (volumeOverlayPane == null)
                 throw new IllegalStateException("Pane ned da");
@@ -64,30 +66,32 @@ public class GameMenuController {
             settingsOverlay.setVisible(true);
 
         } catch (IOException | IllegalStateException e) {
-            e.printStackTrace();
+            System.out.println("Error while loading the option-menu:" + e.getMessage());
         }
     }
 
     @FXML
-    public void onQuitButtonClicked(ActionEvent actionEvent) {
+    public void onQuitButtonClicked() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/start_menu-view.fxml"));
             Parent newRoot = loader.load();
             Scene scene = GameplayApplication.gameplayScene;
             scene.setRoot(newRoot);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error while loading the start-menu: " + e.getMessage());
         }
     }
 
-    @FXML
-    public void setMenuOverlay(Parent menuOverlay) {
-        this.menuOverlay = menuOverlay;
-    }
+    /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
 
     @FXML
     private void closeCurrentWindow(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentWindow.close();
+    }
+
+    @FXML
+    public void setMenuOverlay(Parent menuOverlay) {
+        this.menuOverlay = menuOverlay;
     }
 }

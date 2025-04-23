@@ -65,12 +65,12 @@
         </HBox>
         <HBox fx:id="buttonGridHBox" alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <VBox fx:id="buttonHBox">
-                <Button fx:id="levelStartButton" focusTraversable="false" mnemonicParsing="false" onAction="#onLevelStartButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Start">
+                <Button fx:id="levelStartButton" focusTraversable="false" mnemonicParsing="false" onAction="#onLevelStartButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../CSS/style.css" text="Start">
                     <font>
                         <Font size="28.0" />
                     </font>
                 </Button>
-                <Button fx:id="returnButton" focusTraversable="false" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../CSS/ui-style.css" text="Return">
+                <Button fx:id="returnButton" focusTraversable="false" mnemonicParsing="false" onAction="#onReturnButtonClicked" prefHeight="45.0" prefWidth="204.0" styleClass="Button" stylesheets="@../CSS/style.css" text="Return">
                     <font>
                         <Font size="28.0" />
                     </font>

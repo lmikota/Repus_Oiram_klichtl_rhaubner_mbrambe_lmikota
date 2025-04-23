@@ -1,7 +1,6 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application.GameplayApplication;
-import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +33,9 @@ public class EndScreenController implements Initializable {
         }
     }
 
+    /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
+
+    @FXML
     public void onStartMenuButtonClicked(ActionEvent actionEvent) {
         closeCurrentWindow(actionEvent);
         try {
@@ -42,10 +44,13 @@ public class EndScreenController implements Initializable {
             Scene scene = GameplayApplication.gameplayScene;
             scene.setRoot(newRoot);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error while loading the start-menu:" + e.getMessage());
         }
     }
 
+    /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
+
+    @FXML
     private void closeCurrentWindow(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentWindow.close();

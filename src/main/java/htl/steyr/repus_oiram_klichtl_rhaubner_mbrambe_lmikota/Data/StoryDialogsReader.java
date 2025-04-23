@@ -1,6 +1,7 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data;
 
 import com.google.gson.Gson;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,8 +13,10 @@ public class StoryDialogsReader {
     private int selectedLevelID;
 
     public StoryDialogsReader() {
-        this.selectedLevelID = 1; // Standardmäßig Level 1 setzen
+        this.selectedLevelID = 1;
     }
+
+    /* ------------------------------------------------ JSON Reader ------------------------------------------------- */
 
     public StoryDialogs readStoryDialogs() throws FileNotFoundException {
         File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/StoryDialogs.json");
@@ -29,9 +32,7 @@ public class StoryDialogsReader {
         return null;
     }
 
-    public int getSelectedLevelID() {
-        return selectedLevelID;
-    }
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------- */
 
     public void setSelectedLevelID(int selectedLevelID) {
         this.selectedLevelID = selectedLevelID;

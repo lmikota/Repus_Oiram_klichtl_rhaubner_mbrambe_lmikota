@@ -23,6 +23,8 @@ public class LocalUser {
         setHighscores(highscores);
     }
 
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------- */
+
     public String getLevel_1() {
         return level_1;
     }
@@ -78,6 +80,8 @@ public class LocalUser {
     public void setHighscores(HashMap<Integer, String> highscores) {
         this.highscores = highscores;
     }
+
+    /* ---------------------------------------------- Update Functions ---------------------------------------------- */
 
     public void updateHighscores(int level, String highscore) {
         if (getHighscores().get(level).equals("no")) {

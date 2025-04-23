@@ -1,14 +1,12 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.Objects;
@@ -23,7 +21,7 @@ public class VolumeSettingsController implements Initializable {
     @FXML
     private Parent menuOverlay;
 
-    MusicPlayer musicPlayer = MusicPlayer.getInstance();
+    private final MusicPlayer musicPlayer = MusicPlayer.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,29 +45,28 @@ public class VolumeSettingsController implements Initializable {
         });
     }
 
-    /* methode to help convert from a linear-percent-scale to dB */
+    /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
+
+    @FXML
+    public void onMenuExitButtonClicked() {
+        if (menuOverlay != null) {
+            menuOverlay.setVisible(false);
+        }
+    }
+
+    /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
+    @FXML
+    public void setMenuOverlay(Parent menuOverlay) {
+        this.menuOverlay = menuOverlay;
+    }
+
+    /* ---------------------------------------------- Helper Function ----------------------------------------------  */
+
     private float volumeToDecibels(float volumePercent) {
         if (volumePercent == 0.0f) {
             return -80.0f; /* completely shut */
         }
         /* dB = 20 * log10(volume) */
         return (float) (20.0 * Math.log10(volumePercent));
-    }
-
-    @FXML
-    public void setMenuOverlay(Parent menuOverlay) {
-        this.menuOverlay = menuOverlay;
-    }
-
-    @FXML
-    public void onMenuExitButtonClicked(ActionEvent actionEvent) {
-        if (menuOverlay != null) {
-            menuOverlay.setVisible(false);
-        }
-    }
-
-    public void onVolumeIconImageClicked(MouseEvent mouseEvent) {
-        // @TODO: finish later
-        musicPlayer.setVolume(0);
     }
 }

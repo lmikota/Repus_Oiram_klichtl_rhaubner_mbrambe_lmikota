@@ -3,22 +3,19 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class MapDataReader {
-    final String fileName = "src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/MapData.json";
-    private HashMap<Integer, MapData> mapHm;
+    public final String fileName = "src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/MapData.json";
+    private final HashMap<Integer, MapData> mapHm;
     HashMap<Integer, String> filePaths;
     HashMap<String, HashMap<Integer, Double[]>> enemies;
+
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------- */
 
     public MapDataReader() throws IOException {
         mapHm = new HashMap<>();
@@ -63,7 +60,7 @@ public class MapDataReader {
                     JsonArray array = enemyGroup.getAsJsonArray(key);
                     Double[] values = new Double[array.size()];
                     for (int i = 0; i < array.size(); i++) {
-                        values[i] = (Double) array.get(i).getAsDouble();
+                        values[i] = array.get(i).getAsDouble();
                     }
                     innerMap.put(intKey, values);
                 }
@@ -81,20 +78,7 @@ public class MapDataReader {
         return fileName;
     }
 
-
     public HashMap<Integer, MapData> getMapHm() {
         return mapHm;
-    }
-
-    public void setMapHm(HashMap<Integer, MapData> mapHm) {
-        this.mapHm = mapHm;
-    }
-
-    public HashMap<Integer, String> getFilePaths() {
-        return filePaths;
-    }
-
-    public void setFilePaths(HashMap<Integer, String> filePaths) {
-        this.filePaths = filePaths;
     }
 }

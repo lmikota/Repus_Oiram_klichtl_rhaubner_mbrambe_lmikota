@@ -10,6 +10,8 @@ public class Dialog {
         setDialog(dialog);
     }
 
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------  */
+
     public int getDialogID() {
         return dialogID;
     }

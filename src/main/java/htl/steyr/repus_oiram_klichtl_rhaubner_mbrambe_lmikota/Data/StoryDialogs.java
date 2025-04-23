@@ -12,6 +12,8 @@ public class StoryDialogs {
         setDialogs(dialogs);
     }
 
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------- */
+
     public int getLevelID() {
         return levelID;
     }

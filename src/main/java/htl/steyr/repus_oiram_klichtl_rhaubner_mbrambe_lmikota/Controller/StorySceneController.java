@@ -13,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -108,22 +107,6 @@ public class StorySceneController implements Initializable {
         }
     }
 
-    @FXML
-    public void handleKeyPress(KeyEvent keyEvent) {
-        /**
-         * @TO-Do:
-         * irgendwann fertig machen
-         */
-//        KeyCode key = keyEvent.getCode();
-//        System.out.println("Key pressed: " + key);
-//        if (key == KeyCode.SPACE) {
-//            if (count < storyDialogs.getDialogs().size() - 1) {
-//                count++;
-//                showDialog();
-//            }
-//        }
-    }
-
     /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
 
     @FXML
@@ -179,7 +162,7 @@ public class StorySceneController implements Initializable {
                         .divide(2)
         );
 
-        /* Positionierung des Dialog-Texts */
+        /* Positioning of the Dialog-Text */
         dialogText.translateXProperty().bind(
                 storySceneAnchorPane.widthProperty()
                         .subtract(dialogText.prefWidth(-1))
@@ -192,27 +175,27 @@ public class StorySceneController implements Initializable {
                         .divide(3)
         );
 
-        /* Return-Button: Links unten */
+        /* Return-Button: Bottom Left */
         returnButton.translateYProperty().bind(
                 storySceneAnchorPane.heightProperty().multiply(0.80)
         );
         returnButton.translateXProperty().bind(
-                storySceneAnchorPane.widthProperty().multiply(0.05) // 5% Abstand vom linken Rand
+                storySceneAnchorPane.widthProperty().multiply(0.05)
         );
 
-        /* Next-Dialog-Button: Zentriert unten */
+        /* Next-Dialog-Button: Bottom Center */
         nextDialogButton.translateYProperty().bind(
                 storySceneAnchorPane.heightProperty().multiply(0.80)
         );
 
-        /* Begin-Journey-Button: Rechts unten */
+        /* Begin-Journey-Button: Bottom Right */
         beginJourneyButton.translateYProperty().bind(
                 storySceneAnchorPane.heightProperty().multiply(0.80)
         );
         beginJourneyButton.translateXProperty().bind(
                 storySceneAnchorPane.widthProperty()
                         .subtract(beginJourneyButton.prefWidth(-1))
-                        .multiply(0.95) // 5% Abstand vom rechten Rand
+                        .multiply(0.95)
         );
     }
 
