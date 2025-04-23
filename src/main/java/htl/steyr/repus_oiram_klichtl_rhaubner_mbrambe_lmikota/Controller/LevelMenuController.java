@@ -5,7 +5,6 @@ import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescript
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LevelDescriptionsReader;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUser;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.LocalUserReader;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +21,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -80,15 +78,13 @@ public class LevelMenuController implements Initializable {
         levelMap.put(Level5_Icon, 5);
         levelMap.put(Level6_Icon, 6);
 
-        LocalUserReader localUserReader = new LocalUserReader();
         try {
-            localUser = localUserReader.readLocalUser();
+            localUser = LocalUserReader.readLocalUser();
 
             /* look if the user has unlocked the levels */
             if (localUser != null) {
                 for (int i = 1; i < 7; i++) {
-                    if (!localUser.getHighscores().get(i).equals("no")) { // wen größer als 2, dann steht nicht mehr "no" sondern eine zeit wie 01:00 in der json
-                        System.out.println("Halllllllo");
+                    if (!localUser.getHighscores().get(i).equals("no")) {
                         System.out.println(i);
                         System.out.println(localUser.getHighscores().get(i));
                         try (FileWriter wr = new FileWriter("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json")) {
@@ -117,7 +113,7 @@ public class LevelMenuController implements Initializable {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error while reading the local-user-data: " + e.getMessage());
         }
         applyLayoutBindings();
     }
@@ -125,7 +121,7 @@ public class LevelMenuController implements Initializable {
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
     @FXML
-    public void onLevelStartButtonClicked(ActionEvent actionEvent) {
+    public void onLevelStartButtonClicked() {
         if (selectedLevel > 0) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/story_scene-view.fxml"));
@@ -137,7 +133,7 @@ public class LevelMenuController implements Initializable {
                 Scene scene = returnButton.getScene();
                 scene.setRoot(newRoot);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.out.println("Error while loading the level: " + e.getMessage());
             }
         } else {
             System.out.println("No Level selected!");

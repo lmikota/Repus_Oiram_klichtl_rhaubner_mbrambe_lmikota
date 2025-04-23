@@ -21,7 +21,7 @@
                 <Text text="Game and Sound Volume" />
                 <HBox alignment="CENTER" spacing="10">
                     <children>
-                        <ImageView fx:id="volumeIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onVolumeIconImageClicked" pickOnBounds="true" />
+                        <ImageView fx:id="volumeIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" />
                         <Slider fx:id="volumeSlider" prefWidth="200.0" styleClass="volumeSlider" />
                     </children>
                 </HBox>

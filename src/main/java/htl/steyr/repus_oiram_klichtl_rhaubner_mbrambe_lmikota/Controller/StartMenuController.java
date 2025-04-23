@@ -2,7 +2,6 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +25,7 @@ public class StartMenuController {
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
     @FXML
-    public void onStartButtonClicked(ActionEvent actionEvent) {
+    public void onStartButtonClicked() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/FXML/level_menu-view.fxml"));
             Parent newRoot = loader.load();
@@ -41,7 +40,7 @@ public class StartMenuController {
     }
 
     @FXML
-    public void onMenuButtonClicked(MouseEvent mouseEvent) {
+    public void onMenuButtonClicked() {
         try {
             if (menuOverlay == null) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(
@@ -69,7 +68,7 @@ public class StartMenuController {
     }
 
     @FXML
-    public void onExitButtonClicked(ActionEvent actionEvent) {
+    public void onExitButtonClicked() {
         MusicPlayer.getInstance().stopMusic();
         Platform.exit();
     }

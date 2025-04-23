@@ -14,6 +14,8 @@ public class LevelDescription {
         setDifficulty(difficulty);
     }
 
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------  */
+
     public int getId() {
         return id;
     }

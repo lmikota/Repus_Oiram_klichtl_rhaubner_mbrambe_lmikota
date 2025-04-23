@@ -14,6 +14,8 @@ public class MusicPlayer {
     private FloatControl volumeControl;
     private float currentVolume = -10.0f;
 
+    /* ----------------------------------------------- Music Controls ----------------------------------------------- */
+
     public void playMusic(String filepath) {
         try {
             stopMusic();
@@ -58,12 +60,16 @@ public class MusicPlayer {
         }
     }
 
+    /* ---------------------------------------------- Getter & Setter ----------------------------------------------  */
+
     public void setVolume(float volume) {
         currentVolume = volume;
         if (volumeControl != null) {
             volumeControl.setValue(currentVolume);
         }
     }
+
+    /* ------------------------------------------------- Singleton -------------------------------------------------- */
 
     public static MusicPlayer getInstance() {
         if (instance == null) {

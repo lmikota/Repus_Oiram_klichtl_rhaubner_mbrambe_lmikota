@@ -11,6 +11,8 @@ public class LocalUserReader {
 
     private static final Gson gson = new Gson();
 
+    /* ------------------------------------------------ JSON Reading ------------------------------------------------ */
+
     public static LocalUser readLocalUser() throws IOException {
         File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LocalUser.json");
 
