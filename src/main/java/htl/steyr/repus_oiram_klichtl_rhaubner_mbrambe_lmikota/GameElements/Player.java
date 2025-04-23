@@ -128,9 +128,6 @@ public class Player implements Runnable {
             int blockX = (int) ((getPlayerImage().getX() + i) / getTileSize());
 
             if (blockX >= 0 && blockX < map[0].length) {
-                if(isItemBlock(map[blockYAbovePlayer][blockX]) || isItemBlock(map[blockY][blockX])) {
-
-                }else{
                     if (blockYAbovePlayer >= 0 && blockYAbovePlayer < map.length && isBlockSolid(map[blockYAbovePlayer][blockX])) {
                         isBlockOverIt = true;
                         break;
@@ -141,7 +138,6 @@ public class Player implements Runnable {
                         isBlockUnderIt = false;
                         isBlockOverIt = false;
                     }
-                }
             }
         }
 
@@ -183,7 +179,7 @@ public class Player implements Runnable {
 
             for (int y = topTileY; y <= bottomTileY; y++) {
                 if(isItemBlock(map[y][rightTileX])) {
-                    activatedItem(map[y][rightTileX]);
+                    activatedItem(map[y][rightTileX], map, y, rightTileX);
                 }else{
                     if (rightTileX < map[0].length && isBlockSolid(map[y][rightTileX])) {
                         if (rightTileX < map[0].length && isWinningBlock(map[y][rightTileX])) {
@@ -200,7 +196,7 @@ public class Player implements Runnable {
 
             for (int y = topTileY; y <= bottomTileY; y++) {
                 if(isItemBlock(map[y][leftTileX])) {
-                   activatedItem(map[y][leftTileX]);
+                   activatedItem(map[y][leftTileX], map, y, leftTileX);
                 }else{
                     if (leftTileX >= 0 && isBlockSolid(map[y][leftTileX])) {
                         return true;
@@ -220,16 +216,19 @@ public class Player implements Runnable {
         return block == -1 || block == -2 || block == -3;
     }
 
-    public void activatedItem(int item) {
+    public void activatedItem(int item, int[][] map, int posY, int posX) {
         switch (item) {
             case -1 -> {
                 superboots.activateBootsEffect();
+                map[posY][posX] = 0;
             }
             case -2 -> {
                 superTrank.activateTrankEffect();
+                map[posY][posX] = 0;
             }
             case -3 -> {
                 superUmhang.activateCapeEffect();
+                map[posY][posX] = 0;
             }
         }
     }
