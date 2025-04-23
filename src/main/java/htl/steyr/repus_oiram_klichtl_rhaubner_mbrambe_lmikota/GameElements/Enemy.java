@@ -20,11 +20,11 @@ public class Enemy{
 
     private boolean dead = false;
 
-    public Enemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player) {
+    public Enemy(Image enemyImage, int enemySize, int tileSize, int enemyMovementX, Player player, double xCord, double yCord) {
         setEnemySize(enemySize);
         setEnemyImage(enemyImage);
         setTileSize(tileSize);
-        setEnemySpawn(200,400);
+        setEnemySpawn(xCord,yCord);
         setEnemyMovementX(enemyMovementX);
         setOneMovementSite(getEnemyMovementX()/2);
         setPlayer(player);
@@ -87,7 +87,7 @@ public class Enemy{
         }
     }
 
-    public void setEnemySpawn(int x, int y) {
+    public void setEnemySpawn(double x, double y) {
         enemyY = y;
         enemyX = x;
         getEnemyImage().setX(x);

@@ -8,51 +8,53 @@ public class MusicPlayer {
 
     private static MusicPlayer instance;
 
-    private Clip clip;
+    private Clip musicClip;
+    private Clip soundClip;
+
     private FloatControl volumeControl;
     private float currentVolume = -10.0f;
 
-    private MusicPlayer() {
-        /* private constructor, helps to make it a singleton */
-    }
-
     public void playMusic(String filepath) {
         try {
+            stopMusic();
             URL soundUrl = Objects.requireNonNull(getClass().getResource(filepath));
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundUrl);
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
+            musicClip = AudioSystem.getClip();
+            musicClip.open(audioInputStream);
 
-            volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
             setVolume(currentVolume);
 
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            musicClip.start();
+            musicClip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
-            throw new RuntimeException("Fehler beim Abspielen: " + e.getMessage());
+            throw new RuntimeException("Error while playing: " + e.getMessage());
         }
     }
 
     public void playSound(String filepath) {
         try {
+            if (soundClip != null && soundClip.isRunning()) {
+                soundClip.stop();
+            }
             URL soundUrl = Objects.requireNonNull(getClass().getResource(filepath));
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundUrl);
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
+            soundClip = AudioSystem.getClip();
+            soundClip.open(audioInputStream);
 
-            volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            setVolume(currentVolume);
+            FloatControl soundVolumeControl = (FloatControl) soundClip.getControl(FloatControl.Type.MASTER_GAIN);
+            soundVolumeControl.setValue(currentVolume);
 
-            clip.start();
+            soundClip.start();
         } catch (Exception e) {
-            throw new RuntimeException("Fehler beim Abspielen: " + e.getMessage());
+            throw new RuntimeException("Error while playing: " + e.getMessage());
         }
     }
 
     public void stopMusic() {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-            clip.close();
+        if (musicClip != null && musicClip.isRunning()) {
+            musicClip.stop();
+            musicClip.close();
         }
     }
 

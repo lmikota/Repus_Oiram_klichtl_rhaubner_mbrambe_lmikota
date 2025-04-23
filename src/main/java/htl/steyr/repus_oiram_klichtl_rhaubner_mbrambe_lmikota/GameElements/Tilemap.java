@@ -1,10 +1,13 @@
 package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application.GameplayApplication;
+import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Data.MapDataReader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Objects;
 
 public class Tilemap {
@@ -14,6 +17,7 @@ public class Tilemap {
     private final double TILE_SIZE = SCREEN_HEIGHT / ROWS;
     private int cols;
     private int[][] tileMapPattern;
+    private MapDataReader reader;
     private Pane tyleMapPane;
     final String DIRT_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/3_dirtblock.png";
     final String GRASS_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/4_grassblock.png";
@@ -47,7 +51,13 @@ public class Tilemap {
 
     public void drawTileMap() {
         tyleMapPane = new Pane();
-
+        {
+            try {
+                reader = new MapDataReader();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < cols; col++) {
                 int tileType = tileMapPattern[row][col];
@@ -64,78 +74,76 @@ public class Tilemap {
                 switch (tileType) {
                     /**
                      * @ToDo
-                     * Item allignment is centered
+                     * (W)Rapper Klasse implementieren!!!!!!!
                      */
                     case -1:
                         break;
                     case 0:
                         break;
                     case 1:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getSTONE_DIRT_BLOCK()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(1)))));
                         break;
                     case 2:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getSTONE_DIRT_TRANSITION()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(2)))));
                         break;
                     case 3:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getDIRT_IMAGE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(3)))));
                         break;
                     case 4:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getGRASS_IMAGE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(4)))));
                         break;
                     case 5:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getFLOATING_GRASS_LEFT()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(5)))));
                         break;
                     case 6:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getFLOATING_GRASS_MIDDLE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(6)))));
                         break;
                     case 7:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getFLOATING_GRASS_RIGHT()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(7)))));
                         break;
                     case 187:
                         // invisible Border
                         break;
                     case 11:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(11)))));
                         break;
                     case 12:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_ONE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(12)))));
                         break;
                     case 13:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_ONE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(13)))));
                         break;
                     case 14:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_TWO()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(14)))));
                         break;
                     case 15:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_TWO()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(15)))));
                         break;
                     case 16:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_THREE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(16)))));
                         break;
                     case 17:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_THREE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(17)))));
                         break;
                     case 18:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_LEFT_FOUR()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(18)))));
                         break;
                     case 19:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTOWER_RIGHT_FOUR()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(19)))));
                         break;
                     case 20:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_LEFT_ONE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(20)))));
                         break;
                     case 21:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_RIGHT_ONE()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(21)))));
                         break;
                     case 22:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_LEFT_TWO()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(22)))));
                         break;
                     case 23:
-                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(getTREE_RIGHT_TWO()))));
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(23)))));
                         break;
                 }
-
-
                 tyleMapPane.getChildren().add(imageView);
             }
         }

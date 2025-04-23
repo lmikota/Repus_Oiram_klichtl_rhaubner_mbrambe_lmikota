@@ -17,9 +17,10 @@ public class GameMenuController {
 
     @FXML
     private StackPane volumeOverlayPane;
+    @FXML
     private Parent menuOverlay;
+    @FXML
     private Parent settingsOverlay;
-
 
     @FXML
     public void onPlayButtonClicked(ActionEvent actionEvent) {
@@ -30,10 +31,14 @@ public class GameMenuController {
 
     @FXML
     public void onRestartButtonClicked(ActionEvent actionEvent) {
+        GameplayApplication gameplayApplication = new GameplayApplication();
+
+            gameplayApplication.start(new Stage());
+            closeCurrentWindow(actionEvent);
     }
 
     @FXML
-    public void onOptionButtonClicked(ActionEvent ev) {
+    public void onOptionButtonClicked(ActionEvent actionEvent) {
         try {
             if (volumeOverlayPane == null)
                 throw new IllegalStateException("Pane ned da");
@@ -63,8 +68,6 @@ public class GameMenuController {
         }
     }
 
-
-
     @FXML
     public void onQuitButtonClicked(ActionEvent actionEvent) {
         try {
@@ -82,7 +85,9 @@ public class GameMenuController {
         this.menuOverlay = menuOverlay;
     }
 
-    public void setSettingsOverlay(Parent overlay) {
-        this.settingsOverlay = overlay;
+    @FXML
+    private void closeCurrentWindow(ActionEvent actionEvent) {
+        Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentWindow.close();
     }
 }
