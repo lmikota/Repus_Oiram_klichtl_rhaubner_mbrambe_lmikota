@@ -41,7 +41,7 @@
 /* ------------------------------------------------ Level Description ----------------------------------------------- */
 
 .LevelDescription {
-    -fx-font-family: MedievalSharp;
+    -fx-font-family: Georgia;
     -fx-font-size: 20px;
     /* shadow for a more medieval look */
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 4, 0.0, 2, 2);
@@ -52,13 +52,6 @@
 .menuButton {
     -fx-background-color: transparent;
 
-}
-
-/* -------------------------------------------------- Text Warning -------------------------------------------------- */
-
-.warning {
-    -fx-font-size: 40;
-    -fx-font-family: fantasy;
 }
 
 /* -------------------------------------------------- Volume Slider ------------------------------------------------- */
