@@ -19,7 +19,7 @@ public class SuperUmhang extends Item{
         setImagesize(capesize);
     }
 
-    public void setCapeEffect(Player pl){
+    public void activateCapeEffect(Player pl){
         pl.setCapeEffect(true);
         start = LocalTime.now();
     }
