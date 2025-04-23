@@ -18,7 +18,7 @@ public class SuperBoots extends Item{
         setImagesize(bootsize);
     }
 
-    public void activate(Player player) {
+    public void activateBootsEffect(Player player) {
         player.setJUMP_SPEED(-30);
         start = LocalTime.now();
     }

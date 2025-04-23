@@ -13,7 +13,7 @@ public class SuperTrank extends Item {
         setImagesize(tranksize);
     }
 
-    public void activateSuperTrank(Player player) {
+    public void activateTrankEffect(Player player) {
         player.setHp(player.getHp() + 1);
     }
 
