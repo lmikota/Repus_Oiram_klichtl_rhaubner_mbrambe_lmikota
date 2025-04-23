@@ -97,6 +97,7 @@ public class GameplayApplication extends Application {
             startTimer();
             addToRoot(gameLayer, bg1);
             addToRoot(gameLayer, bg2);
+
             displayTimer(tilemap, root);
             getBg2().setX(bg1.getImage().getWidth());
             addToRoot(gameLayer, tilemap.getTyleMapPane());
