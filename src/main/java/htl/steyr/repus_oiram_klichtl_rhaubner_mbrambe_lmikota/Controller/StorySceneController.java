@@ -50,7 +50,6 @@ public class StorySceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         StoryDialogsReader storyDialogsReader = new StoryDialogsReader();
         storyDialogsReader.setSelectedLevelID(selectedLevelID);
 
@@ -58,6 +57,10 @@ public class StorySceneController implements Initializable {
             storyDialogs = storyDialogsReader.readStoryDialogs();
 
             showDialog();
+
+            if (storyDialogs.getDialogs().size() <= 1) {
+                nextDialogButton.setDisable(true);
+            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException("StoryDialogs.json could not be found!");
         }
@@ -81,15 +84,16 @@ public class StorySceneController implements Initializable {
 
     @FXML
     public void onNextDialogButtonClicked() {
-        if (count < storyDialogs.getDialogs().size() - 1) {
-            count++;
+        if (nextDialogButton.isDisabled()) return;
 
-            // Setze den Text sofort zurück (verhindert Überlappung)
+        count++;
+
+        if (count < storyDialogs.getDialogs().size()) {
             dialogText.setText("");
-
-            // Starte die neue Animation
             showDialog();
-        } else {
+        }
+
+        if (count >= storyDialogs.getDialogs().size() - 1) {
             nextDialogButton.setDisable(true);
         }
     }
