@@ -123,8 +123,8 @@ public class GameplayApplication extends Application {
                     case "skyEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").size(); i++) {
                             SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
-                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
-                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[1] * tilemap.getTILE_SIZE());
                             addToRoot(gameLayer, skyEnemy.getEnemyImage());
                             new Thread(skyEnemy).start();
                         }
@@ -133,8 +133,8 @@ public class GameplayApplication extends Application {
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("jumpingEnemies").size(); i++) {
                             JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/sprungmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
-                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
-                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("jumpingEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
+                                    mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("jumpingEnemies").get(i)[1] * tilemap.getTILE_SIZE());
                             addToRoot(gameLayer, jumpingEnemy.getEnemyImage());
                             new Thread(jumpingEnemy).start();
                         }
@@ -176,7 +176,7 @@ public class GameplayApplication extends Application {
 
             AnimationTimer gameLoop = new AnimationTimer() {
                 public void handle(long now) {
-                    updateGame(tilemap.getTileMapPattern(), root, tilemap.SCREEN_WIDTH, tilemap, bg1, bg2);
+                    updateGame(tilemap.getTileMapPattern(), tilemap.SCREEN_WIDTH, tilemap, bg1, bg2);
                 }
             };
             gameLoop.start();
@@ -282,7 +282,7 @@ public class GameplayApplication extends Application {
         });
     }
 
-    private void updateGame(int[][] map, Pane root, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
+    private void updateGame(int[][] map, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
         switch (player.getHp()) {
             case 3:
@@ -302,12 +302,12 @@ public class GameplayApplication extends Application {
         }
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
-        moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
+        moveRoot(player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
         //cape.isactivateSuperCape(player);
     }
 
-    public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {
+    public void moveRoot(ImageView player, int screenWidth, double totalTileLength, double tileSize) {
         double playerScreenX = player.getX() - offsetX;
 
         if (playerScreenX > screenWidth * 0.75) {
