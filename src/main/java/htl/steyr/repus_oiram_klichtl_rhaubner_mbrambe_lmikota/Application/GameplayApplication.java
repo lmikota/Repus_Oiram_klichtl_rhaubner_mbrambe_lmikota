@@ -132,10 +132,11 @@ public class GameplayApplication extends Application {
 //            Thread skyEnemyThread = new Thread(skyEnemy);
 //            skyEnemyThread.start();
 
-            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
-            addToRoot(gameLayer, skyEnemy.getEnemyImage());
-            Thread skyEnemyThread = new Thread(skyEnemy);
-            skyEnemyThread.start();
+//            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player);
+//            addToRoot(gameLayer, skyEnemy.getEnemyImage());
+//            Thread skyEnemyThread = new Thread(skyEnemy);
+//            skyEnemyThread.start();
+
             for (String enemyType : mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().keySet()) {
                 switch (enemyType) {
                     case "floorEnemies":
@@ -144,7 +145,7 @@ public class GameplayApplication extends Application {
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
-                            addToRoot(root, floorEnemy.getEnemyImage());
+                            addToRoot(gameLayer, floorEnemy.getEnemyImage());
                             new Thread(floorEnemy).start();
                         }
                         break;
@@ -153,7 +154,7 @@ public class GameplayApplication extends Application {
                             SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
-                            addToRoot(root, skyEnemy.getEnemyImage());
+                            addToRoot(gameLayer, skyEnemy.getEnemyImage());
                             new Thread(skyEnemy).start();
                         }
                         break;
@@ -163,7 +164,7 @@ public class GameplayApplication extends Application {
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[1] * tilemap.getTILE_SIZE());
-                            addToRoot(root, jumpingEnemy.getEnemyImage());
+                            addToRoot(gameLayer, jumpingEnemy.getEnemyImage());
                             new Thread(jumpingEnemy).start();
                         }
                 }
