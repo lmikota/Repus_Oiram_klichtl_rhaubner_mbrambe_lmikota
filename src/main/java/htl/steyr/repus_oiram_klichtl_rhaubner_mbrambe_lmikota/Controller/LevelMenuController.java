@@ -129,14 +129,13 @@ public class LevelMenuController implements Initializable {
 
                 StorySceneController storySceneController = loader.getController();
                 storySceneController.setSelectedLevelID(getSelectedLevel());
+                storySceneController.initData();
 
                 Scene scene = returnButton.getScene();
                 scene.setRoot(newRoot);
             } catch (IOException e) {
-                System.out.println("Error while loading the level: " + e.getMessage());
+                System.out.println("Error loading level: " + e.getMessage());
             }
-        } else {
-            System.out.println("No Level selected!");
         }
     }
 

@@ -12,14 +12,16 @@ public class StoryDialogsReader {
     private final Gson gson = new Gson();
     private int selectedLevelID;
 
-    public StoryDialogsReader() {
-        this.selectedLevelID = 1;
-    }
+    public StoryDialogsReader() {}
 
     /* ------------------------------------------------ JSON Reader ------------------------------------------------- */
 
     public StoryDialogs readStoryDialogs() throws FileNotFoundException {
         File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/StoryDialogs.json");
+
+        if (file == null) {
+            throw new FileNotFoundException("StoryDialogs.json nicht gefunden!");
+        }
 
         Reader reader = new FileReader(file);
         StoryDialogs[] dialogs = gson.fromJson(reader, StoryDialogs[].class);

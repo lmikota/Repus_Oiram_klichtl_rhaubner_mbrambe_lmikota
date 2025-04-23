@@ -39,7 +39,7 @@ public class StorySceneController implements Initializable {
     public StoryDialogs storyDialogs;
 
     public int count = 0;
-    public int selectedLevelID = 1;
+    public int selectedLevelID;
 
     public Timeline currentTimeline;
 
@@ -49,20 +49,6 @@ public class StorySceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        StoryDialogsReader storyDialogsReader = new StoryDialogsReader();
-        storyDialogsReader.setSelectedLevelID(selectedLevelID);
-
-        try {
-            storyDialogs = storyDialogsReader.readStoryDialogs();
-
-            showDialog();
-
-            if (storyDialogs.getDialogs().size() <= 1) {
-                nextDialogButton.setDisable(true);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("StoryDialogs.json could not be found!");
-        }
         applyLayoutBindings();
     }
 
@@ -83,7 +69,9 @@ public class StorySceneController implements Initializable {
 
     @FXML
     public void onNextDialogButtonClicked() {
-        if (nextDialogButton.isDisabled()) return;
+        if (nextDialogButton.isDisabled()) {
+            return;
+        }
 
         count++;
 
@@ -197,6 +185,23 @@ public class StorySceneController implements Initializable {
                         .subtract(beginJourneyButton.prefWidth(-1))
                         .multiply(0.95)
         );
+    }
+
+    public void initData() {
+        StoryDialogsReader storyDialogsReader = new StoryDialogsReader();
+        storyDialogsReader.setSelectedLevelID(getSelectedLevelID());
+
+        try {
+            storyDialogs = storyDialogsReader.readStoryDialogs();
+
+            showDialog();
+
+            if (storyDialogs.getDialogs().size() <= 1) {
+                nextDialogButton.setDisable(true);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("StoryDialogs.json could not be found!");
+        }
     }
 
     /* ---------------------------------------------- Getter & Setter ----------------------------------------------  */

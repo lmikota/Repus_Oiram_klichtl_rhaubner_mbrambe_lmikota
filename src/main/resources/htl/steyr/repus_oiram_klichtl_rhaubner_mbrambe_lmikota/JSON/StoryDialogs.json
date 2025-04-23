@@ -12,31 +12,51 @@
   {
     "levelID": 2,
     "dialogs": [
-      { "dialogID": 1, "dialog": "" }
+      { "dialogID": 1, "dialog": "The woods whispered ancient secrets as Repus stepped into their shadows." },
+      { "dialogID": 2, "dialog": "Strange enchantments lingered in the air — Reswob’s curses, no doubt." },
+      { "dialogID": 3, "dialog": "Though the path twisted with illusions, Repus pressed on for Hcaep." },
+      { "dialogID": 4, "dialog": "Deep within the forest, a relic awaited—the key to lifting another barrier." },
+      { "dialogID": 5, "dialog": "The trees themselves seemed alive, watching, waiting... testing his resolve." }
     ]
   },
   {
     "levelID": 3,
     "dialogs": [
-      {"dialogID": 1, "dialog":  ""}
+      { "dialogID": 1, "dialog": "Icy winds howled across the peaks as Repus climbed higher, undeterred." },
+      { "dialogID": 2, "dialog": "The second relic lay beyond the lair of the Ice Wyrm, a beast of frost and fury." },
+      { "dialogID": 3, "dialog": "Memories of Hcaep gave him strength as the cold bit deep into his robes." },
+      { "dialogID": 4, "dialog": "Above the clouds, Reswob's influence grew stronger—but so did Repus' resolve." },
+      { "dialogID": 5, "dialog": "The silence of the summit held a warning... the final climb would be brutal." }
     ]
   },
   {
     "levelID": 4,
     "dialogs": [
-      {"dialogID": 1, "dialog":  ""}
+      { "dialogID": 1, "dialog": "The caverns roared with flame, echoing with the cries of ancient spirits." },
+      { "dialogID": 2, "dialog": "Repus searched through smoke and fire, drawn toward the third relic’s glow." },
+      { "dialogID": 3, "dialog": "Even the heat could not burn away his determination to save Hcaep." },
+      { "dialogID": 4, "dialog": "Reswob’s traps flared brighter here, but Repus would not be stopped." },
+      { "dialogID": 5, "dialog": "From the molten depths, a voice whispered promises of power... and lies." }
     ]
   },
   {
     "levelID": 5,
     "dialogs": [
-      {"dialogID": 1, "dialog":  ""}
+      { "dialogID": 1, "dialog": "Books floated weightlessly in the air, their pages whispering forgotten truths." },
+      { "dialogID": 2, "dialog": "Repus wandered through the maze of knowledge, searching for the fourth relic." },
+      { "dialogID": 3, "dialog": "Within these ancient texts, clues to Reswob’s defeat began to surface." },
+      { "dialogID": 4, "dialog": "The deeper he went, the more the library revealed about the fate of Hcaep." },
+      { "dialogID": 5, "dialog": "One passage spoke of a bond stronger than magic—love, unbreakable and true." }
     ]
   },
   {
     "levelID": 6,
     "dialogs": [
-      {"dialogID": 1, "dialog":  ""}
+      { "dialogID": 1, "dialog": "Dark towers loomed as Repus reached the heart of Reswob’s domain." },
+      { "dialogID": 2, "dialog": "With all five relics in hand, he stood ready to break the final seal." },
+      { "dialogID": 3, "dialog": "Within the fortress walls, Hcaep’s energy flickered—she was alive, but barely." },
+      { "dialogID": 4, "dialog": "The final battle was at hand. Repus would face the darkness and decide the fate of the realm." },
+      { "dialogID": 5, "dialog": "And so, the light of a thousand stars gathered behind him  ... as the gates to Reswob creaked open." }
     ]
   }
 ]
