@@ -16,7 +16,7 @@ public class StoryDialogsReader {
         this.selectedLevelID = 1;
     }
 
-    /* ------------------------------------------------ JSON Reading ------------------------------------------------ */
+    /* ------------------------------------------------ JSON Reader ------------------------------------------------- */
 
     public StoryDialogs readStoryDialogs() throws FileNotFoundException {
         File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/StoryDialogs.json");

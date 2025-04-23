@@ -13,7 +13,7 @@ public class LevelDescriptionsReader {
         setSelectedLevelID(selectedLevelID);
     }
 
-    /* ------------------------------------------------ JSON Reading ------------------------------------------------ */
+    /* ------------------------------------------------ JSON Reader ------------------------------------------------- */
 
     public LevelDescription readLevelDescription() throws IOException {
         File file = new File("src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/LevelDescriptions.json");

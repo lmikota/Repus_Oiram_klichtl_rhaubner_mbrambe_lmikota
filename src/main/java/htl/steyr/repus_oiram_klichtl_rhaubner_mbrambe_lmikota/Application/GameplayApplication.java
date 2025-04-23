@@ -101,7 +101,7 @@ public class GameplayApplication extends Application {
             getBg2().setX(bg1.getImage().getWidth());
             addToRoot(gameLayer, tilemap.getTyleMapPane());
 
-            gameplayScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/CSS/gameElementsStyle.css")).toExternalForm());
+            gameplayScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/CSS/style.css")).toExternalForm());
 
             player = new Player(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png"))), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE(), this);
             addToRoot(gameLayer, player.getPlayerImage());
