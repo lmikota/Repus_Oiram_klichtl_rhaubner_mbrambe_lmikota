@@ -72,11 +72,14 @@ public class Tilemap {
                 imageView.minWidth(TILE_SIZE);
 
                 switch (tileType) {
-                    /**
-                     * @ToDo
-                     * (W)Rapper Klasse implementieren!!!!!!!
-                     */
+                    case -3:
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(-3)))));
+                        break;
+                    case -2:
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(-2)))));
+                        break;
                     case -1:
+                        imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(-1)))));
                         break;
                     case 0:
                         break;

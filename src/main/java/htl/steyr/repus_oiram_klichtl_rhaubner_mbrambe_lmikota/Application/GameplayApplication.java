@@ -69,7 +69,6 @@ public class GameplayApplication extends Application {
     private Player player;
     private SuperUmhang cape;
     private SuperBoots boots;
-    private SuperTrank trank;
     private final Set<KeyCode> pressedKeys = new HashSet<>();
 
     public static void main(String[] args) {
@@ -107,14 +106,6 @@ public class GameplayApplication extends Application {
             player = new Player(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/Character_Repus.png"))), tilemap.getTILE_SIZE(), tilemap.getTILE_SIZE(), this);
             addToRoot(gameLayer, player.getPlayerImage());
 
-            trank = new SuperTrank(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/superTrank.png"))), tilemap.getTILE_SIZE() / 1.5);
-            addToRoot(gameLayer, trank.getImagetrank());
-
-            cape = new SuperUmhang(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperCape.png"))), tilemap.getTILE_SIZE() / 1.5);
-            addToRoot(gameLayer, cape.getImagecape());
-
-            boots = new SuperBoots(player, new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/Items/SuperBoots.png"))), tilemap.getTILE_SIZE() / 1.5);
-            addToRoot(gameLayer, boots.getSuperboots());
 
 //            FloorEnemy gegner = new FloorEnemy(new Image(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png")), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player, mapDataReader.getMapHm().get(getSelectedLevel()).getMapData());
 //            addToRoot(gameLayer, gegner.getEnemyImage());
@@ -160,7 +151,7 @@ public class GameplayApplication extends Application {
                         }
                         break;
                     case "jumpingEnemies":
-                        for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").size(); i++) {
+                        for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("jumpingEnemies").size(); i++) {
                             JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/sprungmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(), 40, player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
@@ -331,8 +322,7 @@ public class GameplayApplication extends Application {
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(root, player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
-        cape.isactivateSuperCape(player);
-        boots.bootsactivecheck(player);
+        //cape.isactivateSuperCape(player);
     }
 
     public void moveRoot(Pane root, ImageView player, int screenWidth, double totalTileLength, double tileSize) {
