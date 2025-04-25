@@ -42,7 +42,6 @@ public class Tilemap {
     final String TREE_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumLinks2.png";
 
     public static HashMap<Point, ImageView> items = new HashMap<>();
-    private SuperTrank superTrank;
 
     public Tilemap(int[][] tileMapPattern) {
         setTileMapPattern(tileMapPattern);
@@ -151,7 +150,6 @@ public class Tilemap {
                 if (tileType < 0) {
                     Point pointKey = new Point(row, col);
                     System.out.println("Item bei" + pointKey);
-
                     items.put(pointKey, imageView);
                 }
                 getTyleMapPane().getChildren().add(imageView);

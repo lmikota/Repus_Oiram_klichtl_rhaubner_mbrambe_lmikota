@@ -33,9 +33,9 @@ public class Player implements Runnable {
 
     private boolean dead = false;
 
-    SuperBoots superboots = new SuperBoots(this);
-    SuperTrank superTrank = new SuperTrank(this);
-    SuperUmhang superUmhang = new SuperUmhang(this);
+    public SuperBoots superboots = new SuperBoots(this);
+    public SuperTrank superTrank = new SuperTrank(this);
+    public SuperUmhang superUmhang = new SuperUmhang(this);
 
     private GameplayApplication gameplayApplication;
 

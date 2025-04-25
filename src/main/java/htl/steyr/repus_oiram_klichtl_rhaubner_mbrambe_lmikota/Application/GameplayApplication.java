@@ -83,7 +83,6 @@ public class GameplayApplication extends Application {
          * Zuerst Projektmanagement usw. AP, Levels Bauen, Robin oder Marcel unterstützen bei Items/Gegner
          */
         try {
-
             mainContainer = new StackPane();
             gameLayer = new Pane();
             overlayLayer = new StackPane();
@@ -308,7 +307,7 @@ public class GameplayApplication extends Application {
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
-        //cape.isactivateSuperCape(player);
+        //checkActiveItems();
     }
 
     public void moveRoot(ImageView player, int screenWidth, double totalTileLength, double tileSize) {
@@ -326,6 +325,7 @@ public class GameplayApplication extends Application {
         heart3.setTranslateX(offsetX);
         heart2.setTranslateX(offsetX);
         heart1.setTranslateX(offsetX);
+        checkActiveItems();
     }
 
     public void addToRoot(Pane root, Node node) {
@@ -392,6 +392,15 @@ public class GameplayApplication extends Application {
 
         getTimerTimeline().setCycleCount(Timeline.INDEFINITE);
         getTimerTimeline().play();
+    }
+
+    public void checkActiveItems(){
+        if(player.superboots.isActive()){
+            player.superboots.bootsactivecheck();
+        }
+        if(player.superUmhang.isActive()){
+            player.superUmhang.isactivateSuperCape();
+        }
     }
 
     public void stopTimer() {

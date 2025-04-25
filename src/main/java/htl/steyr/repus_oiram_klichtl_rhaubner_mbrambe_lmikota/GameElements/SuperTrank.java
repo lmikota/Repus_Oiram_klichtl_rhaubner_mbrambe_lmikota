@@ -13,8 +13,6 @@ public class SuperTrank extends Item {
 
     public void activateTrankEffect() {
         getPlayer().setHp(getPlayer().getHp() + 1);
-        System.out.println("Super-Trank activated + 1 live");
-        System.out.println(getPlayer().getHp());
     }
 
     public Player getPlayer() {
