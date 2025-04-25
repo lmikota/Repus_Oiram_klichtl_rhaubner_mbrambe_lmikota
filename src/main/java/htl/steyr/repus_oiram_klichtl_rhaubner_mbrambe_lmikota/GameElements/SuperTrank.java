@@ -12,7 +12,10 @@ public class SuperTrank extends Item {
     }
 
     public void activateTrankEffect() {
-        getPlayer().setHp(getPlayer().getHp() + 1);
+        if(getPlayer().getHp() < 3){
+            getPlayer().setHp(getPlayer().getHp() + 1);
+            System.out.println(getPlayer().getHp() + ": das sind die leben");
+        }
     }
 
     public Player getPlayer() {

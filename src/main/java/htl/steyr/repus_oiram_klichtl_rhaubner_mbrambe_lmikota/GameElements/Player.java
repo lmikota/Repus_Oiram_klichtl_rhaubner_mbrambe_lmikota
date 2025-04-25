@@ -180,7 +180,7 @@ public class Player implements Runnable {
 
             for (int y = topTileY; y <= bottomTileY; y++) {
                 if(isItemBlock(map[y][rightTileX])) {
-                    activatedItem(map[y][rightTileX], map, y, rightTileX);
+                    activatedItem(map[y][rightTileX], y, rightTileX);
                 }else{
                     if (rightTileX < map[0].length && isBlockSolid(map[y][rightTileX])) {
                         if (rightTileX < map[0].length && isWinningBlock(map[y][rightTileX])) {
@@ -197,7 +197,7 @@ public class Player implements Runnable {
 
             for (int y = topTileY; y <= bottomTileY; y++) {
                 if(isItemBlock(map[y][leftTileX])) {
-                    activatedItem(map[y][leftTileX], map, y, leftTileX);
+                    activatedItem(map[y][leftTileX], y, leftTileX);
                 }else{
                     if (leftTileX >= 0 && isBlockSolid(map[y][leftTileX])) {
                         return true;
@@ -217,24 +217,19 @@ public class Player implements Runnable {
         return block == -1 || block == -2 || block == -3;
     }
 
-    public void activatedItem(int item, int[][] map, int posX, int posY) {
+    public void activatedItem(int item, int posX, int posY) {
         Point itemKey = new Point(posX, posY);
 
-        switch (item) {
-            case -1 -> {
-                superboots.activateBootsEffect();
-                System.out.println("x: " + posX + " y: " + posY);
-                System.out.println(Tilemap.items.get(itemKey));
-                Tilemap.items.get(itemKey).setVisible(false); //zeile 226
+        if(Tilemap.items.get(itemKey).isVisible()) {
+            switch (item) {
+                case -1 -> superboots.activateBootsEffect();
+                case -2 -> {
+                    superTrank.activateTrankEffect();
+                    getGameplayApplication().setHeartImagesBasedOnHp();
+                }
+                case -3 -> superUmhang.activateCapeEffect();
             }
-            case -2 -> {
-                superTrank.activateTrankEffect();
-                Tilemap.items.get(itemKey).setVisible(false);
-            }
-            case -3 -> {
-                superUmhang.activateCapeEffect();
-                Tilemap.items.get(itemKey).setVisible(false);
-            }
+            Tilemap.items.get(itemKey).setVisible(false);
         }
     }
 
