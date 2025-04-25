@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
+import java.awt.*;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Set;
@@ -128,16 +129,16 @@ public class Player implements Runnable {
             int blockX = (int) ((getPlayerImage().getX() + i) / getTileSize());
 
             if (blockX >= 0 && blockX < map[0].length) {
-                    if (blockYAbovePlayer >= 0 && blockYAbovePlayer < map.length && isBlockSolid(map[blockYAbovePlayer][blockX])) {
-                        isBlockOverIt = true;
-                        break;
-                    } else if (blockY >= 0 && blockY < map.length && isBlockSolid(map[blockY][blockX])) {
-                        isBlockUnderIt = true;
-                        break;
-                    } else {
-                        isBlockUnderIt = false;
-                        isBlockOverIt = false;
-                    }
+                if (blockYAbovePlayer >= 0 && blockYAbovePlayer < map.length && isBlockSolid(map[blockYAbovePlayer][blockX])) {
+                    isBlockOverIt = true;
+                    break;
+                } else if (blockY >= 0 && blockY < map.length && isBlockSolid(map[blockY][blockX])) {
+                    isBlockUnderIt = true;
+                    break;
+                } else {
+                    isBlockUnderIt = false;
+                    isBlockOverIt = false;
+                }
             }
         }
 
@@ -196,7 +197,7 @@ public class Player implements Runnable {
 
             for (int y = topTileY; y <= bottomTileY; y++) {
                 if(isItemBlock(map[y][leftTileX])) {
-                   activatedItem(map[y][leftTileX], map, y, leftTileX);
+                    activatedItem(map[y][leftTileX], map, y, leftTileX);
                 }else{
                     if (leftTileX >= 0 && isBlockSolid(map[y][leftTileX])) {
                         return true;
@@ -216,19 +217,23 @@ public class Player implements Runnable {
         return block == -1 || block == -2 || block == -3;
     }
 
-    public void activatedItem(int item, int[][] map, int posY, int posX) {
+    public void activatedItem(int item, int[][] map, int posX, int posY) {
+        Point itemKey = new Point(posX, posY);
+
         switch (item) {
             case -1 -> {
                 superboots.activateBootsEffect();
-                map[posY][posX] = 0;
+                System.out.println("x: " + posX + " y: " + posY);
+                System.out.println(Tilemap.items.get(itemKey));
+                Tilemap.items.get(itemKey).setVisible(false); //zeile 226
             }
             case -2 -> {
                 superTrank.activateTrankEffect();
-                map[posY][posX] = 0;
+                Tilemap.items.get(itemKey).setVisible(false);
             }
             case -3 -> {
                 superUmhang.activateCapeEffect();
-                map[posY][posX] = 0;
+                Tilemap.items.get(itemKey).setVisible(false);
             }
         }
     }
