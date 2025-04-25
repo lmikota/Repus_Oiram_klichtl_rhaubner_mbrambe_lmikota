@@ -41,9 +41,7 @@ public class Tilemap {
     final String TREE_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/bauLlinks1.png";
     final String TREE_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumLinks2.png";
 
-    public static HashMap<int[], ImageView> items = new HashMap<>();
-    private int cords[];
-
+    public static HashMap<Point, ImageView> items = new HashMap<>();
     private SuperTrank superTrank;
 
     public Tilemap(int[][] tileMapPattern) {
@@ -151,8 +149,10 @@ public class Tilemap {
                         break;
                 }
                 if (tileType < 0) {
-                    cords = new int[]{row, col};
-                    items.put(cords, imageView);
+                    Point pointKey = new Point(row, col);
+                    System.out.println("Item bei" + pointKey);
+
+                    items.put(pointKey, imageView);
                 }
                 getTyleMapPane().getChildren().add(imageView);
             }
