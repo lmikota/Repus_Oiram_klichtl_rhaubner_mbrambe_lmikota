@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Tilemap {
@@ -40,6 +41,8 @@ public class Tilemap {
     final String TREE_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/bauLlinks1.png";
     final String TREE_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumLinks2.png";
 
+    public static HashMap<int[], ImageView> items = new HashMap<>();
+    private int cords[];
 
     private SuperTrank superTrank;
 
@@ -147,7 +150,11 @@ public class Tilemap {
                         imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(reader.getMapHm().get(GameplayApplication.getSelectedLevel()).getFilePaths().get(23)))));
                         break;
                 }
-                tyleMapPane.getChildren().add(imageView);
+                if (tileType < 0) {
+                    cords = new int[]{row, col};
+                    items.put(cords, imageView);
+                }
+                getTyleMapPane().getChildren().add(imageView);
             }
         }
     }

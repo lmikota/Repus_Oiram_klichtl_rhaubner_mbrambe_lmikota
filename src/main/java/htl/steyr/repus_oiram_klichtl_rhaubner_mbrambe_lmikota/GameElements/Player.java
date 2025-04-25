@@ -217,18 +217,20 @@ public class Player implements Runnable {
     }
 
     public void activatedItem(int item, int[][] map, int posY, int posX) {
+        int cords[] = {posX,posY};
         switch (item) {
             case -1 -> {
                 superboots.activateBootsEffect();
-                map[posY][posX] = 0;
+                System.out.println(Tilemap.items.get(new int[]{21,15}));
+               Tilemap.items.get(cords).setVisible(false);
             }
             case -2 -> {
                 superTrank.activateTrankEffect();
-                map[posY][posX] = 0;
+                Tilemap.items.get(cords).setVisible(false);
             }
             case -3 -> {
                 superUmhang.activateCapeEffect();
-                map[posY][posX] = 0;
+                Tilemap.items.get(cords).setVisible(false);
             }
         }
     }
