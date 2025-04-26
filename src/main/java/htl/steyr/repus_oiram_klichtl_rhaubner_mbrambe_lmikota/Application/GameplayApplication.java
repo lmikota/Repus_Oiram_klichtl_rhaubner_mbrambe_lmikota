@@ -112,7 +112,7 @@ public class GameplayApplication extends Application {
                 switch (enemyType) {
                     case "floorEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").size(); i++) {
-                            FloorEnemy floorEnemy = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/floorEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
+                            FloorEnemy floorEnemy = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/flyEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[2], player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
@@ -123,7 +123,7 @@ public class GameplayApplication extends Application {
                         break;
                     case "skyEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").size(); i++) {
-                            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/flyEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
+                            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/floorEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[2], player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[1] * tilemap.getTILE_SIZE());
