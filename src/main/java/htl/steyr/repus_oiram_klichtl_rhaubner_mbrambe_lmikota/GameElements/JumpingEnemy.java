@@ -10,12 +10,12 @@ public class JumpingEnemy extends Enemy implements Runnable {
     private int map[][];
     private double enemyVelY = 0;
     private boolean isBlockUnderIt = false;
-    private double enemyGravity = 0.4;
+    private double enemyGravity = 0.5;
 
     private LocalTime lastJump;
 
     private boolean isJumping = false;
-    private int jumpSpeed = -24;
+    private int jumpSpeed = -10;
 
     public JumpingEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, int map[][], double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
@@ -34,7 +34,7 @@ public class JumpingEnemy extends Enemy implements Runnable {
                         return;
                     }
 
-                    Thread.sleep(20);
+                    Thread.sleep(15);
                     setEnemyX(getEnemyX()+2);
 
                     Platform.runLater(() -> {
@@ -58,7 +58,7 @@ public class JumpingEnemy extends Enemy implements Runnable {
                         return;
                     }
 
-                    Thread.sleep(20);
+                    Thread.sleep(15);
                     setEnemyX(getEnemyX()-2);
 
                     Platform.runLater(() -> {
