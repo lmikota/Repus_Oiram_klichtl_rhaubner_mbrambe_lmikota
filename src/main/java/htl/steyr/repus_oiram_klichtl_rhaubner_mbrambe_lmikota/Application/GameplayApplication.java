@@ -83,7 +83,6 @@ public class GameplayApplication extends Application {
          * Zuerst Projektmanagement usw. AP, Levels Bauen, Robin oder Marcel unterstützen bei Items/Gegner
          */
         try {
-
             mainContainer = new StackPane();
             gameLayer = new Pane();
             overlayLayer = new StackPane();
@@ -113,7 +112,7 @@ public class GameplayApplication extends Application {
                 switch (enemyType) {
                     case "floorEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").size(); i++) {
-                            FloorEnemy floorEnemy = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/ghost.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
+                            FloorEnemy floorEnemy = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/floorEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[2], player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
@@ -124,7 +123,7 @@ public class GameplayApplication extends Application {
                         break;
                     case "skyEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").size(); i++) {
-                            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/bodenmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
+                            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/flyEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[2], player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[1] * tilemap.getTILE_SIZE());
@@ -134,7 +133,7 @@ public class GameplayApplication extends Application {
                         break;
                     case "jumpingEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("jumpingEnemies").size(); i++) {
-                            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/sprungmonster.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
+                            JumpingEnemy jumpingEnemy = new JumpingEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/Creatures/jumpingEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("jumpingEnemies").get(i)[2], player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("jumpingEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
@@ -229,7 +228,6 @@ public class GameplayApplication extends Application {
         }
     }
 
-
     private void closeWindow() {
         Stage stage = (Stage) gameplayScene.getWindow();
         stage.close();
@@ -288,27 +286,11 @@ public class GameplayApplication extends Application {
 
     private void updateGame(int[][] map, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
-        switch (player.getHp()) {
-            case 3:
-                break;
-            case 2:
-                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
-                break;
-            case 1:
-                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
-                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
-                break;
-            case 0:
-                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
-                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
-                heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
-                break;
-        }
         player.playerMovementX(pressedKeys, map);
         player.playerMovementY(map, pressedKeys, GRAVITY);
         moveRoot(player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE());
         repeatBackground(bg1, bg2, offsetX);
-        //cape.isactivateSuperCape(player);
+        checkActiveItems();
     }
 
     public void moveRoot(ImageView player, int screenWidth, double totalTileLength, double tileSize) {
@@ -326,6 +308,7 @@ public class GameplayApplication extends Application {
         heart3.setTranslateX(offsetX);
         heart2.setTranslateX(offsetX);
         heart1.setTranslateX(offsetX);
+        checkActiveItems();
     }
 
     public void addToRoot(Pane root, Node node) {
@@ -353,6 +336,31 @@ public class GameplayApplication extends Application {
 
         if (bg2.getX() >= offsetX + bgWidth) {
             bg2.setX(bg1.getX() - bgWidth);
+        }
+    }
+
+    public void setHeartImagesBasedOnHp(){
+        switch (player.getHp()) {
+            case 3:
+                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+                heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+                break;
+            case 2:
+                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+                heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+                break;
+            case 1:
+                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/fullHeart.png"))));
+                break;
+            case 0:
+                heart3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                heart1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/GameElements/emptyHeart.png"))));
+                break;
         }
     }
 
@@ -392,6 +400,15 @@ public class GameplayApplication extends Application {
 
         getTimerTimeline().setCycleCount(Timeline.INDEFINITE);
         getTimerTimeline().play();
+    }
+
+    public void checkActiveItems(){
+        if(player.superboots.isActive()){
+            player.superboots.bootsactivecheck();
+        }
+        if(player.superUmhang.isActive()){
+            player.superUmhang.isactivateSuperCape();
+        }
     }
 
     public void stopTimer() {

@@ -7,7 +7,7 @@ public class FloorEnemy extends Enemy implements Runnable {
     private int map[][];
     private int enemyVelY = 0;
     private boolean isBlockUnderIt;
-    private double enemyGravity = 4;
+    private double enemyGravity = 0.5;
 
     public FloorEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, int map[][], double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);

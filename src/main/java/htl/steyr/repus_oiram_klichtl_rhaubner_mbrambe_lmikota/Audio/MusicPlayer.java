@@ -30,7 +30,7 @@ public class MusicPlayer {
             musicClip.start();
             musicClip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
-            throw new RuntimeException("Error while playing: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -49,7 +49,7 @@ public class MusicPlayer {
 
             soundClip.start();
         } catch (Exception e) {
-            throw new RuntimeException("Error while playing: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 

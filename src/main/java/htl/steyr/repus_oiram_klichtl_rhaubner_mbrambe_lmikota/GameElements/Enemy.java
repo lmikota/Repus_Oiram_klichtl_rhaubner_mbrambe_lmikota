@@ -74,7 +74,7 @@ public class Enemy{
     public void onEnemyHitsPlayer(){
         if(!playerTouching){
             getPlayer().setHp(getPlayer().getHp()-1);
-            System.out.println("1 leben verloren");
+            getPlayer().getGameplayApplication().setHeartImagesBasedOnHp();
             if(getPlayer().getHp() == 0){
                 System.out.println("kein leben mehr");
                 getPlayer().onPlayerDead();
