@@ -13,15 +13,39 @@ public class JumpingEnemy extends Enemy implements Runnable {
     private double enemyGravity = 0.5;
 
     private LocalTime lastJump;
-
-    private boolean isJumping = false;
     private int jumpSpeed = -10;
+
+    /**
+     * JumpingEnemy inherits from the Enemy class.
+     * This enemy jumps randomly upwards and, like the FloorEnemy,
+     * is pulled to the ground.
+     *
+     * @param enemyImage
+     * @param enemySize
+     * @param tileSize
+     * @param enemyMovementX
+     * @param player
+     * @param map
+     * @param xCord
+     * @param yCord
+     */
 
     public JumpingEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, int map[][], double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
         this.map = map;
         lastJump = LocalTime.now();
     }
+
+    /**
+     * This run function simulates the movement of the enemy.
+     * The enemy moves as long as it is alive or as long as
+     * the isDead variable is false.
+     * The two for loops simulate movement to the left
+     * and movement to the right.
+     * In each iteration of the for loop, the checkPlayerHitBox()
+     * function is executed to check if the player touches the enemy.
+     * The gravityOnEnemy() function simulates gravity and the enemy's random jumping.
+     */
 
     @Override
     public void run() {
@@ -80,6 +104,11 @@ public class JumpingEnemy extends Enemy implements Runnable {
             }
         }
     }
+
+    /**
+     * This method checks if there is a solid box beneath the enemy.
+     * Additionally, it is responsible for making the enemy jump upwards.
+     */
 
     public void gravityOnEnemy(){
         LocalTime now = LocalTime.now();

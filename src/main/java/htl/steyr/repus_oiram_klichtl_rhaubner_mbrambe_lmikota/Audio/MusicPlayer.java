@@ -16,6 +16,11 @@ public class MusicPlayer {
 
     /* ----------------------------------------------- Music Controls ----------------------------------------------- */
 
+    /**
+     * In this Methode, the music in the String of the filepath gets played endlessly.
+     *
+     * @param filepath the fiepath to the music
+     */
     public void playMusic(String filepath) {
         try {
             stopMusic();
@@ -34,6 +39,11 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * In this Methode, the sound in the String of the filepath gets played once.
+     *
+     * @param filepath the fiepath to the sound
+     */
     public void playSound(String filepath) {
         try {
             if (soundClip != null && soundClip.isRunning()) {
@@ -53,6 +63,9 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * In this Methode, the music and sounds playing get stopped.
+     */
     public void stopMusic() {
         if (musicClip != null && musicClip.isRunning()) {
             musicClip.stop();
@@ -71,6 +84,10 @@ public class MusicPlayer {
 
     /* ------------------------------------------------- Singleton -------------------------------------------------- */
 
+    /**
+     * In this Methode, it is getting created a Singleton instance of the MusicPlayer.
+     * This helps with more than one Class trying to get an Instance of the MusicPlayer Class.
+     */
     public static MusicPlayer getInstance() {
         if (instance == null) {
             instance = new MusicPlayer();

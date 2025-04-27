@@ -9,10 +9,36 @@ public class FloorEnemy extends Enemy implements Runnable {
     private boolean isBlockUnderIt;
     private double enemyGravity = 0.5;
 
+    /**
+     * FloorEnemy inherits from the Enemy class.
+     * This enemy moves left and right on the ground
+     * and can also fall off platforms.
+     *
+     * @param enemyImage
+     * @param enemySize
+     * @param tileSize
+     * @param enemyMovementX
+     * @param player
+     * @param map
+     * @param xCord
+     * @param yCord
+     */
+
     public FloorEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, int map[][], double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
-        this.map = map;
+        setMap(map);
     }
+
+    /**
+     * This run function simulates the movement of the enemy.
+     * The enemy moves as long as it is alive or as long as
+     * the isDead variable is false.
+     * The two for loops simulate movement to the left
+     * and movement to the right.
+     * In each iteration of the for loop, the checkPlayerHitBox()
+     * function is executed to check if the player touches the enemy.
+     * The gravityOnEnemy() function ensures the enemy is pulled to the ground.
+     */
 
     @Override
     public void run() {
@@ -72,6 +98,12 @@ public class FloorEnemy extends Enemy implements Runnable {
         }
     }
 
+    /**
+     * The enemy is pulled to the ground like the player.
+     * It checks whether the box beneath the enemy is solid ground.
+     * If not, a gravitational force pulls the enemy downward.
+     */
+
     public void gravityOnEnemy(){
         isBlockUnderIt = false;
 
@@ -99,6 +131,13 @@ public class FloorEnemy extends Enemy implements Runnable {
             setEnemyY(newYPosition);
         }
     }
+
+    /**
+     * All blocks in the map that are defined as solid ground.
+     *
+     * @param block
+     * @return
+     */
 
     public boolean isBlockSolid(int block) {
         return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 ;

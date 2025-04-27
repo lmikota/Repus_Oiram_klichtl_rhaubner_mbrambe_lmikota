@@ -24,6 +24,9 @@ public class StartMenuController {
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
+    /**
+     * In this Methode, the level-menu gets loaded in the current scene.
+     */
     @FXML
     public void onStartButtonClicked() {
         try {
@@ -39,6 +42,9 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * In this Methode, the volumeSettings get displayed on the current scene.
+     */
     @FXML
     public void onMenuButtonClicked() {
         try {
@@ -67,6 +73,9 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * In this Methode, the music gets stopped and the Platform is exited closing the game.
+     */
     @FXML
     public void onExitButtonClicked() {
         MusicPlayer.getInstance().stopMusic();

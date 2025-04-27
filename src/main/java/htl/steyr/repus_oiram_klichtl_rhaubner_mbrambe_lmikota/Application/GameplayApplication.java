@@ -77,11 +77,6 @@ public class GameplayApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        /**
-         * @ToDo
-         * Background je nach Level matchen und ALLE 3 Hintergründe implementieren (erst wenn der Rest fertig ist, weil des ned elementar was am game ändert).
-         * Zuerst Projektmanagement usw. AP, Levels Bauen, Robin oder Marcel unterstützen bei Items/Gegner
-         */
         try {
             mainContainer = new StackPane();
             gameLayer = new Pane();
@@ -112,7 +107,7 @@ public class GameplayApplication extends Application {
                 switch (enemyType) {
                     case "floorEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").size(); i++) {
-                            FloorEnemy floorEnemy = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/floorEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
+                            FloorEnemy floorEnemy = new FloorEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/flyEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[2], player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getMapData(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("floorEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
@@ -123,7 +118,7 @@ public class GameplayApplication extends Application {
                         break;
                     case "skyEnemies":
                         for (int i = 1; i <= mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").size(); i++) {
-                            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/flyEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
+                            SkyEnemy skyEnemy = new SkyEnemy(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/floorEnemy.png"))), (int) tilemap.getTILE_SIZE(), (int) tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[2], player,
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[0] * tilemap.getTILE_SIZE(),
                                     mapDataReader.getMapHm().get(getSelectedLevel()).getEnemies().get("skyEnemies").get(i)[1] * tilemap.getTILE_SIZE());
@@ -228,23 +223,14 @@ public class GameplayApplication extends Application {
         }
     }
 
-    private void closeWindow() {
-        Stage stage = (Stage) gameplayScene.getWindow();
-        stage.close();
-    }
-
     public void onPlayerLoseLevel() {
         stopTimer();
         levelWon = false;
         gameplayScene.setOnKeyPressed(null);
         gameplayScene.setOnKeyReleased(null);
         loadEndScreen();
-        //closeWindow();
     }
 
-    /**
-     * @ToDo winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
-     */
     public void onPlayerWinLevel() {
         stopTimer();
         Gson gson = new Gson();
@@ -258,7 +244,6 @@ public class GameplayApplication extends Application {
         loadEndScreen();
         gameplayScene.setOnKeyPressed(null);
         gameplayScene.setOnKeyReleased(null);
-        // closeWindow();
     }
 
     private void loadEndScreen() {
@@ -284,6 +269,21 @@ public class GameplayApplication extends Application {
         });
     }
 
+    /**
+     * This function is continuously executed by the computer and enables gameplay.
+     * player.checkPlayerLegalHeight(); -> Checks if the player has not fallen into the void.
+     * player.playerMovementX(pressedKeys, map); -> Responsible for the player's left and right movement.
+     * player.playerMovementY(map, pressedKeys, GRAVITY); -> Handles the player's vertical movement (jumping and falling).
+     * moveRoot(player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE()); -> Moves the root to display the new section of the level.
+     * repeatBackground(bg1, bg2, offsetX); -> Repeats the background image.
+     * checkActiveItems(); -> Checks for active player items and verifies when they expire.
+     *
+     * @param map
+     * @param screenWidth
+     * @param tilemap
+     * @param bg1
+     * @param bg2
+     */
     private void updateGame(int[][] map, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
         player.playerMovementX(pressedKeys, map);
@@ -292,6 +292,16 @@ public class GameplayApplication extends Application {
         repeatBackground(bg1, bg2, offsetX);
         checkActiveItems();
     }
+
+    /**
+     * Responsible for shifting the game or level when the player moves too far off-screen,
+     * ensuring the relevant part of the level where the player is located stays in focus.
+     *
+     * @param player
+     * @param screenWidth
+     * @param totalTileLength
+     * @param tileSize
+     */
 
     public void moveRoot(ImageView player, int screenWidth, double totalTileLength, double tileSize) {
         double playerScreenX = player.getX() - offsetX;
@@ -310,6 +320,13 @@ public class GameplayApplication extends Application {
         heart1.setTranslateX(offsetX);
         checkActiveItems();
     }
+
+    /**
+     * Adds an object to the root.
+     *
+     * @param root
+     * @param node
+     */
 
     public void addToRoot(Pane root, Node node) {
         root.getChildren().add(node);
@@ -338,6 +355,12 @@ public class GameplayApplication extends Application {
             bg2.setX(bg1.getX() - bgWidth);
         }
     }
+
+    /**
+     * This function sets the player's heart images.
+     * The number of full hearts reflects the player's remaining lives.
+     * This function is only executed when the player's HP value changes.
+     */
 
     public void setHeartImagesBasedOnHp(){
         switch (player.getHp()) {
@@ -402,6 +425,11 @@ public class GameplayApplication extends Application {
         getTimerTimeline().play();
     }
 
+    /**
+     * Checks if an item is active and, if so,
+     * verifies how long it has been running. If it runs for too long,
+     * the effect disappears.
+     */
     public void checkActiveItems(){
         if(player.superboots.isActive()){
             player.superboots.bootsactivecheck();
