@@ -270,13 +270,13 @@ public class GameplayApplication extends Application {
     }
 
     /**
-     * diese funktion wird vom pc durchgehen ausgefüht und ermöglich das spielen.
-     * player.checkPlayerLegalHeight(); -> überprüft ob der spieler nicht ins void gefallen ist
-     * player.playerMovementX(pressedKeys, map); -> ist für die links, rechts bewegung des Spielers verantwortlich
-     * player.playerMovementY(map, pressedKeys, GRAVITY); -> ist für die vertikale bewegung des Spierlers zusändig (springen und fallen)
-     * moveRoot(player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE()); -> bewegt die root um den neuen abschnit des level anzuzeigen
-     * repeatBackground(bg1, bg2, offsetX); -> wiederholt das hintergrund bild
-     * checkActiveItems(); -> checkt nach aktiven items des Spielers und überprüft wann dieses abläuft
+     * This function is continuously executed by the computer and enables gameplay.
+     * player.checkPlayerLegalHeight(); -> Checks if the player has not fallen into the void.
+     * player.playerMovementX(pressedKeys, map); -> Responsible for the player's left and right movement.
+     * player.playerMovementY(map, pressedKeys, GRAVITY); -> Handles the player's vertical movement (jumping and falling).
+     * moveRoot(player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE()); -> Moves the root to display the new section of the level.
+     * repeatBackground(bg1, bg2, offsetX); -> Repeats the background image.
+     * checkActiveItems(); -> Checks for active player items and verifies when they expire.
      *
      * @param map
      * @param screenWidth
@@ -294,15 +294,15 @@ public class GameplayApplication extends Application {
     }
 
     /**
-     * Ist dafür zustänig, wenn der Spieler zu weit aus dem Bildschirm rausläuft
-     * das Spiel bzw Level zu bewegen um den wichtigen teil des Level in dem der Spiel sich befindet
-     * in den Fokus gezogen wird
+     * Responsible for shifting the game or level when the player moves too far off-screen,
+     * ensuring the relevant part of the level where the player is located stays in focus.
      *
      * @param player
      * @param screenWidth
      * @param totalTileLength
      * @param tileSize
      */
+
     public void moveRoot(ImageView player, int screenWidth, double totalTileLength, double tileSize) {
         double playerScreenX = player.getX() - offsetX;
 
@@ -322,11 +322,12 @@ public class GameplayApplication extends Application {
     }
 
     /**
-     * fügt ein object zur root hinzu
+     * Adds an object to the root.
      *
      * @param root
      * @param node
      */
+
     public void addToRoot(Pane root, Node node) {
         root.getChildren().add(node);
     }
@@ -356,10 +357,11 @@ public class GameplayApplication extends Application {
     }
 
     /**
-     * Diese funktion setzt die Herbilder des Spielers
-     * Die anzahl an vollen herzen spiegelt die anzahl an Leben des Spielers wieder.
-     * Dieser funktion wird nur ausgeführt wenn sich der Hp wert des Spieler verändert
+     * This function sets the player's heart images.
+     * The number of full hearts reflects the player's remaining lives.
+     * This function is only executed when the player's HP value changes.
      */
+
     public void setHeartImagesBasedOnHp(){
         switch (player.getHp()) {
             case 3:
@@ -424,9 +426,9 @@ public class GameplayApplication extends Application {
     }
 
     /**
-     * überprüft ob ein item activ ist und wenn ja
-     * wird überprüft wie lange dieses schon läuft und wenn es zu lange
-     * läuft verschwindet der effect
+     * Checks if an item is active and, if so,
+     * verifies how long it has been running. If it runs for too long,
+     * the effect disappears.
      */
     public void checkActiveItems(){
         if(player.superboots.isActive()){

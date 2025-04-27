@@ -16,9 +16,9 @@ public class JumpingEnemy extends Enemy implements Runnable {
     private int jumpSpeed = -10;
 
     /**
-     * JumpingEnemy erbt von der Enemy Klasse
-     * dieser Gegner springt zufällignach oben und wird auch wie
-     * der FloorEnemy auf den boden gezogen
+     * JumpingEnemy inherits from the Enemy class.
+     * This enemy jumps randomly upwards and, like the FloorEnemy,
+     * is pulled to the ground.
      *
      * @param enemyImage
      * @param enemySize
@@ -29,6 +29,7 @@ public class JumpingEnemy extends Enemy implements Runnable {
      * @param xCord
      * @param yCord
      */
+
     public JumpingEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, int map[][], double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
         this.map = map;
@@ -36,16 +37,16 @@ public class JumpingEnemy extends Enemy implements Runnable {
     }
 
     /**
-     * Diese run funktion simuliert die bewegung des Gegners.
-     * Der Gegner läuft solange er noch am Leben ist bzw solagne die
-     * isDead variable false ist.
-     * Die zwei for schleife simulieren einmal die bewegung nach linkse
-     * und anderseits die bewegung nach rechts.
-     * bei jeden durchlauf der for schleife wird die checkPlayerHitBox()
-     * funktion ausgefürht um zu checken ob der spieler den gegner berührt.
-     * in der gravityOnEnemy() funktion wird die schwerkraft und das zufällige
-     * springen des gegners simuliert
+     * This run function simulates the movement of the enemy.
+     * The enemy moves as long as it is alive or as long as
+     * the isDead variable is false.
+     * The two for loops simulate movement to the left
+     * and movement to the right.
+     * In each iteration of the for loop, the checkPlayerHitBox()
+     * function is executed to check if the player touches the enemy.
+     * The gravityOnEnemy() function simulates gravity and the enemy's random jumping.
      */
+
     @Override
     public void run() {
         while(!isDead()) {
@@ -105,9 +106,10 @@ public class JumpingEnemy extends Enemy implements Runnable {
     }
 
     /**
-     * Diese Methode überpüft ob eine feste box unter dem Gegner ist.
-     * Zudem ist diese methode dafür zuständig den Gegner in die höhe springen zu lassen
+     * This method checks if there is a solid box beneath the enemy.
+     * Additionally, it is responsible for making the enemy jump upwards.
      */
+
     public void gravityOnEnemy(){
         LocalTime now = LocalTime.now();
 

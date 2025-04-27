@@ -5,9 +5,9 @@ import javafx.scene.image.Image;
 
 public class SkyEnemy extends Enemy implements Runnable {
     /**
-     * Der SkyEnemy erbt von Enemy klasse
-     * Dieser Gegener bewekt sich nach links und
-     * rechts in der luft ohne das schwerkarft auf ihn wirkt
+     * The SkyEnemy inherits from the Enemy class.
+     * This enemy moves left and right in the air
+     * without being affected by gravity.
      *
      * @param enemyImage
      * @param enemySize
@@ -17,19 +17,21 @@ public class SkyEnemy extends Enemy implements Runnable {
      * @param xCord
      * @param yCord
      */
+
     public SkyEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
     }
 
     /**
-     * Diese run funktion simuliert die bewegung des Gegners.
-     * Der Gegner läuft solange er noch am Leben ist bzw solagne die
-     * isDead variable false ist.
-     * Die zwei for schleife simulieren einmal die bewegung nach linkse
-     * und anderseits die bewegung nach rechts.
-     * bei jeden durchlauf der for schleife wird die checkPlayerHitBox()
-     * funktion ausgefürht um zu checken ob der spieler den gegner berührt.
+     * This run function simulates the movement of the enemy.
+     * The enemy moves as long as it is still alive or as long as
+     * the isDead variable is false.
+     * The two for loops simulate movement to the left
+     * and movement to the right.
+     * In each iteration of the for loop, the checkPlayerHitBox()
+     * function is executed to check if the player touches the enemy.
      */
+
     @Override
     public void run() {
         while(!isDead()) {
