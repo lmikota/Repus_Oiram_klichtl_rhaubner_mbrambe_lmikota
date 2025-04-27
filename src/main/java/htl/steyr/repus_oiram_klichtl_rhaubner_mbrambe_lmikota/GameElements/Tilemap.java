@@ -51,13 +51,13 @@ public class Tilemap {
 
     public void drawTileMap() {
         tyleMapPane = new Pane();
-        {
-            try {
-                reader = new MapDataReader();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        try {
+            reader = new MapDataReader();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < cols; col++) {
                 int tileType = tileMapPattern[row][col];
