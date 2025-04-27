@@ -7,17 +7,28 @@ public class SuperUmhang extends Item{
     private LocalTime start;
     private Player player;
 
+    /**
+     * Constructor for the Item SuperUmhang
+     * @param player
+     */
     public SuperUmhang(Player player) {
         super("Super-Umhang");
         setPlayer(player);
     }
 
+    /**
+     * the capeeffect is set active
+     */
     public void activateCapeEffect(){
         getPlayer().setCapeEffect(true);
         setActive(true);
         start = LocalTime.now();
     }
 
+    /**
+     * checks if 30 seconds have past if so the capeeffect is
+     * set back to false
+     */
     public void isactivateSuperCape() {
         LocalTime currentTime = LocalTime.now();
         long duration = Duration.between(start, currentTime).toSeconds();
