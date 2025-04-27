@@ -26,6 +26,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileWriter;
@@ -262,6 +263,7 @@ public class GameplayApplication extends Application {
 
                     endScreenStage.initOwner((Stage) gameLayer.getScene().getWindow());
                     endScreenStage.initModality(Modality.APPLICATION_MODAL);
+                    endScreenStage.initStyle(StageStyle.UNDECORATED);
                     endScreenStage.show();
                 } catch (IOException e) {
                     System.out.println("Error while loading the end screne: " + e.getMessage());
