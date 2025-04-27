@@ -59,7 +59,7 @@
         <HBox fx:id="secondLevelIconHBox" alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <ImageView fx:id="Level6_Icon" fitHeight="150.0" fitWidth="900.0" onMouseClicked="#onLevelSelected" pickOnBounds="true" styleClass="LevelImages">
                 <image>
-                    <Image url="@../img/LevelBackgrounds/Level_6_Background/Level_6-Background_1.png" />
+                    <Image url="@../IMG/LevelBackgrounds/Level_6_Background/Level_6-Background_1.png" />
                 </image>
             </ImageView>
         </HBox>

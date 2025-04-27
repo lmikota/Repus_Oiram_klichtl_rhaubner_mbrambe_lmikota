@@ -66,6 +66,12 @@ public class LevelMenuController implements Initializable {
     public static LocalUser localUser;
     private final Gson gson = new Gson();
 
+    /**
+     * In this Methode, it is checked if the user has unlocked the levels.
+     * If not the level-Image gets disabled, so he cant start the level.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -120,6 +126,9 @@ public class LevelMenuController implements Initializable {
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
+    /**
+     * In this Methode, the story-dialogs fxml gets loaded in the current stage
+     */
     @FXML
     public void onLevelStartButtonClicked() {
         if (selectedLevel > 0) {
@@ -139,6 +148,13 @@ public class LevelMenuController implements Initializable {
         }
     }
 
+    /**
+     * In this Methode, the user interaction with the level-Images gets checked.
+     * When pressed on an Image the user gets displayed information about the Level.
+     * For Example, the name, a short description, the difficulty, and the best time of the user.
+     * @param mouseEvent
+     * @throws IOException
+     */
     @FXML
     public void onLevelSelected(MouseEvent mouseEvent) throws IOException {
         clearFromSelectionClass();
@@ -165,6 +181,9 @@ public class LevelMenuController implements Initializable {
         }
     }
 
+    /**
+     * In this Methode, the scene gets changed back to the start-menu.
+     */
     @FXML
     public void onReturnButtonClicked() {
         try {
@@ -180,6 +199,10 @@ public class LevelMenuController implements Initializable {
 
     /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
 
+    /**
+     * In this Methode, all Images get the "selected-image-view" class removed from them.
+     * This makes their appearance different.
+     */
     @FXML
     private void clearFromSelectionClass() {
         /* Node is a base class for the graphical elements */
@@ -193,6 +216,12 @@ public class LevelMenuController implements Initializable {
         levelDescriptionGrid.getChildren().clear();
     }
 
+    /**
+     * In this Methode, if og the selected Image gets checked.
+     *
+     * @param levelImageView the selected levelImage
+     * @return the information about the level Image from the levelMap
+     */
     @FXML
     private int getLevelIdByImageView(ImageView levelImageView) {
         Integer level = levelMap.get(levelImageView);
@@ -203,6 +232,12 @@ public class LevelMenuController implements Initializable {
         return -1;
     }
 
+    /**
+     * In this Methode, the level Icon gets visually disabled and cannot be clicked.
+     * The saturation of the icon is reduced and the opacity is set to 0.75.
+     *
+     *@param icon the icon of the Level
+     */
     @FXML
     public void disableLevelIcon(ImageView icon) {
         ColorAdjust colorAdjust = new ColorAdjust();
@@ -213,6 +248,9 @@ public class LevelMenuController implements Initializable {
         icon.setStyle("-fx-opacity: 0.75");
     }
 
+    /**
+     * In this Method, the fxml layouts fot the different elements gets changed to make it a bit responsive.
+     */
     @FXML
     public void applyLayoutBindings() {
 

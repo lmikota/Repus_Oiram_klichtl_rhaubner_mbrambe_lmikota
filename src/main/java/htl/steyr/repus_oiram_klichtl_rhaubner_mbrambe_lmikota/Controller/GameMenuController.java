@@ -24,6 +24,9 @@ public class GameMenuController {
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
+    /**
+     * In this Methode, the game is resumed from the Menu
+     */
     @FXML
     public void onPlayButtonClicked() {
         if (menuOverlay != null) {
@@ -31,6 +34,11 @@ public class GameMenuController {
         }
     }
 
+    /**
+     * In this Methode, the Level is restarted from the literal beginning.
+     *      * No checkpoints.
+     * @param actionEvent
+     */
     @FXML
     public void onRestartButtonClicked(ActionEvent actionEvent) {
         GameplayApplication gameplayApplication = new GameplayApplication();
@@ -39,6 +47,9 @@ public class GameMenuController {
             closeCurrentWindow(actionEvent);
     }
 
+    /**
+     * In this Methode, the option (sound-) Menu gets displayed.
+     */
     @FXML
     public void onOptionButtonClicked() {
         try {
@@ -70,6 +81,10 @@ public class GameMenuController {
         }
     }
 
+    /**
+     * In this Methode, the user gets sent back to the startMenu.
+     * No progress saved.
+     */
     @FXML
     public void onQuitButtonClicked() {
         try {
@@ -84,12 +99,20 @@ public class GameMenuController {
 
     /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
 
+    /**
+     * In this Methode, the current window get closed.
+     * @param actionEvent
+     */
     @FXML
     private void closeCurrentWindow(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentWindow.close();
     }
 
+    /**
+     * In this Method, the menuOverlay is set.
+     * @param menuOverlay
+     */
     @FXML
     public void setMenuOverlay(Parent menuOverlay) {
         this.menuOverlay = menuOverlay;

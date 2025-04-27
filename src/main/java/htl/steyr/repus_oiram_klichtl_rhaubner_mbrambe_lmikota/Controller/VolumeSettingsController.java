@@ -23,6 +23,11 @@ public class VolumeSettingsController implements Initializable {
 
     private final MusicPlayer musicPlayer = MusicPlayer.getInstance();
 
+    /**
+     * In this Method, the VolumeSlider is initialized, and a Listener is set to look for changes in the volume.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -47,6 +52,9 @@ public class VolumeSettingsController implements Initializable {
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
+    /**
+     * In this Method, the Menu is closed.
+     */
     @FXML
     public void onMenuExitButtonClicked() {
         if (menuOverlay != null) {
@@ -55,6 +63,11 @@ public class VolumeSettingsController implements Initializable {
     }
 
     /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
+
+    /**
+     * In this Method, the menuOverlay is set.
+     * @param menuOverlay
+     */
     @FXML
     public void setMenuOverlay(Parent menuOverlay) {
         this.menuOverlay = menuOverlay;
@@ -62,6 +75,11 @@ public class VolumeSettingsController implements Initializable {
 
     /* ---------------------------------------------- Helper Function ----------------------------------------------  */
 
+    /**
+     * In this Method the percent-value is converted into decibels.
+     * @param volumePercent
+     * @return value in decibels
+     */
     private float volumeToDecibels(float volumePercent) {
         if (volumePercent == 0.0f) {
             return -80.0f; /* completely shut */

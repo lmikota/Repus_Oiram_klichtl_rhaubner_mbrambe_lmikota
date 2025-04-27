@@ -23,6 +23,11 @@ public class EndScreenController implements Initializable {
     @FXML
     private AnchorPane endScreenAnchorPane;
 
+    /**
+     * In this Methode, the resultText gets displayed depending on the levelWon status of the Game.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         endScreenAnchorPane.toFront();
@@ -35,6 +40,10 @@ public class EndScreenController implements Initializable {
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
+    /**
+     * In this Methode, StartMenu gets loaded when to user pressed the button.
+     * @param actionEvent
+     */
     @FXML
     public void onStartMenuButtonClicked(ActionEvent actionEvent) {
         closeCurrentWindow(actionEvent);
@@ -50,6 +59,10 @@ public class EndScreenController implements Initializable {
 
     /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
 
+    /**
+     * In this Methode, the current window get closed.
+     * @param actionEvent
+     */
     @FXML
     private void closeCurrentWindow(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

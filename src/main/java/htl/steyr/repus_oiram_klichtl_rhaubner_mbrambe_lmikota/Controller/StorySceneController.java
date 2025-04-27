@@ -43,10 +43,18 @@ public class StorySceneController implements Initializable {
 
     public Timeline currentTimeline;
 
-    /* to load the controller out of the fxml */
+
+    /**
+     * To load the controller out of the fxml.
+     */
     public StorySceneController() {
     }
 
+    /**
+     * In this Method, the layout-bindings get done.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         applyLayoutBindings();
@@ -54,6 +62,9 @@ public class StorySceneController implements Initializable {
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
+    /**
+     * In this Method, the scene is set back to the level-menu.
+     */
     @FXML
     public void onReturnButtonClicked() {
         try {
@@ -67,6 +78,9 @@ public class StorySceneController implements Initializable {
         }
     }
 
+    /**
+     * In this Method, the next Dialog of the Level is managed.
+     */
     @FXML
     public void onNextDialogButtonClicked() {
         if (nextDialogButton.isDisabled()) {
@@ -85,6 +99,10 @@ public class StorySceneController implements Initializable {
         }
     }
 
+    /**
+     * In this Method, the Game is actually loaded.
+     * @param actionEvent
+     */
     @FXML
     public void onBeginJourneyButtonClicked(ActionEvent actionEvent) {
         GameplayApplication gameplayApplication = new GameplayApplication();
@@ -97,6 +115,9 @@ public class StorySceneController implements Initializable {
 
     /* ---------------------------------------------- Visual Handling ----------------------------------------------  */
 
+    /**
+     * In this Methode, the Dialog is shown. This is done with a TimeLine to make it look as a print-writer.
+     */
     @FXML
     private void showDialog() {
         /* Stop the current animation if one is running */
@@ -134,12 +155,19 @@ public class StorySceneController implements Initializable {
         }
     }
 
+    /**
+     * In this Method, the current window is closed.
+     * @param actionEvent
+     */
     @FXML
     private void closeCurrentWindow(ActionEvent actionEvent) {
         Stage currentWindow = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentWindow.close();
     }
 
+    /**
+     * In this Method, the layout-bindings are set.
+     */
     @FXML
     private void applyLayoutBindings() {
 
@@ -187,6 +215,9 @@ public class StorySceneController implements Initializable {
         );
     }
 
+    /**
+     * In this Method, the data that is needed for the game-logic is initialized.
+     */
     public void initData() {
         StoryDialogsReader storyDialogsReader = new StoryDialogsReader();
         storyDialogsReader.setSelectedLevelID(getSelectedLevelID());
