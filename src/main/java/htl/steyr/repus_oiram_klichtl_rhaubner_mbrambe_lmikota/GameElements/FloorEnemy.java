@@ -10,9 +10,9 @@ public class FloorEnemy extends Enemy implements Runnable {
     private double enemyGravity = 0.5;
 
     /**
-     * FloorEnemy erbt von der Enemy Klasse
-     * Dieser Gegener läuft am boden nach links und rechts
-     * zusätzlich kann dieser von platformen runterfallen
+     * FloorEnemy inherits from the Enemy class.
+     * This enemy moves left and right on the ground
+     * and can also fall off platforms.
      *
      * @param enemyImage
      * @param enemySize
@@ -23,21 +23,23 @@ public class FloorEnemy extends Enemy implements Runnable {
      * @param xCord
      * @param yCord
      */
+
     public FloorEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, int map[][], double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
         setMap(map);
     }
 
     /**
-     * Diese run funktion simuliert die bewegung des Gegners.
-     * Der Gegner läuft solange er noch am Leben ist bzw solagne die
-     * isDead variable false ist.
-     * Die zwei for schleife simulieren einmal die bewegung nach linkse
-     * und anderseits die bewegung nach rechts.
-     * bei jeden durchlauf der for schleife wird die checkPlayerHitBox()
-     * funktion ausgefürht um zu checken ob der spieler den gegner berührt
-     * die gravityOnEnemy() funktion ist dafür zuständig den Gegner auf den Boden zu ziehen
+     * This run function simulates the movement of the enemy.
+     * The enemy moves as long as it is alive or as long as
+     * the isDead variable is false.
+     * The two for loops simulate movement to the left
+     * and movement to the right.
+     * In each iteration of the for loop, the checkPlayerHitBox()
+     * function is executed to check if the player touches the enemy.
+     * The gravityOnEnemy() function ensures the enemy is pulled to the ground.
      */
+
     @Override
     public void run() {
         while(!isDead()) {
@@ -97,11 +99,11 @@ public class FloorEnemy extends Enemy implements Runnable {
     }
 
     /**
-     * der Enemy wird wie der Spieler auf den boden gezogen.
-     * hierführ wird überprüft ob die box unter dem gegener ein fester boden ist.
-     * Wenn dies nicht dem fall entspricht, dann wirkt eine anziehungs kraft auf ihm
-     * die nach unten zieht.
+     * The enemy is pulled to the ground like the player.
+     * It checks whether the box beneath the enemy is solid ground.
+     * If not, a gravitational force pulls the enemy downward.
      */
+
     public void gravityOnEnemy(){
         isBlockUnderIt = false;
 
@@ -131,11 +133,12 @@ public class FloorEnemy extends Enemy implements Runnable {
     }
 
     /**
-     * alle blöcke die in der map als fester boden definiert sind
+     * All blocks in the map that are defined as solid ground.
      *
      * @param block
      * @return
      */
+
     public boolean isBlockSolid(int block) {
         return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 ;
     }

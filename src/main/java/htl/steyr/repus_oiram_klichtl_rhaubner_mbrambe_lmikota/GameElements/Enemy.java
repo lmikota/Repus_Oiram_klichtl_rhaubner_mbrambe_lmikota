@@ -22,7 +22,7 @@ public class Enemy {
     private boolean dead = false;
 
     /**
-     * Konstruktur der Enemy Klasse
+     * Constructor of the Enemy class.
      *
      * @param enemyImage
      * @param enemySize
@@ -32,6 +32,7 @@ public class Enemy {
      * @param xCord
      * @param yCord
      */
+
     public Enemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, double xCord, double yCord) {
         setEnemySize(enemySize);
         setEnemyImage(enemyImage);
@@ -43,10 +44,11 @@ public class Enemy {
     }
 
     /**
-     * Diese Funktion überprüft ob das Enemy bild mit dem Player bild überschneidet
-     * Wenn der Spieler von oben kommt killt er den Enemy aber ansonsten bekommt der Spieler 1
-     * Leben abgezogen
+     * This function checks if the enemy image overlaps with the player image.
+     * If the player approaches from above, they defeat the enemy; otherwise,
+     * the player loses one life.
      */
+
     public void checkPlayerHitBox() {
         if (isDead()) return;
 
@@ -83,20 +85,21 @@ public class Enemy {
     }
 
     /**
-     * Das Enemy object wird als tot definiert
+     * Defines the enemy object as dead.
      */
+
     public void playerKillsEnemy() {
         setDead(true);
     }
 
     /**
-     * diese funktion wird ausgeführt wenn der Enemy den Player berührt.
-     * dem Spieler wird ein leben abgezogen.
-     * danach wird überprüft ob dieser noch mehr als 1 leben hat
-     * ansonsten stirbt der Spieler und das Spiel endet.
-     * Wenn dies aber nicht dem fall entspricht, kommt der Spieler in eine safe
-     * time wo er keinen schaden bekommen kann
+     * This function is executed when the enemy touches the player.
+     * The player loses one life.
+     * Then, it checks if the player has more than one life remaining.
+     * If not, the player dies and the game ends.
+     * Otherwise, the player enters a safe time where they cannot take damage.
      */
+
     public void onEnemyHitsPlayer() {
         getPlayer().setHp(getPlayer().getHp() - 1);
         getPlayer().getGameplayApplication().setHeartImagesBasedOnHp();
@@ -112,10 +115,11 @@ public class Enemy {
     }
 
     /**
-     * An diesen koordinaten wird der Gegner im Spiel plaziert
+     * At these coordinates, the enemy is placed in the game.
      * @param x
      * @param y
      */
+
     public void setEnemySpawn(double x, double y) {
         enemyY = y;
         enemyX = x;
