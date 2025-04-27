@@ -2,37 +2,37 @@
   {
     "id": 1,
     "name": "Sunny Meadows",
-    "description": "",
+    "description": "Repus begins his journey, filled with hope and determination.",
     "difficulty": "Easy"
   },
   {
     "id": 2,
     "name": "Twilight Path",
-    "description": "",
+    "description": "Repus faces growing doubts, but his resolve pushes him forward.",
     "difficulty": "Easy-Medium"
   },
   {
     "id": 3,
     "name": "Stormy Road",
-    "description": "",
+    "description": "Repus battles the storm and his own pain, but won't back down.",
     "difficulty": "Medium"
   },
   {
     "id": 4,
     "name": "Ghostly Night",
-    "description": "",
+    "description": "Repus presses on, fueled by his love for Hcaep, undeterred by fear.",
     "difficulty": "Medium-Hard"
   },
   {
     "id": 5,
     "name": "Eye of the Chaos",
-    "description": "",
+    "description": "Repus faces his inner demons, driven only by love and willpower.",
     "difficulty": "Hard"
   },
   {
     "id": 6,
     "name": "Dark Cave",
-    "description": "",
+    "description": "Repus nears his goal, the final trial ahead, his resolve unshaken.",
     "difficulty": "Hard"
   }
 ]
