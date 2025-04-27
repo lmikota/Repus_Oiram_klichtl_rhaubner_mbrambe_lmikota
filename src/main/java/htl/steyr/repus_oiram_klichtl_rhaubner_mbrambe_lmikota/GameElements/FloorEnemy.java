@@ -9,11 +9,35 @@ public class FloorEnemy extends Enemy implements Runnable {
     private boolean isBlockUnderIt;
     private double enemyGravity = 0.5;
 
+    /**
+     * FloorEnemy erbt von der Enemy Klasse
+     * Dieser Gegener läuft am boden nach links und rechts
+     * zusätzlich kann dieser von platformen runterfallen
+     *
+     * @param enemyImage
+     * @param enemySize
+     * @param tileSize
+     * @param enemyMovementX
+     * @param player
+     * @param map
+     * @param xCord
+     * @param yCord
+     */
     public FloorEnemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, int map[][], double xCord, double yCord) {
         super(enemyImage, enemySize, tileSize, enemyMovementX, player, xCord, yCord);
-        this.map = map;
+        setMap(map);
     }
 
+    /**
+     * Diese run funktion simuliert die bewegung des Gegners.
+     * Der Gegner läuft solange er noch am Leben ist bzw solagne die
+     * isDead variable false ist.
+     * Die zwei for schleife simulieren einmal die bewegung nach linkse
+     * und anderseits die bewegung nach rechts.
+     * bei jeden durchlauf der for schleife wird die checkPlayerHitBox()
+     * funktion ausgefürht um zu checken ob der spieler den gegner berührt
+     * die gravityOnEnemy() funktion ist dafür zuständig den Gegner auf den Boden zu ziehen
+     */
     @Override
     public void run() {
         while(!isDead()) {
@@ -72,6 +96,12 @@ public class FloorEnemy extends Enemy implements Runnable {
         }
     }
 
+    /**
+     * der Enemy wird wie der Spieler auf den boden gezogen.
+     * hierführ wird überprüft ob die box unter dem gegener ein fester boden ist.
+     * Wenn dies nicht dem fall entspricht, dann wirkt eine anziehungs kraft auf ihm
+     * die nach unten zieht.
+     */
     public void gravityOnEnemy(){
         isBlockUnderIt = false;
 
@@ -100,6 +130,12 @@ public class FloorEnemy extends Enemy implements Runnable {
         }
     }
 
+    /**
+     * alle blöcke die in der map als fester boden definiert sind
+     *
+     * @param block
+     * @return
+     */
     public boolean isBlockSolid(int block) {
         return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 ;
     }

@@ -53,6 +53,14 @@ public class Player implements Runnable {
 
     private LocalTime start;
 
+    /**
+     * diese run methode ist dafür zuständig
+     * den Spieler in die safe time zu bringen
+     * in der er von keine gegner atakiert werden kann.
+     * Sie senkt die opacity des Spielers und checkt
+     * wie mit einer schleife wie lange die safe time noch
+     * dauern darf
+     */
     @Override
     public void run() {
         setSafeTime(true);
@@ -86,6 +94,15 @@ public class Player implements Runnable {
         Platform.runLater(() -> getPlayerImage().setOpacity(1));
     }
 
+    /**
+     * Im konstruktor wird bild des spielers,
+     * größe und die GameApplication Klasse mitgegeben
+     *
+     * @param playerImage
+     * @param playerSize
+     * @param tileSize
+     * @param gameplayApplication
+     */
     public Player(Image playerImage, double playerSize, double tileSize, GameplayApplication gameplayApplication) {
         setGameplayApplication(gameplayApplication);
         setPlayerImage(playerImage);
@@ -142,6 +159,11 @@ public class Player implements Runnable {
         }
     }
 
+    /**
+     * An diesen punkt wird der Spieler im Spiel platziert
+     * @param x
+     * @param y
+     */
     public void setPlayerSpawn(int x, int y) {
         playerX = x;
         playerY = y;
@@ -149,11 +171,20 @@ public class Player implements Runnable {
         getPlayerImage().setY(playerY);
     }
 
+    /**
+     * hier mit lässt sich die größe des Spielers ändern
+     * die höhe und breite des spielers wird hier
+     * auf den selben wert gebracht
+     * @param playerSize
+     */
     public void changePlayerSize(double playerSize) {
         playerImage.setFitHeight(playerSize);
         playerImage.setFitWidth(playerSize);
     }
 
+    /**
+     * Diese Methode überpüft das der Spieler nicht ins void gefallen ist
+     */
     public void checkPlayerLegalHeight() {
         double screenHeight = getTileSize() * 18;
         if (getPlayerImage().getY() > screenHeight) {
@@ -166,14 +197,31 @@ public class Player implements Runnable {
         }
     }
 
+    /**
+     * Diese Methode wird ausgeführt wenn der Spieler
+     * das Level geschaft hat
+     */
     public void onPlayerSuccess() {
         getGameplayApplication().onPlayerWinLevel();
     }
 
+    /**
+     * Diese Methode wird ausgeführt wenn der Spieler
+     * stirbt
+     */
     public void onPlayerDead() {
         getGameplayApplication().onPlayerLoseLevel();
     }
 
+    /**
+     * ist zuständig dafür je nach input des Spielers die
+     * vertikale bewegung zu überprüfen.
+     * sprich springen, gravitation und aufangen von harten blöcken
+     *
+     * @param map
+     * @param pressedKeys
+     * @param GRAVITY
+     */
     public void playerMovementY(int map[][], Set<KeyCode> pressedKeys, double GRAVITY) {
         if (pressedKeys.contains(KeyCode.SPACE) && !isJumping && isBlockUnderIt) {
             playerVelY = JUMP_SPEED;
@@ -215,6 +263,13 @@ public class Player implements Runnable {
         }
     }
 
+    /**
+     * Ist für die horizontale bewegung des Spieler zustänig
+     * Sprich Links und rechts laufen und bei wenden stehen zu bleiben
+     *
+     * @param pressedKeys
+     * @param map
+     */
     public void playerMovementX(Set<KeyCode> pressedKeys, int map[][]) {
         if (pressedKeys.contains(KeyCode.D)) {
             if (!checkCollisionX(playerX + MOVE_SPEED, map)) {
@@ -235,6 +290,14 @@ public class Player implements Runnable {
         }
     }
 
+    /**
+     * überprüft ob der block in der tile map in der,
+     * der Spieler hineinleuft ein fester block ist
+     *
+     * @param futurePlayerX
+     * @param map
+     * @return
+     */
     public boolean checkCollisionX(double futurePlayerX, int map[][]) {
         int topTileY = (int) (playerImage.getY() / getTileSize());
         int bottomTileY = (int) ((playerImage.getY() + playerImage.getFitHeight() - 1) / getTileSize());
@@ -276,14 +339,31 @@ public class Player implements Runnable {
         return false;
     }
 
+    /**
+     * überprüft ob es ein fester block ist (mit hitbox)
+     */
     public boolean isBlockSolid(int block) {
         return block == 1 || block == 2 || block == 3 || block == 4 || block == 5 || block == 6 || block == 7 || block == 187 || block == 12 || block == 13 || block == 14 || block == 15 || block == 16 || block == 17 || block == 18 || block == 19 ;
     }
 
+    /**
+     * überprüft ob der block ein item ist
+     * @param block
+     * @return
+     */
     public boolean isItemBlock(int block){
         return block == -1 || block == -2 || block == -3;
     }
 
+    /**
+     * das Item wird über die Methode mitgegeben und
+     * dan wird das item ausgwählt das zum activieren
+     * ist.
+     * Das item image wird im level danach ausgeblendet
+     * @param item
+     * @param posX
+     * @param posY
+     */
     public void activatedItem(int item, int posX, int posY) {
         Point itemKey = new Point(posX, posY);
 
@@ -300,6 +380,12 @@ public class Player implements Runnable {
         }
     }
 
+    /**
+     * überprüft ob die Blöcke zum Turm gehören.
+     * beim berühren der blöcke hat man gewonnen
+     * @param block
+     * @return
+     */
     public boolean isWinningBlock(int block) {
         return block == 12 || block == 13 || block == 14 || block == 15 || block == 16 || block == 17 || block == 18 || block == 19;
     }

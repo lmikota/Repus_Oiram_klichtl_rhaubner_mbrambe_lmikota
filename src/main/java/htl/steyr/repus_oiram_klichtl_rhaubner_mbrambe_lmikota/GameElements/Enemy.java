@@ -5,7 +5,9 @@ import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
 
-public class Enemy{
+import java.util.Objects;
+
+public class Enemy {
     private ImageView enemyImage;
     private int enemySize;
 
@@ -15,21 +17,36 @@ public class Enemy{
     private double enemyMovementX;
     private double oneMovementSite;
 
-    private boolean playerTouching;
     private Player player;
 
     private boolean dead = false;
 
+    /**
+     * Konstruktur der Enemy Klasse
+     *
+     * @param enemyImage
+     * @param enemySize
+     * @param tileSize
+     * @param enemyMovementX
+     * @param player
+     * @param xCord
+     * @param yCord
+     */
     public Enemy(Image enemyImage, int enemySize, int tileSize, double enemyMovementX, Player player, double xCord, double yCord) {
         setEnemySize(enemySize);
         setEnemyImage(enemyImage);
         setTileSize(tileSize);
-        setEnemySpawn(xCord,yCord);
+        setEnemySpawn(xCord, yCord);
         setEnemyMovementX(enemyMovementX);
-        setOneMovementSite(getEnemyMovementX()/2);
+        setOneMovementSite(getEnemyMovementX() / 2);
         setPlayer(player);
     }
 
+    /**
+     * Diese Funktion überprüft ob das Enemy bild mit dem Player bild überschneidet
+     * Wenn der Spieler von oben kommt killt er den Enemy aber ansonsten bekommt der Spieler 1
+     * Leben abgezogen
+     */
     public void checkPlayerHitBox() {
         if (isDead()) return;
 
@@ -41,8 +58,8 @@ public class Enemy{
         double playerWidth = playerImage.getFitWidth();
         double playerHeight = playerImage.getFitHeight();
 
-        double enemyX = enemyImage.getX(); // FIXED
-        double enemyY = enemyImage.getY(); // FIXED
+        double enemyX = enemyImage.getX();
+        double enemyY = enemyImage.getY();
         double enemyWidth = enemyImage.getFitWidth();
         double enemyHeight = enemyImage.getFitHeight();
 
@@ -53,7 +70,6 @@ public class Enemy{
             double playerBottom = playerY + playerHeight;
             double enemyTop = enemyY;
 
-            // präziser Stomp-Check:
             boolean isStomp = player.getPlayerVelY() > 0 && playerBottom > enemyTop && playerBottom < enemyTop + enemyHeight / 2;
 
             if (isStomp) {
@@ -66,27 +82,40 @@ public class Enemy{
         }
     }
 
-
+    /**
+     * Das Enemy object wird als tot definiert
+     */
     public void playerKillsEnemy() {
         setDead(true);
     }
 
-    public void onEnemyHitsPlayer(){
-        if(!playerTouching){
-            getPlayer().setHp(getPlayer().getHp()-1);
-            getPlayer().getGameplayApplication().setHeartImagesBasedOnHp();
-            if(getPlayer().getHp() == 0){
-                System.out.println("kein leben mehr");
-                getPlayer().onPlayerDead();
-                String deathSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/deathSound.wav";
-                MusicPlayer.getInstance().playSound(deathSound);
-            }else{
-                Thread startSafeTime = new Thread(getPlayer());
-                startSafeTime.start();
-            }
+    /**
+     * diese funktion wird ausgeführt wenn der Enemy den Player berührt.
+     * dem Spieler wird ein leben abgezogen.
+     * danach wird überprüft ob dieser noch mehr als 1 leben hat
+     * ansonsten stirbt der Spieler und das Spiel endet.
+     * Wenn dies aber nicht dem fall entspricht, kommt der Spieler in eine safe
+     * time wo er keinen schaden bekommen kann
+     */
+    public void onEnemyHitsPlayer() {
+        getPlayer().setHp(getPlayer().getHp() - 1);
+        getPlayer().getGameplayApplication().setHeartImagesBasedOnHp();
+        if (getPlayer().getHp() == 0) {
+            System.out.println("kein leben mehr");
+            getPlayer().onPlayerDead();
+            String deathSound = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/WAV/deathSound.wav";
+            MusicPlayer.getInstance().playSound(deathSound);
+        } else {
+            Thread startSafeTime = new Thread(getPlayer());
+            startSafeTime.start();
         }
     }
 
+    /**
+     * An diesen koordinaten wird der Gegner im Spiel plaziert
+     * @param x
+     * @param y
+     */
     public void setEnemySpawn(double x, double y) {
         enemyY = y;
         enemyX = x;
@@ -162,14 +191,6 @@ public class Enemy{
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public boolean isPlayerTouching() {
-        return playerTouching;
-    }
-
-    public void setPlayerTouching(boolean playerTouching) {
-        this.playerTouching = playerTouching;
     }
 
     public boolean isDead() {

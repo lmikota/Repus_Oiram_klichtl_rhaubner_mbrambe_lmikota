@@ -77,11 +77,6 @@ public class GameplayApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        /**
-         * @ToDo
-         * Background je nach Level matchen und ALLE 3 Hintergründe implementieren (erst wenn der Rest fertig ist, weil des ned elementar was am game ändert).
-         * Zuerst Projektmanagement usw. AP, Levels Bauen, Robin oder Marcel unterstützen bei Items/Gegner
-         */
         try {
             mainContainer = new StackPane();
             gameLayer = new Pane();
@@ -228,23 +223,14 @@ public class GameplayApplication extends Application {
         }
     }
 
-    private void closeWindow() {
-        Stage stage = (Stage) gameplayScene.getWindow();
-        stage.close();
-    }
-
     public void onPlayerLoseLevel() {
         stopTimer();
         levelWon = false;
         gameplayScene.setOnKeyPressed(null);
         gameplayScene.setOnKeyReleased(null);
         loadEndScreen();
-        //closeWindow();
     }
 
-    /**
-     * @ToDo winLevel(); erst aufrufen, wenn der spieler den Turm erreicht
-     */
     public void onPlayerWinLevel() {
         stopTimer();
         Gson gson = new Gson();
@@ -258,7 +244,6 @@ public class GameplayApplication extends Application {
         loadEndScreen();
         gameplayScene.setOnKeyPressed(null);
         gameplayScene.setOnKeyReleased(null);
-        // closeWindow();
     }
 
     private void loadEndScreen() {
@@ -284,6 +269,21 @@ public class GameplayApplication extends Application {
         });
     }
 
+    /**
+     * diese funktion wird vom pc durchgehen ausgefüht und ermöglich das spielen.
+     * player.checkPlayerLegalHeight(); -> überprüft ob der spieler nicht ins void gefallen ist
+     * player.playerMovementX(pressedKeys, map); -> ist für die links, rechts bewegung des Spielers verantwortlich
+     * player.playerMovementY(map, pressedKeys, GRAVITY); -> ist für die vertikale bewegung des Spierlers zusändig (springen und fallen)
+     * moveRoot(player.getPlayerImage(), screenWidth, tilemap.getTileMapLengthInPixel(), tilemap.getTILE_SIZE()); -> bewegt die root um den neuen abschnit des level anzuzeigen
+     * repeatBackground(bg1, bg2, offsetX); -> wiederholt das hintergrund bild
+     * checkActiveItems(); -> checkt nach aktiven items des Spielers und überprüft wann dieses abläuft
+     *
+     * @param map
+     * @param screenWidth
+     * @param tilemap
+     * @param bg1
+     * @param bg2
+     */
     private void updateGame(int[][] map, int screenWidth, Tilemap tilemap, ImageView bg1, ImageView bg2) {
         player.checkPlayerLegalHeight();
         player.playerMovementX(pressedKeys, map);
@@ -293,6 +293,16 @@ public class GameplayApplication extends Application {
         checkActiveItems();
     }
 
+    /**
+     * Ist dafür zustänig, wenn der Spieler zu weit aus dem Bildschirm rausläuft
+     * das Spiel bzw Level zu bewegen um den wichtigen teil des Level in dem der Spiel sich befindet
+     * in den Fokus gezogen wird
+     *
+     * @param player
+     * @param screenWidth
+     * @param totalTileLength
+     * @param tileSize
+     */
     public void moveRoot(ImageView player, int screenWidth, double totalTileLength, double tileSize) {
         double playerScreenX = player.getX() - offsetX;
 
@@ -311,6 +321,12 @@ public class GameplayApplication extends Application {
         checkActiveItems();
     }
 
+    /**
+     * fügt ein object zur root hinzu
+     *
+     * @param root
+     * @param node
+     */
     public void addToRoot(Pane root, Node node) {
         root.getChildren().add(node);
     }
@@ -339,6 +355,11 @@ public class GameplayApplication extends Application {
         }
     }
 
+    /**
+     * Diese funktion setzt die Herbilder des Spielers
+     * Die anzahl an vollen herzen spiegelt die anzahl an Leben des Spielers wieder.
+     * Dieser funktion wird nur ausgeführt wenn sich der Hp wert des Spieler verändert
+     */
     public void setHeartImagesBasedOnHp(){
         switch (player.getHp()) {
             case 3:
@@ -402,6 +423,11 @@ public class GameplayApplication extends Application {
         getTimerTimeline().play();
     }
 
+    /**
+     * überprüft ob ein item activ ist und wenn ja
+     * wird überprüft wie lange dieses schon läuft und wenn es zu lange
+     * läuft verschwindet der effect
+     */
     public void checkActiveItems(){
         if(player.superboots.isActive()){
             player.superboots.bootsactivecheck();
