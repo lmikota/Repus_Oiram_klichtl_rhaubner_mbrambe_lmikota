@@ -82,7 +82,7 @@
 ## 👨‍💻 Authors
 
 * **Marcel Bramberger** – Designer & Animator
-  * <img alt="mbrambe.png" src="src%2Fmain%2Fresources%2Fhtl%2Fsteyr%2Frepus_oiram_klichtl_rhaubner_mbrambe_lmikota%2FIMG%2FREADME%2Fmbrambe.png" width="150"/>
+  * <img alt="mbrambe.png" src="src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/img/README/mbrambe.png" width="150"/>
 * **Robin Haubner (Project-Manager)** – Developer
   * <img alt="rhaubner.png" src="src%2Fmain%2Fresources%2Fhtl%2Fsteyr%2Frepus_oiram_klichtl_rhaubner_mbrambe_lmikota%2FIMG%2FREADME%2Frhaubner.png" width="150"/>
 * **Kevin Lichtl** – UI Designer & Developer
