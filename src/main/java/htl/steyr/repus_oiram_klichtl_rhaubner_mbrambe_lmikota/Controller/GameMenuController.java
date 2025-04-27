@@ -21,6 +21,8 @@ public class GameMenuController {
     private Parent menuOverlay;
     @FXML
     private Parent settingsOverlay;
+    @FXML
+    private GameplayApplication gameplayApplication;
 
     /* ---------------------------------------------- Buttons Clicked ----------------------------------------------- */
 
@@ -32,6 +34,7 @@ public class GameMenuController {
         if (menuOverlay != null) {
             menuOverlay.setVisible(false);
         }
+        getGameplayApplication().resumeTimer();
     }
 
     /**
@@ -116,5 +119,13 @@ public class GameMenuController {
     @FXML
     public void setMenuOverlay(Parent menuOverlay) {
         this.menuOverlay = menuOverlay;
+    }
+
+    public GameplayApplication getGameplayApplication() {
+        return gameplayApplication;
+    }
+
+    public void setGameplayApplication(GameplayApplication gameplayApplication) {
+        this.gameplayApplication = gameplayApplication;
     }
 }

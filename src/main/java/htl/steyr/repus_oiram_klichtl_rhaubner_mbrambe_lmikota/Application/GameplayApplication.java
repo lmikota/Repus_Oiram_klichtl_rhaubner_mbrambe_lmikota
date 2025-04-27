@@ -206,6 +206,7 @@ public class GameplayApplication extends Application {
             Parent menuOverlay = loader.load();
             GameMenuController menuCtrl = loader.getController();
             menuCtrl.setMenuOverlay(menuOverlay);
+            menuCtrl.setGameplayApplication(this);
 
             overlayContainer = new StackPane(menuOverlay);
             StackPane.setAlignment(menuOverlay, Pos.CENTER);
@@ -441,6 +442,10 @@ public class GameplayApplication extends Application {
 
     public void stopTimer() {
         getTimerTimeline().stop();
+    }
+
+    public void resumeTimer() {
+        getTimerTimeline().play();
     }
 
     public Timeline getTimerTimeline() {
