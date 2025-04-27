@@ -8,9 +8,10 @@
 <?import javafx.scene.layout.VBox?>
 
 <StackPane stylesheets="@../CSS/style.css" fx:id="rootPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Controller.StartMenuController">
-    <AnchorPane fx:id="start_screen_AnchorPane" prefHeight="900.0" prefWidth="1600.0">
+    <AnchorPane fx:id="start_screen_AnchorPane">
         <children>
-            <ImageView fitHeight="${start_screen_AnchorPane.height}" fitWidth="${start_screen_AnchorPane.width}" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="${start_screen_AnchorPane.height}" fitWidth="${start_screen_AnchorPane.width}" pickOnBounds="true"
+                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <image>
                     <Image url="@../IMG/GameElements/Start-Screen-Background.jpg" />
                 </image>
