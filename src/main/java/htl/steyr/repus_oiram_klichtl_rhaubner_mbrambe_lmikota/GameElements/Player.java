@@ -2,6 +2,9 @@ package htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.GameElements;
 
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Application.GameplayApplication;
 import htl.steyr.repus_oiram_klichtl_rhaubner_mbrambe_lmikota.Audio.MusicPlayer;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,11 +13,15 @@ import javafx.scene.input.KeyCode;
 import java.awt.*;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.Set;
 
 public class Player implements Runnable {
     private ImageView playerImage;
+    private Image[] goingright;
+    private Image[] goingleft;
     private double playerSize;
+    private Image standing;
 
     private double playerX;
     private double playerY;
@@ -30,6 +37,11 @@ public class Player implements Runnable {
 
     private double JUMP_SPEED = -15;
     private final double MOVE_SPEED = 4;
+    private boolean moving = false;
+    private int currentFrame1 = 0;
+    private int currentFrame2 = 0;
+    private long lastFrameTime = 0;// in Nanosekunden
+    private boolean movingright = false;
 
     private boolean dead = false;
 
@@ -38,6 +50,8 @@ public class Player implements Runnable {
     public SuperUmhang superUmhang = new SuperUmhang(this);
 
     private GameplayApplication gameplayApplication;
+
+    private LocalTime start;
 
     @Override
     public void run() {
@@ -79,6 +93,53 @@ public class Player implements Runnable {
         changePlayerSize(getPlayerSize());
         setTileSize(tileSize);
         setPlayerSpawn(0, 0);
+        standing =  playerImage;
+
+        goingright = new Image[]{
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-R_1.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-R_2.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-R_3.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-R_4.png"))),
+        };
+
+        goingleft = new Image[]{
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-L_1.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-L_2.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-L_3.png"))),
+                new Image(Objects.requireNonNull(getClass().getResourceAsStream("/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/Creatures/anima-L_4.png"))),
+        };
+
+        startAnimationTimer();
+    }
+
+    private void startAnimationTimer() {
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                updateAnimation(now);
+            }
+        };
+        timer.start();
+    }
+
+    private void updateAnimation(long now) {
+        if (moving) {
+            if (now - lastFrameTime > 250_000_000) {
+                lastFrameTime = now;
+                if (movingright) {
+                    getPlayerImage().setImage((goingright[currentFrame1]));
+
+                } else {
+                    getPlayerImage().setImage((goingleft[currentFrame2]));
+                }
+                currentFrame1 = (currentFrame1 + 1) % goingright.length;
+                currentFrame2 = (currentFrame2 + 1) % goingleft.length;
+            }
+        } else {
+            getPlayerImage().setImage(standing);
+            currentFrame1 = 0;
+            currentFrame2 = 0;
+        }
     }
 
     public void setPlayerSpawn(int x, int y) {
@@ -159,12 +220,18 @@ public class Player implements Runnable {
             if (!checkCollisionX(playerX + MOVE_SPEED, map)) {
                 playerX += MOVE_SPEED;
                 getPlayerImage().setX(playerX);
+                movingright = true;
+                moving = true;
             }
         } else if (pressedKeys.contains(KeyCode.A)) {
             if (!checkCollisionX(playerX - MOVE_SPEED, map)) {
                 playerX -= MOVE_SPEED;
                 getPlayerImage().setX(playerX);
+                movingright = false;
+                moving = true;
             }
+        } else {
+            moving = false;
         }
     }
 
