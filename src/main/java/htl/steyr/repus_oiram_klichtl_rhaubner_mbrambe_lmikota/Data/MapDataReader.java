@@ -10,15 +10,24 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class MapDataReader {
-    public final String fileName = "src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/MapData.json";
+    public final String FILE_NAME = "src/main/resources/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/JSON/MapData.json";
     private final HashMap<Integer, MapData> mapHm;
     HashMap<Integer, String> filePaths;
     HashMap<String, HashMap<Integer, Double[]>> enemies;
 
     public MapDataReader() throws IOException {
         mapHm = new HashMap<>();
-        initializeMapData(getFileName());
+        initializeMapData(getFILE_NAME());
     }
+
+    /**
+     * Initializes the mapdata by reading from a JSON file.
+     * It parses the JSON data, extracts the level information, map data, file paths, and enemy data,
+     * and stores them in their respective variables (mapHm, filePaths, enemies).
+     *
+     * @param fileName
+     * @throws IOException
+     */
 
     private void initializeMapData(String fileName) throws IOException {
         Gson gson = new Gson();
@@ -72,8 +81,8 @@ public class MapDataReader {
         reader.close();
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFILE_NAME() {
+        return FILE_NAME;
     }
 
     public HashMap<Integer, MapData> getMapHm() {

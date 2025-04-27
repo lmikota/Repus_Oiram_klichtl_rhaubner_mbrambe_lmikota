@@ -26,6 +26,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileWriter;
@@ -75,6 +76,16 @@ public class GameplayApplication extends Application {
         launch(args);
     }
 
+    /**
+     * The start Method starts a Level.
+     * It initializes the Tilemap, Player and enemeies
+     *
+     * @param primaryStage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     */
+
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -92,7 +103,7 @@ public class GameplayApplication extends Application {
             addToRoot(gameLayer, bg1);
             addToRoot(gameLayer, bg2);
 
-            displayTimer(tilemap, root);
+            displayTimer();
             getBg2().setX(bg1.getImage().getWidth());
             addToRoot(gameLayer, tilemap.getTyleMapPane());
 
@@ -206,6 +217,7 @@ public class GameplayApplication extends Application {
             Parent menuOverlay = loader.load();
             GameMenuController menuCtrl = loader.getController();
             menuCtrl.setMenuOverlay(menuOverlay);
+            menuCtrl.setGameplayApplication(this);
 
             overlayContainer = new StackPane(menuOverlay);
             StackPane.setAlignment(menuOverlay, Pos.CENTER);
@@ -246,6 +258,11 @@ public class GameplayApplication extends Application {
         gameplayScene.setOnKeyReleased(null);
     }
 
+
+    /**
+     * This method loads the Endscreen, whenever you win/lose.
+     * It is called in the gameloop in the start(); method.
+     */
     private void loadEndScreen() {
         Platform.runLater(() -> {
             if (!endScreenLoaded) {
@@ -255,12 +272,13 @@ public class GameplayApplication extends Application {
                     AnchorPane endScreenPane = loader.load();
 
                     Stage endScreenStage = new Stage();
-                    endScreenStage.setTitle("Exit Menu");
+                    endScreenStage.setTitle("Endscreen");
                     endScreenStage.setScene(new Scene(endScreenPane));
                     endScreenStage.setResizable(false);
 
                     endScreenStage.initOwner((Stage) gameLayer.getScene().getWindow());
                     endScreenStage.initModality(Modality.APPLICATION_MODAL);
+                    endScreenStage.initStyle(StageStyle.UNDECORATED);
                     endScreenStage.show();
                 } catch (IOException e) {
                     System.out.println("Error while loading the end screne: " + e.getMessage());
@@ -336,6 +354,17 @@ public class GameplayApplication extends Application {
         return new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream(filepath))));
     }
 
+    /**
+     * Updates the position of two background images to create an infinite scrolling effect.
+     *
+     * As one background moves out of view, it is repositioned to the opposite side
+     * to repeat the background.
+     *
+     * @param bg1 The first background imageview
+     * @param bg2 The second background imageview
+     * @param offsetX The current horizontal scroll offset
+     */
+
     public void repeatBackground(ImageView bg1, ImageView bg2, double offsetX) {
         double bgWidth = bg1.getImage().getWidth();
 
@@ -395,7 +424,13 @@ public class GameplayApplication extends Application {
         GameplayApplication.selectedLevel = selectedLevel;
     }
 
-    public void displayTimer(Tilemap tilemap, Pane root) {
+    /**
+     * Displays the timer on the screen by positioning and adding it to the game layer.
+     *
+     * Sets the timer's X and Y coordinates, assigns it an ID for styling purposes,
+     * and adds it to the specified game layer.
+     */
+    public void displayTimer() {
         getTimerDisplay().setY(60);
 
         getTimerDisplay().setX(1340);
@@ -403,8 +438,14 @@ public class GameplayApplication extends Application {
         getTimerDisplay().setId("timerDisplay");
 
         addToRoot(gameLayer, getTimerDisplay());
-        System.out.println("in root drinnen"); // debugging
     }
+
+    /**
+     * Starts the in-game timer that updates every second.
+     *
+     * Increments the total seconds since the start and updates the displayed timer text
+     * in "00:00" format, adding leading zeros for single-digit minutes and seconds.
+     */
 
     public void startTimer() {
         setTimerTimeline(new Timeline(new KeyFrame(Duration.seconds(1), actionEvent -> {
@@ -417,7 +458,6 @@ public class GameplayApplication extends Application {
 
             setTime((mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs);
             getTimerDisplay().setText(getTime());
-            // System.out.println(time); debugging
         })));
 
 
@@ -439,8 +479,18 @@ public class GameplayApplication extends Application {
         }
     }
 
+    /**
+     * stops the in-game timer
+     */
     public void stopTimer() {
         getTimerTimeline().stop();
+    }
+
+    /**
+     * resumes the in-game timer
+     */
+    public void resumeTimer() {
+        getTimerTimeline().play();
     }
 
     public Timeline getTimerTimeline() {

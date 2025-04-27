@@ -6,11 +6,19 @@ import javafx.scene.image.ImageView;
 public class SuperTrank extends Item {
     private Player player;
 
+    /**
+     * Constructor for the Item SuperTrank
+     * @param player
+     */
     public SuperTrank(Player player) {
         super("Super-Trank");
         setPlayer(player);
     }
 
+    /**
+     * When the methode is called the player regains one
+     * hp/live
+     */
     public void activateTrankEffect() {
         if(getPlayer().getHp() < 3){
             getPlayer().setHp(getPlayer().getHp() + 1);

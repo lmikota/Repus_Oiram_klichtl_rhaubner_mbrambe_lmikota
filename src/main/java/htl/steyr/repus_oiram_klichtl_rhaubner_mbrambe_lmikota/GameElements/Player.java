@@ -127,6 +127,10 @@ public class Player implements Runnable {
         startAnimationTimer();
     }
 
+    /**
+     * Animationtimer that calls the methode updateAnimation
+     *
+     */
     private void startAnimationTimer() {
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -137,6 +141,12 @@ public class Player implements Runnable {
         timer.start();
     }
 
+    /**
+     * A methode that checks if an Time interval of 250 milliseconds
+     * have past. If that is the case and the player is moving the
+     * image for the player is updated
+     * @param now
+     */
     private void updateAnimation(long now) {
         if (moving) {
             if (now - lastFrameTime > 250_000_000) {

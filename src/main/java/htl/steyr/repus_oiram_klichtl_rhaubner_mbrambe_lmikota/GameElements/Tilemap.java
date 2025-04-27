@@ -20,26 +20,6 @@ public class Tilemap {
     private int[][] tileMapPattern;
     private MapDataReader reader;
     private Pane tyleMapPane;
-    final String DIRT_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/3_dirtblock.png";
-    final String GRASS_IMAGE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/4_grassblock.png";
-    final String STONE_DIRT_BLOCK = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/1_stonedirtblock.png";
-    final String STONE_DIRT_TRANSITION = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/2_stoneDirtTransition.png";
-    final String FLOATING_GRASS_LEFT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/5_floatingGrassblockLeft.png";
-    final String FLOATING_GRASS_RIGHT = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/7_floatingGrassblockRight.png";
-    final String FLOATING_GRASS_MIDDLE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/6_floatingGrassBlockMiddle.png";
-    final String TREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/11_Tree.png";
-    final String TOWER_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks1.png";
-    final String TOWER_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks2.png";
-    final String TOWER_LEFT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks3.png";
-    final String TOWER_LEFT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/TurmLinks4.png";
-    final String TOWER_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts1.png";
-    final String TOWER_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts2.png";
-    final String TOWER_RIGHT_THREE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts3.png";
-    final String TOWER_RIGHT_FOUR = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/turmRechts4.png";
-    final String TREE_RIGHT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumRechts1.png";
-    final String TREE_RIGHT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumRechts2.png";
-    final String TREE_LEFT_ONE = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/bauLlinks1.png";
-    final String TREE_LEFT_TWO = "/htl/steyr/repus_oiram_klichtl_rhaubner_mbrambe_lmikota/IMG/BlockElements/baumLinks2.png";
 
     public static HashMap<Point, ImageView> items = new HashMap<>();
 
@@ -49,15 +29,24 @@ public class Tilemap {
         drawTileMap();
     }
 
+    /**
+     * This method draws the tile map on the screen.
+     * It creates a new Pane to hold the tiles, initializes a MapDataReader
+     * to read the mapdata, and then loops through each row and column
+     * to create and position ImageViews for each tile in the map.
+     * Depending on the tile type, it sets the image for each tile.
+     * It also handles cases where the tile type is negative (representing items),
+     * storing the corresponding ImageViews in a map for later use.
+     */
     public void drawTileMap() {
         tyleMapPane = new Pane();
-        {
-            try {
-                reader = new MapDataReader();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        try {
+            reader = new MapDataReader();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < cols; col++) {
                 int tileType = tileMapPattern[row][col];
@@ -157,6 +146,12 @@ public class Tilemap {
         }
     }
 
+    /**
+     * Returns the Tilemaps length
+     *
+     * @return the tilemaps Length as int in pictures
+     */
+
     public double getTileMapLengthInPixel() {
         return getTileMapPattern()[0].length * getTILE_SIZE() + getTileMapPattern().length * getTILE_SIZE();
     }
@@ -192,85 +187,5 @@ public class Tilemap {
 
     public double getTILE_SIZE() {
         return TILE_SIZE;
-    }
-
-    public String getDIRT_IMAGE() {
-        return DIRT_IMAGE;
-    }
-
-    public String getGRASS_IMAGE() {
-        return GRASS_IMAGE;
-    }
-
-    public String getSTONE_DIRT_BLOCK() {
-        return STONE_DIRT_BLOCK;
-    }
-
-    public String getFLOATING_GRASS_MIDDLE() {
-        return FLOATING_GRASS_MIDDLE;
-    }
-
-    public String getFLOATING_GRASS_RIGHT() {
-        return FLOATING_GRASS_RIGHT;
-    }
-
-    public String getFLOATING_GRASS_LEFT() {
-        return FLOATING_GRASS_LEFT;
-    }
-
-    public String getSTONE_DIRT_TRANSITION() {
-        return STONE_DIRT_TRANSITION;
-    }
-
-    public String getTREE() {
-        return TREE;
-    }
-
-    public String getTOWER_LEFT_ONE() {
-        return TOWER_LEFT_ONE;
-    }
-
-    public String getTOWER_LEFT_TWO() {
-        return TOWER_LEFT_TWO;
-    }
-
-    public String getTOWER_LEFT_FOUR() {
-        return TOWER_LEFT_FOUR;
-    }
-
-    public String getTOWER_LEFT_THREE() {
-        return TOWER_LEFT_THREE;
-    }
-
-    public String getTOWER_RIGHT_ONE() {
-        return TOWER_RIGHT_ONE;
-    }
-
-    public String getTOWER_RIGHT_TWO() {
-        return TOWER_RIGHT_TWO;
-    }
-
-    public String getTOWER_RIGHT_THREE() {
-        return TOWER_RIGHT_THREE;
-    }
-
-    public String getTOWER_RIGHT_FOUR() {
-        return TOWER_RIGHT_FOUR;
-    }
-
-    public String getTREE_LEFT_TWO() {
-        return TREE_LEFT_TWO;
-    }
-
-    public String getTREE_LEFT_ONE() {
-        return TREE_LEFT_ONE;
-    }
-
-    public String getTREE_RIGHT_ONE() {
-        return TREE_RIGHT_ONE;
-    }
-
-    public String getTREE_RIGHT_TWO() {
-        return TREE_RIGHT_TWO;
     }
 }
